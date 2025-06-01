@@ -1,11 +1,10 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Linkedin, Github, Download, MapPin, Phone } from "lucide-react";
 
 const HeroSection = () => {
   return (
-    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg">
+    <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg pt-16">
       {/* Animated background elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-20 w-64 h-64 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
