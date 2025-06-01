@@ -1,3 +1,4 @@
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Linkedin, Github, Download, MapPin, Phone } from "lucide-react";
@@ -18,98 +19,147 @@ const HeroSection = () => {
       }}></div>
 
       <div className="relative z-10 container mx-auto px-6 py-20 flex flex-col justify-center min-h-screen">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Main Content */}
-          <div className="space-y-8 animate-fade-in">
-            {/* Top Contact & Resume Section */}
-            <Card className="p-6 bg-card/80 backdrop-blur-sm border-primary/20 animate-glow">
-              <div className="space-y-4">
-                <div className="flex flex-wrap gap-4 items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Mail className="w-5 h-5 text-primary animated-icon" />
-                    <a href="mailto:rajeshuriti@gmail.com" className="text-primary font-medium hover:text-neon-cyan transition-colors">
-                      rajeshuriti@gmail.com
-                    </a>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="w-5 h-5 text-primary animated-icon" />
-                    <a href="https://www.linkedin.com/in/rajesh-uriti/" target="_blank" rel="noopener noreferrer" className="text-primary font-medium hover:text-neon-cyan transition-colors">
-                      LinkedIn Profile
-                    </a>
-                  </div>
-                </div>
-                
-                <div className="flex flex-wrap gap-3">
-                  <Button className="bg-primary hover:bg-primary/90 neon-glow animated-icon" size="sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    Short Resume
-                  </Button>
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    Detailed Resume
-                  </Button>
-                  <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="sm">
-                    <Github className="w-4 h-4 mr-2" />
-                    View GitHub
-                  </Button>
-                </div>
-              </div>
-            </Card>
-
-            {/* Main Headline */}
+        {/* Top Header Section - Absolute Priority for Recruiters */}
+        <div className="mb-12 animate-fade-in">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
+            {/* Core Identity Block */}
             <div className="space-y-6">
-              <h1 className="text-5xl lg:text-7xl font-bold text-gradient animate-slide-in-left">
+              <h1 className="text-5xl lg:text-6xl font-bold text-gradient animate-slide-in-left">
                 Rajesh Uriti
               </h1>
               <h2 className="text-2xl lg:text-3xl font-light text-foreground/90">
                 Full-Stack Application Architect
               </h2>
-              <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed">
+              <p className="text-xl text-muted-foreground leading-relaxed">
                 Architecting and Developing End-to-End Solutions with{" "}
                 <span className="text-primary font-semibold neon-text">15+ Years</span> of Expertise
               </p>
+              
+              {/* Core Contact Info */}
+              <div className="space-y-3 text-lg">
+                <div className="flex items-center gap-3">
+                  <Phone className="w-5 h-5 text-primary" />
+                  <span className="text-foreground font-medium">+1-(502)-807-9789</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <MapPin className="w-5 h-5 text-primary" />
+                  <span className="text-foreground font-medium">Mississauga, Ontario, Canada</span>
+                </div>
+                <div className="text-primary font-semibold text-lg">
+                  Canadian Permanent Resident
+                </div>
+              </div>
             </div>
 
-            {/* Secondary Contact Info */}
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                <span>+1-(502)-807-9789</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                <span>Mississauga, Ontario, Canada</span>
-              </div>
-              <div className="text-primary font-medium">
-                Canadian Permanent Resident
-              </div>
-            </div>
-          </div>
-
-          {/* Professional Image/Visual */}
-          <div className="flex justify-center lg:justify-end">
-            <div className="relative">
-              <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-2xl bg-gradient-to-br from-primary/20 to-neon-cyan/20 flex items-center justify-center animate-float">
-                <div className="w-72 h-72 lg:w-88 lg:h-88 rounded-xl bg-card/50 backdrop-blur-sm border border-primary/30 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-neon-cyan rounded-full flex items-center justify-center text-4xl font-bold text-primary-foreground">
-                      RU
-                    </div>
-                    <div className="space-y-2">
-                      <p className="text-lg font-semibold">Application Architect</p>
-                      <p className="text-sm text-muted-foreground">15+ Years Experience</p>
+            {/* Professional Image/Visual */}
+            <div className="flex justify-center lg:justify-end">
+              <div className="relative">
+                <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-2xl bg-gradient-to-br from-primary/20 to-neon-cyan/20 flex items-center justify-center animate-float">
+                  <div className="w-72 h-72 lg:w-88 lg:h-88 rounded-xl bg-card/50 backdrop-blur-sm border border-primary/30 flex items-center justify-center">
+                    <div className="text-center space-y-4">
+                      <div className="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-neon-cyan rounded-full flex items-center justify-center text-4xl font-bold text-primary-foreground">
+                        RU
+                      </div>
+                      <div className="space-y-2">
+                        <p className="text-lg font-semibold">Application Architect</p>
+                        <p className="text-sm text-muted-foreground">15+ Years Experience</p>
+                      </div>
                     </div>
                   </div>
                 </div>
+                
+                {/* Floating skill badges */}
+                <div className="absolute -top-4 -left-4 skill-tag animate-float">React</div>
+                <div className="absolute -top-4 -right-4 skill-tag animate-float delay-500">Python</div>
+                <div className="absolute -bottom-4 -left-4 skill-tag animate-float delay-1000">.NET Core</div>
+                <div className="absolute -bottom-4 -right-4 skill-tag animate-float delay-1500">AWS</div>
               </div>
-              
-              {/* Floating skill badges */}
-              <div className="absolute -top-4 -left-4 skill-tag animate-float">React</div>
-              <div className="absolute -top-4 -right-4 skill-tag animate-float delay-500">Python</div>
-              <div className="absolute -bottom-4 -left-4 skill-tag animate-float delay-1000">.NET Core</div>
-              <div className="absolute -bottom-4 -right-4 skill-tag animate-float delay-1500">AWS</div>
             </div>
           </div>
+        </div>
+
+        {/* Immediate Call-to-Action & Highlighted Contacts */}
+        <div className="space-y-8 animate-slide-in-up">
+          {/* Exceptionally Highlighted Contact Methods */}
+          <Card className="p-8 bg-card/90 backdrop-blur-sm border-primary/30 animate-glow">
+            <div className="space-y-6">
+              <h3 className="text-2xl font-semibold text-center text-primary mb-6">
+                Let's Connect - Ready for Your Next Project
+              </h3>
+              
+              {/* Primary Contact Methods - Exceptionally Highlighted */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {/* Email - Exceptionally Highlighted */}
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-3 text-2xl font-bold text-primary">
+                    <Mail className="w-8 h-8 animated-icon neon-glow" />
+                    <span className="neon-text">Primary Contact</span>
+                  </div>
+                  <a 
+                    href="mailto:rajeshuriti@gmail.com" 
+                    className="block text-xl font-semibold text-primary hover:text-neon-cyan transition-all duration-300 hover:scale-105"
+                  >
+                    rajeshuriti@gmail.com
+                  </a>
+                  <Button 
+                    className="w-full bg-primary hover:bg-primary/90 neon-glow animated-icon text-lg py-3"
+                    onClick={() => window.location.href = 'mailto:rajeshuriti@gmail.com'}
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    Email Me Directly
+                  </Button>
+                </div>
+
+                {/* LinkedIn - Equally Highlighted */}
+                <div className="text-center space-y-3">
+                  <div className="flex items-center justify-center gap-3 text-2xl font-bold text-primary">
+                    <Linkedin className="w-8 h-8 animated-icon neon-glow" />
+                    <span className="neon-text">Professional Profile</span>
+                  </div>
+                  <a 
+                    href="https://www.linkedin.com/in/rajesh-uriti/" 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="block text-xl font-semibold text-primary hover:text-neon-cyan transition-all duration-300 hover:scale-105"
+                  >
+                    LinkedIn Profile
+                  </a>
+                  <Button 
+                    variant="outline" 
+                    className="w-full border-primary text-primary hover:bg-primary/10 animated-icon text-lg py-3"
+                    onClick={() => window.open('https://www.linkedin.com/in/rajesh-uriti/', '_blank')}
+                  >
+                    <Linkedin className="w-5 h-5 mr-2" />
+                    View LinkedIn
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </Card>
+
+          {/* Resume Downloads & GitHub */}
+          <Card className="p-6 bg-card/80 backdrop-blur-sm border-primary/20">
+            <div className="space-y-4">
+              <h4 className="text-lg font-semibold text-center text-primary">
+                Professional Documents & Portfolio
+              </h4>
+              
+              <div className="flex flex-wrap justify-center gap-4">
+                <Button className="bg-primary hover:bg-primary/90 neon-glow animated-icon" size="lg">
+                  <Download className="w-5 h-5 mr-2" />
+                  Download Short Resume
+                </Button>
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg">
+                  <Download className="w-5 h-5 mr-2" />
+                  Download Detailed Resume
+                </Button>
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg">
+                  <Github className="w-5 h-5 mr-2" />
+                  View GitHub Portfolio
+                </Button>
+              </div>
+            </div>
+          </Card>
         </div>
       </div>
     </section>
