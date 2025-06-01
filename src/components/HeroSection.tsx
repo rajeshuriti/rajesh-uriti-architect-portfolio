@@ -1,7 +1,7 @@
-
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Mail, Linkedin, Github, Download, MapPin, Phone } from "lucide-react";
+import profileImage from "../assets/images/rajesh-uriti.jpg";
 
 const HeroSection = () => {
   return (
@@ -55,16 +55,12 @@ const HeroSection = () => {
             <div className="flex justify-center lg:justify-end">
               <div className="relative">
                 <div className="w-80 h-80 lg:w-96 lg:h-96 rounded-2xl bg-gradient-to-br from-primary/20 to-neon-cyan/20 flex items-center justify-center animate-float">
-                  <div className="w-72 h-72 lg:w-88 lg:h-88 rounded-xl bg-card/50 backdrop-blur-sm border border-primary/30 flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <div className="w-32 h-32 mx-auto bg-gradient-to-br from-primary to-neon-cyan rounded-full flex items-center justify-center text-4xl font-bold text-primary-foreground">
-                        RU
-                      </div>
-                      <div className="space-y-2">
-                        <p className="text-lg font-semibold">Application Architect</p>
-                        <p className="text-sm text-muted-foreground">15+ Years Experience</p>
-                      </div>
-                    </div>
+                  <div className="w-72 h-72 lg:w-88 lg:h-88 rounded-xl bg-card/50 backdrop-blur-sm border border-primary/30 flex items-center justify-center overflow-hidden">
+                    <img 
+                      src={profileImage} 
+                      alt="Rajesh Uriti" 
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </div>
                 
