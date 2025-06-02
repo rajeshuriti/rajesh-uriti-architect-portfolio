@@ -23,39 +23,79 @@ jobs:
 
       - name: Create ECS Cluster (if not exists)
         run: |
-          aws ecs describe-clusters --clusters ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }} --query "clusters[0].status" --output text 2>/dev/null || \
-          aws ecs create-cluster --cluster-name ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }}
+          set -e
+          echo "Checking for ECS cluster: ${{ github.event.inputs.ecs_cluster }} in region: ${{ secrets.AWS_REGION }}"
+          CLUSTER_STATUS=$(aws ecs describe-clusters --clusters ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }} --query "clusters[0].status" --output text 2>/dev/null || echo "NOT_FOUND")
+          if [ "$CLUSTER_STATUS" = "ACTIVE" ]; then
+            echo "ECS Cluster ${{ github.event.inputs.ecs_cluster }} already exists and is active."
+          else
+            echo "ECS Cluster ${{ github.event.inputs.ecs_cluster }} not found or not active. Attempting to create..."
+            aws ecs create-cluster --cluster-name ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }}
+            echo "ECS Cluster ${{ github.event.inputs.ecs_cluster }} creation initiated."
+            # You might want to add a small wait or describe-clusters again to confirm
+          fi
 
       - name: Get latest Amazon Linux 2 AMI ID
         id: ami
         run: |
-          AMI_ID=$(aws ec2 describe-images \
+          set -e
+          echo "Fetching latest Amazon Linux 2 AMI ID in region: ${{ secrets.AWS_REGION }}"
+          AMI_ID_OUTPUT=$(aws ec2 describe-images \
             --owners amazon \
             --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" "Name=state,Values=available" \
             --region ${{ secrets.AWS_REGION }} \
             --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
             --output text)
-          echo "ami_id=$AMI_ID" >> $GITHUB_OUTPUT
+          if [ -z "$AMI_ID_OUTPUT" ]; then
+            echo "ERROR: Failed to retrieve AMI ID."
+            exit 1
+          fi
+          echo "Using AMI ID: $AMI_ID_OUTPUT"
+          echo "ami_id=$AMI_ID_OUTPUT" >> $GITHUB_OUTPUT
 
       - name: Create Security Group (if not exists)
         id: sg
         run: |
+          set -e
           SG_NAME=ecs-sg
-          VPC_ID=$(aws ec2 describe-vpcs --region ${{ secrets.AWS_REGION }} --query "Vpcs[0].VpcId" --output text)
-          SG_ID=$(aws ec2 describe-security-groups --region ${{ secrets.AWS_REGION }} --filters Name=group-name,Values=$SG_NAME --query "SecurityGroups[0].GroupId" --output text)
-          if [ "$SG_ID" = "None" ]; then
-            SG_ID=$(aws ec2 create-security-group --group-name $SG_NAME --description "ECS SG" --vpc-id $VPC_ID --region ${{ secrets.AWS_REGION }} --output text)
-            # Allow HTTP (80), HTTPS (443), and ECS agent (51678)
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 80 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 443 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 51678 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
+          echo "Checking/Creating Security Group: $SG_NAME in region: ${{ secrets.AWS_REGION }}"
+          VPC_ID=$(aws ec2 describe-vpcs --region ${{ secrets.AWS_REGION }} --filters Name=isDefault,Values=true --query "Vpcs[0].VpcId" --output text)
+          if [ -z "$VPC_ID" ]; then
+            echo "ERROR: Default VPC not found in region ${{ secrets.AWS_REGION }}."
+            exit 1
           fi
-          echo "sg_id=$SG_ID" >> $GITHUB_OUTPUT
+          echo "Using Default VPC ID: $VPC_ID"
+          
+          SG_ID_EXISTING=$(aws ec2 describe-security-groups --region ${{ secrets.AWS_REGION }} --filters Name=group-name,Values=$SG_NAME Name=vpc-id,Values=$VPC_ID --query "SecurityGroups[0].GroupId" --output text 2>/dev/null || echo "NOT_FOUND")
+
+          if [ "$SG_ID_EXISTING" != "NOT_FOUND" ] && [ ! -z "$SG_ID_EXISTING" ]; then
+            echo "Security Group $SG_NAME ($SG_ID_EXISTING) already exists."
+            SG_ID_TO_USE=$SG_ID_EXISTING
+          else
+            echo "Security Group $SG_NAME does not exist. Creating..."
+            SG_ID_CREATED=$(aws ec2 create-security-group --group-name $SG_NAME --description "ECS SG for EC2 instances" --vpc-id $VPC_ID --region ${{ secrets.AWS_REGION }} --output text --query 'GroupId')
+            if [ -z "$SG_ID_CREATED" ]; then
+              echo "ERROR: Failed to create Security Group $SG_NAME."
+              exit 1
+            fi
+            echo "Created Security Group $SG_NAME with ID: $SG_ID_CREATED."
+            echo "Authorizing ingress rules..."
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID_CREATED --protocol tcp --port 80 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID_CREATED --protocol tcp --port 443 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID_CREATED --protocol tcp --port 51678 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }} # ECS Agent
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID_CREATED --protocol tcp --port 22 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }} # SSH (recommend restricting CIDR)
+            echo "Ingress rules authorized for $SG_ID_CREATED."
+            SG_ID_TO_USE=$SG_ID_CREATED
+          fi
+          echo "Using Security Group ID: $SG_ID_TO_USE"
+          echo "sg_id=$SG_ID_TO_USE" >> $GITHUB_OUTPUT
 
       - name: Launch EC2 Instance
         id: ec2
         run: |
-          INSTANCE_ID=$(aws ec2 run-instances \
+          set -e
+          echo "Attempting to launch EC2 instance with AMI: ${{ steps.ami.outputs.ami_id }}, Key: ${{ github.event.inputs.ec2_key_name }}, SG: ${{ steps.sg.outputs.sg_id }}"
+          INSTANCE_ID_OUTPUT=$(aws ec2 run-instances \
             --image-id ${{ steps.ami.outputs.ami_id }} \
             --count 1 \
             --instance-type t2.micro \
@@ -63,12 +103,24 @@ jobs:
             --security-group-ids ${{ steps.sg.outputs.sg_id }} \
             --iam-instance-profile Name=ecsInstanceRole \
             --user-data "#!/bin/bash\necho ECS_CLUSTER=${{ github.event.inputs.ecs_cluster }} >> /etc/ecs/ecs.config" \
-            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=ecs-ec2-instance}]" \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=ecs-ec2-instance-${{ github.event.inputs.ecs_cluster }}},{Key=ECS_Cluster,Value=${{ github.event.inputs.ecs_cluster }}]" \
             --region ${{ secrets.AWS_REGION }} \
             --query 'Instances[0].InstanceId' \
             --output text)
-          echo "instance_id=$INSTANCE_ID" >> $GITHUB_OUTPUT
+          
+          if [ -z "$INSTANCE_ID_OUTPUT" ] || [ "$INSTANCE_ID_OUTPUT" = "None" ]; then
+            echo "ERROR: Failed to launch EC2 instance. No Instance ID returned."
+            exit 1
+          fi
+          echo "Launched instance with ID: $INSTANCE_ID_OUTPUT"
+          echo "instance_id=$INSTANCE_ID_OUTPUT" >> $GITHUB_OUTPUT
+          
+          echo "Waiting for instance $INSTANCE_ID_OUTPUT to be running..."
+          aws ec2 wait instance-running --instance-ids $INSTANCE_ID_OUTPUT --region ${{ secrets.AWS_REGION }}
+          echo "Instance $INSTANCE_ID_OUTPUT is running."
 
       - name: Output Instance ID
         run: |
-          echo "Launched EC2 Instance ID: ${{ steps.ec2.outputs.instance_id }}" 
+          echo "Launched EC2 Instance ID: ${{ steps.ec2.outputs.instance_id }}"
+          echo "EC2 Instance should be registering with ECS Cluster: ${{ github.event.inputs.ecs_cluster }}"
+          echo "Check the ECS console in a few minutes." 
