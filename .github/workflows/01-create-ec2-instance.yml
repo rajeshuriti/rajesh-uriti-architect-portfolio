@@ -21,12 +21,18 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ secrets.AWS_REGION }}
 
+      - name: Create ECS Cluster (if not exists)
+        run: |
+          aws ecs describe-clusters --clusters ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }} --query "clusters[0].status" --output text 2>/dev/null || \
+          aws ecs create-cluster --cluster-name ${{ github.event.inputs.ecs_cluster }} --region ${{ secrets.AWS_REGION }}
+
       - name: Get latest Amazon Linux 2 AMI ID
         id: ami
         run: |
           AMI_ID=$(aws ec2 describe-images \
             --owners amazon \
             --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" "Name=state,Values=available" \
+            --region ${{ secrets.AWS_REGION }} \
             --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
             --output text)
           echo "ami_id=$AMI_ID" >> $GITHUB_OUTPUT
@@ -35,14 +41,14 @@ jobs:
         id: sg
         run: |
           SG_NAME=ecs-sg
-          VPC_ID=$(aws ec2 describe-vpcs --query "Vpcs[0].VpcId" --output text)
-          SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=$SG_NAME --query "SecurityGroups[0].GroupId" --output text)
+          VPC_ID=$(aws ec2 describe-vpcs --region ${{ secrets.AWS_REGION }} --query "Vpcs[0].VpcId" --output text)
+          SG_ID=$(aws ec2 describe-security-groups --region ${{ secrets.AWS_REGION }} --filters Name=group-name,Values=$SG_NAME --query "SecurityGroups[0].GroupId" --output text)
           if [ "$SG_ID" = "None" ]; then
-            SG_ID=$(aws ec2 create-security-group --group-name $SG_NAME --description "ECS SG" --vpc-id $VPC_ID --output text)
+            SG_ID=$(aws ec2 create-security-group --group-name $SG_NAME --description "ECS SG" --vpc-id $VPC_ID --region ${{ secrets.AWS_REGION }} --output text)
             # Allow HTTP (80), HTTPS (443), and ECS agent (51678)
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 80 --cidr 0.0.0.0/0
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 443 --cidr 0.0.0.0/0
-            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 51678 --cidr 0.0.0.0/0
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 80 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 443 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 51678 --cidr 0.0.0.0/0 --region ${{ secrets.AWS_REGION }}
           fi
           echo "sg_id=$SG_ID" >> $GITHUB_OUTPUT
 
@@ -58,6 +64,7 @@ jobs:
             --iam-instance-profile Name=ecsInstanceRole \
             --user-data "#!/bin/bash\necho ECS_CLUSTER=${{ github.event.inputs.ecs_cluster }} >> /etc/ecs/ecs.config" \
             --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=ecs-ec2-instance}]" \
+            --region ${{ secrets.AWS_REGION }} \
             --query 'Instances[0].InstanceId' \
             --output text)
           echo "instance_id=$INSTANCE_ID" >> $GITHUB_OUTPUT
