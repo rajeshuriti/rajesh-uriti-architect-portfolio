@@ -1,0 +1,66 @@
+name: 01 - Create EC2 Instance for ECS Cluster
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecs_cluster:
+        description: 'ECS Cluster Name'
+        required: true
+      ec2_key_name:
+        description: 'EC2 Key Pair Name (must exist in AWS)'
+        required: true
+
+jobs:
+  create-ec2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Get latest Amazon Linux 2 AMI ID
+        id: ami
+        run: |
+          AMI_ID=$(aws ec2 describe-images \
+            --owners amazon \
+            --filters "Name=name,Values=amzn2-ami-hvm-*-x86_64-gp2" "Name=state,Values=available" \
+            --query "Images | sort_by(@, &CreationDate)[-1].ImageId" \
+            --output text)
+          echo "ami_id=$AMI_ID" >> $GITHUB_OUTPUT
+
+      - name: Create Security Group (if not exists)
+        id: sg
+        run: |
+          SG_NAME=ecs-sg
+          VPC_ID=$(aws ec2 describe-vpcs --query "Vpcs[0].VpcId" --output text)
+          SG_ID=$(aws ec2 describe-security-groups --filters Name=group-name,Values=$SG_NAME --query "SecurityGroups[0].GroupId" --output text)
+          if [ "$SG_ID" = "None" ]; then
+            SG_ID=$(aws ec2 create-security-group --group-name $SG_NAME --description "ECS SG" --vpc-id $VPC_ID --output text)
+            # Allow HTTP (80), HTTPS (443), and ECS agent (51678)
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 80 --cidr 0.0.0.0/0
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 443 --cidr 0.0.0.0/0
+            aws ec2 authorize-security-group-ingress --group-id $SG_ID --protocol tcp --port 51678 --cidr 0.0.0.0/0
+          fi
+          echo "sg_id=$SG_ID" >> $GITHUB_OUTPUT
+
+      - name: Launch EC2 Instance
+        id: ec2
+        run: |
+          INSTANCE_ID=$(aws ec2 run-instances \
+            --image-id ${{ steps.ami.outputs.ami_id }} \
+            --count 1 \
+            --instance-type t2.micro \
+            --key-name ${{ github.event.inputs.ec2_key_name }} \
+            --security-group-ids ${{ steps.sg.outputs.sg_id }} \
+            --iam-instance-profile Name=ecsInstanceRole \
+            --user-data "#!/bin/bash\necho ECS_CLUSTER=${{ github.event.inputs.ecs_cluster }} >> /etc/ecs/ecs.config" \
+            --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=ecs-ec2-instance}]" \
+            --query 'Instances[0].InstanceId' \
+            --output text)
+          echo "instance_id=$INSTANCE_ID" >> $GITHUB_OUTPUT
+
+      - name: Output Instance ID
+        run: echo "Launched EC2 Instance ID: ${{ steps.ec2.outputs.instance_id }}" 

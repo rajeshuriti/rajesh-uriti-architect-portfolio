@@ -1,0 +1,33 @@
+name: 02 - Wait for EC2 to Register with ECS
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecs_cluster:
+        description: 'ECS Cluster Name'
+        required: true
+
+jobs:
+  wait-for-registration:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Wait for EC2 to register with ECS
+        run: |
+          for i in {1..30}; do
+            ACTIVE_INSTANCES=$(aws ecs list-container-instances --cluster ${{ github.event.inputs.ecs_cluster }} --status ACTIVE --query 'containerInstanceArns' --output text)
+            if [ -n "$ACTIVE_INSTANCES" ]; then
+              echo "ECS instance is ACTIVE: $ACTIVE_INSTANCES"
+              exit 0
+            fi
+            echo "Waiting for ECS instance to become ACTIVE... ($i/30)"
+            sleep 20
+          done
+          echo "Timeout: ECS instance did not become ACTIVE in time." >&2
+          exit 1 

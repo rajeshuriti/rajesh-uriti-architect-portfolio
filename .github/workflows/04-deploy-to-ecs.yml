@@ -1,0 +1,71 @@
+name: 04 - Deploy Docker Image to ECS
+
+on:
+  workflow_dispatch:
+    inputs:
+      ecs_cluster:
+        description: 'ECS Cluster Name'
+        required: true
+      image_tag:
+        description: 'Docker Image Tag'
+        required: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      - name: Register ECS Task Definition
+        id: task-def
+        run: |
+          cat > task-def.json <<EOF
+          {
+            "family": "react-app-task",
+            "networkMode": "bridge",
+            "containerDefinitions": [
+              {
+                "name": "react-app",
+                "image": "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:${{ github.event.inputs.image_tag }}",
+                "essential": true,
+                "portMappings": [
+                  {
+                    "containerPort": 80,
+                    "hostPort": 80
+                  }
+                ]
+              }
+            ]
+          }
+          EOF
+          aws ecs register-task-definition --cli-input-json file://task-def.json
+
+      - name: Create ECS Service (if not exists)
+        id: create-service
+        run: |
+          SERVICE_NAME=react-app-service
+          CLUSTER=${{ github.event.inputs.ecs_cluster }}
+          TASK_DEF_ARN=$(aws ecs describe-task-definition --task-definition react-app-task --query 'taskDefinition.taskDefinitionArn' --output text)
+          SERVICE_EXISTS=$(aws ecs describe-services --cluster $CLUSTER --services $SERVICE_NAME --query 'services[0].status' --output text 2>/dev/null || echo "MISSING")
+          if [ "$SERVICE_EXISTS" = "ACTIVE" ]; then
+            echo "Service exists, updating..."
+            aws ecs update-service --cluster $CLUSTER --service $SERVICE_NAME --task-definition $TASK_DEF_ARN
+          else
+            echo "Creating new service..."
+            aws ecs create-service \
+              --cluster $CLUSTER \
+              --service-name $SERVICE_NAME \
+              --task-definition $TASK_DEF_ARN \
+              --desired-count 1 \
+              --launch-type EC2 \
+              --deployment-configuration maximumPercent=200,minimumHealthyPercent=0
+          fi
+
+      - name: Wait for service to stabilize
+        run: |
+          aws ecs wait services-stable --cluster ${{ github.event.inputs.ecs_cluster }} --services react-app-service 
