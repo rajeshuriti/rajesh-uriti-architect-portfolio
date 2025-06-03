@@ -2,10 +2,6 @@ name: 03 - Build and Push Docker Image to ECR
 
 on:
   workflow_dispatch:
-    inputs:
-      image_tag:
-        description: 'Docker Image Tag'
-        required: true
 
 jobs:
   build-and-push:
@@ -30,14 +26,18 @@ jobs:
           aws ecr describe-repositories --repository-names react-app || \
           aws ecr create-repository --repository-name react-app
 
+      - name: Set timestamp
+        id: timestamp
+        run: echo "timestamp=$(date +'%Y%m%d_%H%M%S')" >> $GITHUB_OUTPUT
+
       - name: Build Docker image
         run: |
-          docker build -t react-app:${{ github.event.inputs.image_tag }} .
+          docker build -t react-app:${{ steps.timestamp.outputs.timestamp }} .
 
       - name: Tag Docker image
         run: |
-          docker tag react-app:${{ github.event.inputs.image_tag }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:${{ github.event.inputs.image_tag }}
+          docker tag react-app:${{ steps.timestamp.outputs.timestamp }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:${{ steps.timestamp.outputs.timestamp }}
 
       - name: Push Docker image to ECR
         run: |
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:${{ github.event.inputs.image_tag }} 
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/react-app:${{ steps.timestamp.outputs.timestamp }} 
