@@ -27,7 +27,10 @@ jobs:
           cat > task-def.json <<EOF
           {
             "family": "react-app-task",
-            "networkMode": "bridge",
+            "networkMode": "awsvpc",
+            "requiresCompatibilities": ["FARGATE"],
+            "cpu": "256",
+            "memory": "512",
             "containerDefinitions": [
               {
                 "name": "react-app",
@@ -36,9 +39,17 @@ jobs:
                 "portMappings": [
                   {
                     "containerPort": 80,
-                    "hostPort": 80
+                    "protocol": "tcp"
                   }
-                ]
+                ],
+                "logConfiguration": {
+                  "logDriver": "awslogs",
+                  "options": {
+                    "awslogs-group": "/ecs/react-app",
+                    "awslogs-region": "${{ secrets.AWS_REGION }}",
+                    "awslogs-stream-prefix": "ecs"
+                  }
+                }
               }
             ]
           }
@@ -62,8 +73,10 @@ jobs:
               --service-name $SERVICE_NAME \
               --task-definition $TASK_DEF_ARN \
               --desired-count 1 \
-              --launch-type EC2 \
-              --deployment-configuration maximumPercent=200,minimumHealthyPercent=0
+              --launch-type FARGATE \
+              --network-configuration "awsvpcConfiguration={subnets=[${{ secrets.SUBNET_ID }}],securityGroups=[${{ secrets.SECURITY_GROUP_ID }}],assignPublicIp=ENABLED}" \
+              --load-balancers "[{\"targetGroupArn\":\"${{ secrets.TARGET_GROUP_ARN }}\",\"containerName\":\"react-app\",\"containerPort\":80}]" \
+              --deployment-configuration maximumPercent=200,minimumHealthyPercent=100
           fi
 
       - name: Wait for service to stabilize
