@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Mail, Linkedin, Github, MapPin, Phone, Download } from "lucide-react";
@@ -72,13 +71,17 @@ const ContactSection = () => {
                 <div className="space-y-4">
                   {/* Resume Downloads */}
                   <div className="space-y-3">
-                    <Button className="w-full bg-primary hover:bg-primary/90 neon-glow animated-icon justify-start" size="lg">
-                      <Download className="w-5 h-5 mr-3" />
-                      Download Short Resume
+                    <Button className="w-full bg-primary hover:bg-primary/90 neon-glow animated-icon justify-start" size="lg" asChild>
+                      <a href="/files/Rajesh Uriti_Short_Resume.pdf" download>
+                        <Download className="w-5 h-5 mr-3" />
+                        Download Short Resume
+                      </a>
                     </Button>
-                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 animated-icon justify-start" size="lg">
-                      <Download className="w-5 h-5 mr-3" />
-                      Download Detailed Resume
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 animated-icon justify-start" size="lg" asChild>
+                      <a href="/files/Rajesh Uriti_Detailed_Resume.pdf" download>
+                        <Download className="w-5 h-5 mr-3" />
+                        Download Detailed Resume
+                      </a>
                     </Button>
                   </div>
 
@@ -91,7 +94,7 @@ const ContactSection = () => {
                       </a>
                     </Button>
                     <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 animated-icon justify-start" size="lg" asChild>
-                      <a href="#" target="_blank" rel="noopener noreferrer">
+                      <a href="https://github.com/rajeshuriti" target="_blank" rel="noopener noreferrer">
                         <Github className="w-5 h-5 mr-3" />
                         View GitHub Profile
                       </a>

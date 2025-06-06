@@ -1,4 +1,3 @@
-
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code, Database, Cloud, Wrench, GitBranch, Zap } from "lucide-react";
@@ -72,9 +71,16 @@ const SkillsSection = () => {
                     <Badge 
                       key={skillIndex}
                       variant="secondary" 
-                      className="skill-tag text-xs hover:scale-105 transition-transform cursor-default"
+                      className="skill-tag text-xs hover:scale-105 transition-transform"
                     >
-                      {skill}
+                      <a 
+                        href={`https://en.wikipedia.org/wiki/${skill.replace(/\s/g, '_').replace(/\./g, '')}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-primary transition-colors"
+                      >
+                        {skill}
+                      </a>
                     </Badge>
                   ))}
                 </div>
@@ -92,7 +98,14 @@ const SkillsSection = () => {
                 key={index}
                 className="px-6 py-3 text-lg bg-primary/20 text-primary border-primary/40 hover:bg-primary/30 transition-all duration-300 hover:scale-110 neon-glow"
               >
-                {tech}
+                <a 
+                  href={`https://en.wikipedia.org/wiki/${tech.replace(/\s/g, '_').replace(/\./g, '')}`} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-white transition-colors"
+                >
+                  {tech}
+                </a>
               </Badge>
             ))}
           </div>

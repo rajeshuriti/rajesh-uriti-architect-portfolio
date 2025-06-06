@@ -131,14 +131,6 @@ const ProjectsSection = () => {
 
               {/* Action Buttons */}
               <div className="flex gap-2 mt-6 pt-4 border-t border-primary/10">
-                <Button size="sm" variant="outline" className="flex-1 text-xs border-primary/30 hover:border-primary/60">
-                  <Code className="w-3 h-3 mr-1" />
-                  View Details
-                </Button>
-                <Button size="sm" variant="outline" className="flex-1 text-xs border-primary/30 hover:border-primary/60">
-                  <ExternalLink className="w-3 h-3 mr-1" />
-                  Case Study
-                </Button>
               </div>
             </Card>
           ))}

@@ -62,13 +62,7 @@ const HeroSection = () => {
                       className="w-full h-full object-cover"
                     />
                   </div>
-                </div>
-                
-                {/* Floating skill badges */}
-                <div className="absolute -top-4 -left-4 skill-tag animate-float">React</div>
-                <div className="absolute -top-4 -right-4 skill-tag animate-float delay-500">Python</div>
-                <div className="absolute -bottom-4 -left-4 skill-tag animate-float delay-1000">.NET Core</div>
-                <div className="absolute -bottom-4 -right-4 skill-tag animate-float delay-1500">AWS</div>
+                </div>                
               </div>
             </div>
           </div>
@@ -141,17 +135,23 @@ const HeroSection = () => {
               </h4>
               
               <div className="flex flex-wrap justify-center gap-4">
-                <Button className="bg-primary hover:bg-primary/90 neon-glow animated-icon" size="lg">
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Short Resume
+                <Button className="bg-primary hover:bg-primary/90 neon-glow animated-icon" size="lg" asChild>
+                  <a href="/files/Rajesh Uriti_Short_Resume.pdf" download>
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Short Resume
+                  </a>
                 </Button>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg">
-                  <Download className="w-5 h-5 mr-2" />
-                  Download Detailed Resume
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg" asChild>
+                  <a href="/files/Rajesh Uriti_Detailed_Resume.pdf" download>
+                    <Download className="w-5 h-5 mr-2" />
+                    Download Detailed Resume
+                  </a>
                 </Button>
-                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg">
-                  <Github className="w-5 h-5 mr-2" />
-                  View GitHub Portfolio
+                <Button variant="outline" className="border-primary text-primary hover:bg-primary/10 animated-icon" size="lg" asChild>
+                  <a href="https://github.com/rajeshuriti" target="_blank" rel="noopener noreferrer">
+                    <Github className="w-5 h-5 mr-2" />
+                    View GitHub Portfolio
+                  </a>
                 </Button>
               </div>
             </div>
