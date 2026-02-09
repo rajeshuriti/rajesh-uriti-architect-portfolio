@@ -6,9 +6,15 @@ const SkillsSection = () => {
   const skillCategories = [
     {
       icon: Code,
-      title: "Programming & Frameworks",
-      skills: [".NET Framework", ".NET Core", "Python", "ML.NET", "Gen AI", "Angular", "React", "jQuery", "HTML5", "CSS3", "JavaScript", "TypeScript"],
+      title: "Backend Programming",
+      skills: [".NET Framework", ".NET Core", "Python", "ML.NET", "Gen AI"],
       gradient: "from-blue-500/20 to-cyan-500/20"
+    },
+    {
+      icon: Code,
+      title: "Frontend Programming",
+      skills: ["Angular", "React", "jQuery", "HTML5", "CSS3", "JavaScript", "TypeScript"],
+      gradient: "from-sky-500/20 to-indigo-500/20"
     },
     {
       icon: Database,
