@@ -1,6 +1,6 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Cloud, Wrench, GitBranch, Zap } from "lucide-react";
+import { Code, Database, Cloud, Wrench, GitBranch, Zap, Brain } from "lucide-react";
 
 const SkillsSection = () => {
   const skillCategories = [
@@ -15,6 +15,12 @@ const SkillsSection = () => {
       title: "Frontend Programming",
       skills: ["Angular", "React", "jQuery", "HTML5", "CSS3", "JavaScript", "TypeScript"],
       gradient: "from-sky-500/20 to-indigo-500/20"
+    },
+    {
+      icon: Brain,
+      title: "AI & LLM",
+      skills: ["RAG", "LangChain", "LangGraph", "LLM", "Prompt Engineering", "Vector DB", "Embeddings", "Fine-tuning", "Agents", "OpenAI", "Anthropic"],
+      gradient: "from-violet-500/20 to-fuchsia-500/20"
     },
     {
       icon: Database,
