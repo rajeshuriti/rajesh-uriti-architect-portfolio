@@ -2,15 +2,20 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, MapPin, Building, Briefcase } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ExperienceSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const experiences = [
     {
       company: "Cognizant Technology Solutions",
       role: "Full-Stack Application Architect",
       period: "Jan 2019 – Present",
+      tenure: "6+ years",
       location: "Mississauga, ON & West Palm Beach, FL",
       client: "NextEra Energy",
+      clientContext: "North America's largest clean energy company (S&P 500, Fortune 200)",
       isCurrent: true,
       achievements: [
         "Served as Solution Architect and Technical Lead for 12 enterprise-scale customer-facing applications supporting planning, execution, risk assessment, compliance, safety, and reporting processes for thousands of users across multiple business functions.",
@@ -26,8 +31,10 @@ const ExperienceSection = () => {
       company: "Cognizant Technology Solutions",
       role: "Senior Software Engineer",
       period: "Mar 2017 – Dec 2018",
+      tenure: "2 years",
       location: "Mississauga, ON",
       client: "NextEra Energy",
+      clientContext: "North America's largest clean energy company (S&P 500, Fortune 200)",
       isCurrent: false,
       achievements: [
         "Led development of ASP.NET MVC and Angular-based enrollment platforms for utility customers, designing Web APIs and scalable application architectures to support business growth and future enhancements.",
@@ -41,22 +48,26 @@ const ExperienceSection = () => {
       company: "Tata Consultancy Services",
       role: "Application Developer",
       period: "Sep 2012 – Mar 2017",
+      tenure: "4.5 years",
       location: "India",
       client: "Multiple Clients",
+      clientContext: "Enterprise healthcare and identity management clients",
       isCurrent: false,
       achievements: [
         "Developed enterprise healthcare applications using .NET Framework, Angular, JavaScript, and SQL Server.",
         "Participated in project planning, technical analysis, effort estimation, and enterprise application development.",
         "Designed reusable application components and responsive user interfaces, serving 10,000+ users."
       ],
-      technologies: [".NET Framework", "Angular", "jQuery", "Bootstrap", "SQL Server", "Healthcare"]
+      technologies: [".NET Framework", "Angular", "jQuery", "Bootstrap", "SQL Server"]
     },
     {
       company: "ATOS Syntel",
       role: "Software Engineer",
       period: "Feb 2010 – Aug 2012",
+      tenure: "2.5 years",
       location: "India",
       client: "Various Clients",
+      clientContext: "Healthcare and enterprise technology clients",
       isCurrent: false,
       achievements: [
         "Developed full-stack healthcare applications, database solutions, and Google API integrations while supporting production environments.",
@@ -68,8 +79,10 @@ const ExperienceSection = () => {
       company: "Cyient Limited",
       role: "Software Developer",
       period: "May 2009 – Jan 2010",
+      tenure: "9 months",
       location: "India",
       client: "Engineering Clients",
+      clientContext: "Engineering and technology services",
       isCurrent: false,
       achievements: [
         "Contributed to enterprise application development, maintenance, testing, troubleshooting, and technical documentation.",
@@ -81,7 +94,10 @@ const ExperienceSection = () => {
 
   return (
     <section className="py-20 bg-background">
-      <div className="container mx-auto px-6">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Professional Journey</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
@@ -89,14 +105,14 @@ const ExperienceSection = () => {
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5">
           {experiences.map((exp, index) => (
             <Card
               key={index}
-              className={`p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group ${exp.isCurrent ? 'border-primary/35' : ''}`}
+              className={`p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group ${exp.isCurrent ? "border-primary/35" : ""}`}
             >
               <div className="grid lg:grid-cols-4 gap-6">
-                {/* Company & Role Info */}
+                {/* Company & Role */}
                 <div className="lg:col-span-1 space-y-4">
                   <div>
                     <div className="flex items-center gap-2 mb-1">
@@ -116,26 +132,32 @@ const ExperienceSection = () => {
                       <span>{exp.location}</span>
                     </div>
                     {exp.client && (
-                      <div className="flex items-center gap-2 text-muted-foreground">
-                        <Briefcase className="w-3.5 h-3.5 flex-shrink-0" />
-                        <span>Client: {exp.client}</span>
+                      <div className="flex items-start gap-2 text-muted-foreground">
+                        <Briefcase className="w-3.5 h-3.5 flex-shrink-0 mt-0.5" />
+                        <div>
+                          <span className="font-medium text-foreground/80">{exp.client}</span>
+                          <p className="text-muted-foreground/70 text-xs mt-0.5">{exp.clientContext}</p>
+                        </div>
                       </div>
                     )}
                   </div>
 
-                  {exp.isCurrent && (
-                    <div className="flex items-center gap-2">
-                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                      <Badge className="bg-green-400/20 text-green-400 border-green-400/40 text-xs">
-                        Current Role
+                  <div className="flex flex-wrap gap-1.5">
+                    <Badge variant="outline" className="text-xs border-primary/20 text-muted-foreground">
+                      {exp.tenure}
+                    </Badge>
+                    {exp.isCurrent && (
+                      <Badge className="bg-green-400/15 text-green-400 border-green-400/30 text-xs flex items-center gap-1">
+                        <span className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse inline-block"></span>
+                        Current
                       </Badge>
-                    </div>
-                  )}
+                    )}
+                  </div>
                 </div>
 
                 {/* Achievements */}
                 <div className="lg:col-span-2 space-y-3">
-                  <h4 className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Key Contributions</h4>
+                  <h4 className="text-xs font-semibold text-foreground/60 uppercase tracking-widest">Key Contributions</h4>
                   <ul className="space-y-2.5">
                     {exp.achievements.map((achievement, achIndex) => (
                       <li key={achIndex} className="flex items-start gap-3 text-sm leading-relaxed">
@@ -148,7 +170,7 @@ const ExperienceSection = () => {
 
                 {/* Technologies */}
                 <div className="lg:col-span-1 space-y-3">
-                  <h4 className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Technologies</h4>
+                  <h4 className="text-xs font-semibold text-foreground/60 uppercase tracking-widest">Technologies</h4>
                   <div className="flex flex-wrap gap-1.5">
                     {exp.technologies.map((tech, techIndex) => (
                       <Badge
@@ -169,21 +191,19 @@ const ExperienceSection = () => {
         {/* Career Stats */}
         <div className="mt-14 text-center">
           <Card className="p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-4xl w-full">
-            <div className="space-y-4">
-              <h3 className="text-xl font-bold text-primary">Career at a Glance</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-                {[
-                  { value: "16+", label: "Years Experience" },
-                  { value: "5", label: "Companies" },
-                  { value: "12", label: "Enterprise Apps" },
-                  { value: "38+", label: "Engineers Led" },
-                ].map((stat, index) => (
-                  <div key={index}>
-                    <div className="text-3xl font-bold text-gradient">{stat.value}</div>
-                    <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-                  </div>
-                ))}
-              </div>
+            <h3 className="text-xl font-bold text-primary mb-6">Career at a Glance</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { value: "16+", label: "Years Experience" },
+                { value: "5", label: "Companies" },
+                { value: "12", label: "Enterprise Apps" },
+                { value: "38+", label: "Engineers Led" },
+              ].map((stat, index) => (
+                <div key={index}>
+                  <div className="text-3xl font-bold text-gradient">{stat.value}</div>
+                  <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+                </div>
+              ))}
             </div>
           </Card>
         </div>

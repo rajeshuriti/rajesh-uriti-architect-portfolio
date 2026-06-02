@@ -2,13 +2,16 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Cloud, GitMerge, Brain, Database, Layers, Workflow } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ProjectsSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const projects = [
     {
       title: "Enterprise Application Portfolio",
       subtitle: "12-Application Architecture Programme",
-      company: "Cognizant — NextEra Energy",
+      company: "Cognizant — NextEra Energy (North America's largest clean energy company, S&P 500)",
       period: "2019 – Present",
       context: "Served as Solution Architect for an enterprise portfolio of 12 customer-facing applications supporting planning, execution, risk assessment, compliance, safety, and reporting for thousands of users across business-critical functions.",
       architectureDecisions: [
@@ -31,7 +34,7 @@ const ProjectsSection = () => {
     {
       title: "Monolith to Microservices Transformation",
       subtitle: "Application Modernisation Initiative",
-      company: "Cognizant — NextEra Energy",
+      company: "Cognizant — NextEra Energy (Fortune 200 energy enterprise)",
       period: "2019 – 2022",
       context: "Led the architectural transformation of a tightly coupled monolithic enterprise application into a scalable, independently deployable microservices ecosystem — a major digital transformation initiative.",
       architectureDecisions: [
@@ -54,7 +57,7 @@ const ProjectsSection = () => {
     {
       title: "Generative AI Integration Programme",
       subtitle: "Enterprise AI Solutions",
-      company: "Cognizant — NextEra Energy",
+      company: "Cognizant — NextEra Energy (Regulated energy enterprise, Fortune 200)",
       period: "2023 – Present",
       context: "Drove enterprise AI adoption by architecting and delivering Generative AI solutions — evaluating LLM platforms (Anthropic Claude, OpenAI GPT, Google Gemini) and integrating production-grade AI capabilities into enterprise workflows.",
       architectureDecisions: [
@@ -77,7 +80,7 @@ const ProjectsSection = () => {
     {
       title: "AWS Cloud Infrastructure Architecture",
       subtitle: "Cloud Migration & Infrastructure Design",
-      company: "Cognizant — NextEra Energy",
+      company: "Cognizant — NextEra Energy (Enterprise-scale regulated energy sector)",
       period: "2019 – Present",
       context: "Designed and implemented AWS cloud solutions across the enterprise application portfolio — migrating on-premises workloads to cloud-native architectures while optimising for performance, cost, and operational resilience.",
       architectureDecisions: [
@@ -145,7 +148,10 @@ const ProjectsSection = () => {
 
   return (
     <section className="py-20 bg-gradient-to-b from-card/10 to-background">
-      <div className="container mx-auto px-6">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="text-center mb-16 space-y-4">
           <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
             Architecture Case Studies

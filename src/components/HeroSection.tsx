@@ -33,7 +33,7 @@ const HeroSection = () => {
             <div className="flex items-center gap-2">
               <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
               <Badge variant="outline" className="border-green-400/50 text-green-400 text-sm font-medium">
-                Available for New Opportunities
+                Open to Solution Architect & Enterprise Architect Roles
               </Badge>
             </div>
 
@@ -93,15 +93,9 @@ const HeroSection = () => {
             {/* Secondary CTAs */}
             <div className="flex flex-wrap gap-3">
               <Button variant="ghost" className="text-muted-foreground hover:text-primary text-sm px-3 py-2" asChild>
-                <a href="/files/Rajesh Uriti_Short_Resume.pdf" download>
+                <a href="/files/Rajesh_Uriti_Solution_Architect_Resume.pdf" download="Rajesh_Uriti_Solution_Architect_Resume.pdf">
                   <Download className="w-4 h-4 mr-2" />
-                  Short Resume
-                </a>
-              </Button>
-              <Button variant="ghost" className="text-muted-foreground hover:text-primary text-sm px-3 py-2" asChild>
-                <a href="/files/Rajesh Uriti_Detailed_Resume.pdf" download>
-                  <Download className="w-4 h-4 mr-2" />
-                  Detailed Resume
+                  Download Resume
                 </a>
               </Button>
               <Button variant="ghost" className="text-muted-foreground hover:text-primary text-sm px-3 py-2" asChild>

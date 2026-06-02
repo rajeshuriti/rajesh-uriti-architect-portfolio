@@ -1,8 +1,11 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Code, Database, Cloud, Wrench, GitBranch, Zap, Brain, Layers } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const SkillsSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const skillCategories = [
     {
       icon: Layers,
@@ -160,7 +163,10 @@ const SkillsSection = () => {
 
   return (
     <section className="py-20 bg-gradient-to-b from-background to-card/20">
-      <div className="container mx-auto px-6">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Technical Skills</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">

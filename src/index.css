@@ -161,3 +161,32 @@
 .animate-slide-in-up {
   animation: slide-in-up 0.6s ease-out;
 }
+
+/* Scroll-triggered reveal utility */
+.scroll-reveal {
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.scroll-reveal.hidden {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Accessibility: disable motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-pulse,
+  .animate-pulse-glow,
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-up,
+  .scroll-reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

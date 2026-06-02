@@ -1,10 +1,13 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Brain, Search, Bot, Zap, Shield, BarChart3, CheckCircle, Sparkles } from "lucide-react";
+import { Brain, Search, Bot, Zap, Shield, BarChart3, CheckCircle, Cpu } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const GenAISection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const aiModels = [
-    { name: "Anthropic Claude", description: "Primary LLM for enterprise AI solutions and SDK integration" },
+    { name: "Anthropic Claude", description: "Primary LLM for enterprise AI solutions and Anthropic SDK integration" },
     { name: "OpenAI GPT", description: "GPT API integration for AI-powered feature development" },
     { name: "Google Gemini", description: "Evaluated and integrated for multimodal AI use cases" },
   ];
@@ -53,10 +56,13 @@ const GenAISection = () => {
 
   return (
     <section className="py-20 bg-gradient-to-b from-card/20 to-background" id="ai">
-      <div className="container mx-auto px-6">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="text-center mb-16 space-y-4">
-          <Badge variant="outline" className="border-violet-400/50 text-violet-400 px-4 py-1 text-sm mb-4">
-            <Sparkles className="w-3.5 h-3.5 mr-1.5 inline" />
+          <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
+            <Cpu className="w-3.5 h-3.5 mr-1.5 inline" />
             Generative AI Practice
           </Badge>
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Generative AI & Enterprise AI</h2>
@@ -70,11 +76,11 @@ const GenAISection = () => {
           {aiModels.map((model, index) => (
             <Card
               key={index}
-              className="p-6 bg-gradient-to-br from-violet-600/20 to-fuchsia-500/15 border-violet-500/30 hover:border-violet-400/50 transition-all duration-300 hover:shadow-lg hover:shadow-violet-500/20 group text-center"
+              className="p-6 bg-gradient-to-br from-primary/15 to-neon-cyan/10 border-primary/30 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 group text-center"
             >
               <div className="space-y-3">
-                <div className="w-12 h-12 rounded-xl bg-violet-500/20 flex items-center justify-center mx-auto group-hover:bg-violet-500/30 transition-colors">
-                  <Brain className="w-6 h-6 text-violet-400" />
+                <div className="w-12 h-12 rounded-xl bg-primary/20 flex items-center justify-center mx-auto group-hover:bg-primary/30 transition-colors">
+                  <Brain className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="font-bold text-base">{model.name}</h3>
                 <p className="text-sm text-muted-foreground">{model.description}</p>
@@ -88,12 +94,12 @@ const GenAISection = () => {
           {capabilities.map((cap, index) => (
             <Card
               key={index}
-              className="p-6 bg-card/40 backdrop-blur-sm border-primary/15 hover:border-violet-500/40 transition-all duration-500 hover:shadow-lg hover:shadow-violet-500/20 group"
+              className="p-6 bg-card/40 backdrop-blur-sm border-primary/15 hover:border-primary/40 transition-all duration-500 hover:shadow-lg hover:shadow-primary/20 group"
             >
               <div className="space-y-3">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 bg-violet-500/20 rounded-lg group-hover:bg-violet-500/30 transition-colors">
-                    <cap.icon className="w-5 h-5 text-violet-400" />
+                  <div className="p-2.5 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
+                    <cap.icon className="w-5 h-5 text-primary" />
                   </div>
                   <h3 className="font-semibold text-sm leading-tight">{cap.title}</h3>
                 </div>
@@ -105,8 +111,8 @@ const GenAISection = () => {
           ))}
         </div>
 
-        {/* AI Use Cases & Impact Banner */}
-        <Card className="p-8 bg-gradient-to-r from-violet-600/10 via-card/60 to-fuchsia-500/10 border-violet-500/20">
+        {/* AI Use Cases & Stack Banner */}
+        <Card className="p-8 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/20">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-foreground">
@@ -118,7 +124,7 @@ const GenAISection = () => {
               <div className="space-y-2">
                 {useCases.map((useCase, index) => (
                   <div key={index} className="flex items-center gap-2">
-                    <CheckCircle className="w-4 h-4 text-violet-400 flex-shrink-0" />
+                    <CheckCircle className="w-4 h-4 text-primary flex-shrink-0" />
                     <span className="text-sm text-muted-foreground">{useCase}</span>
                   </div>
                 ))}
@@ -143,7 +149,7 @@ const GenAISection = () => {
                 ].map((tag) => (
                   <Badge
                     key={tag}
-                    className="px-3 py-1 text-xs bg-violet-500/20 text-violet-300 border border-violet-500/30 hover:bg-violet-500/30 transition-colors"
+                    className="px-3 py-1 text-xs bg-primary/20 text-primary border border-primary/30 hover:bg-primary/30 transition-colors"
                   >
                     {tag}
                   </Badge>

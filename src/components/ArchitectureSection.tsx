@@ -9,8 +9,11 @@ import {
   RefreshCw,
   CheckCircle
 } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ArchitectureSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
   const domains = [
     {
       icon: Layers,
@@ -106,7 +109,10 @@ const ArchitectureSection = () => {
 
   return (
     <section className="py-20 bg-background" id="architecture">
-      <div className="container mx-auto px-6">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
         <div className="text-center mb-16 space-y-4">
           <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
             Architecture Practice

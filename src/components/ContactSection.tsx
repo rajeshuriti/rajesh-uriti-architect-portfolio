@@ -1,9 +1,35 @@
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Mail, Linkedin, Github, MapPin, Phone, Download, ArrowRight } from "lucide-react";
+import { Mail, Linkedin, Github, MapPin, Phone, Download, ArrowRight, Briefcase, MonitorSmartphone, Globe, CalendarCheck } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ContactSection = () => {
+  const { ref, isVisible } = useScrollAnimation();
+
+  const lookingFor = [
+    {
+      icon: Briefcase,
+      label: "Role Types",
+      value: "Solution Architect · Enterprise Architect · Cloud Architect · AI Solution Architect",
+    },
+    {
+      icon: MonitorSmartphone,
+      label: "Work Arrangement",
+      value: "Remote or Hybrid — open to on-site in Toronto / Mississauga area",
+    },
+    {
+      icon: Globe,
+      label: "Geography",
+      value: "Canada (primary) · Open to US remote roles",
+    },
+    {
+      icon: CalendarCheck,
+      label: "Availability",
+      value: "Available immediately for the right opportunity",
+    },
+  ];
+
   return (
     <section className="py-20 bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg relative overflow-hidden">
       {/* Background Effects */}
@@ -12,14 +38,41 @@ const ContactSection = () => {
         <div className="absolute bottom-20 left-20 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
-        <div className="text-center mb-16 space-y-4">
+      <div
+        ref={ref}
+        className={`container mx-auto px-6 relative z-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+      >
+        <div className="text-center mb-14 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Let's Connect</h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Open to Solution Architect, Enterprise Architect, Cloud Architect, and AI Solution Architect opportunities.
+            Open to Solution Architect, Enterprise Architect, Cloud Architect, and AI Solution Architect opportunities across Canada.
           </p>
         </div>
 
+        {/* What I'm Looking For */}
+        <div className="max-w-4xl mx-auto mb-10">
+          <Card className="p-7 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/25">
+            <h3 className="text-lg font-bold text-primary mb-5 flex items-center gap-2">
+              <Briefcase className="w-5 h-5" />
+              What I'm Looking For
+            </h3>
+            <div className="grid sm:grid-cols-2 gap-4">
+              {lookingFor.map((item, index) => (
+                <div key={index} className="flex items-start gap-3">
+                  <div className="p-2 bg-primary/20 rounded-lg flex-shrink-0 mt-0.5">
+                    <item.icon className="w-4 h-4 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground uppercase tracking-wide">{item.label}</p>
+                    <p className="text-sm text-foreground/90 mt-0.5">{item.value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </Card>
+        </div>
+
+        {/* Contact Card */}
         <div className="max-w-4xl mx-auto">
           <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/20 animate-glow">
             <div className="grid md:grid-cols-2 gap-8">
@@ -59,7 +112,7 @@ const ContactSection = () => {
                     <div>
                       <p className="text-xs text-muted-foreground">Location</p>
                       <p className="text-primary font-medium text-sm">Mississauga, Ontario, Canada</p>
-                      <p className="text-xs text-neon-cyan">🇨🇦 Canadian Permanent Resident</p>
+                      <p className="text-xs text-neon-cyan">🇨🇦 Canadian Permanent Resident · No sponsorship required</p>
                     </div>
                   </div>
                 </div>
@@ -67,33 +120,20 @@ const ContactSection = () => {
                 {/* Availability */}
                 <div className="p-4 bg-gradient-to-r from-green-500/10 to-emerald-500/10 rounded-lg border border-green-500/20">
                   <div className="flex items-center gap-3">
-                    <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
                     <div>
-                      <p className="text-sm font-medium text-green-400">Available for New Opportunities</p>
-                      <p className="text-xs text-muted-foreground mt-0.5">Solution Architect · Enterprise Architect · Cloud Architect · AI Architect</p>
+                      <p className="text-sm font-medium text-green-400">Available Immediately</p>
+                      <p className="text-xs text-muted-foreground mt-0.5">Full-time · Contract · Consulting engagements</p>
                     </div>
-                  </div>
-                </div>
-
-                {/* Target Roles */}
-                <div className="space-y-2">
-                  <p className="text-xs text-muted-foreground uppercase tracking-widest">Target Roles</p>
-                  <div className="flex flex-wrap gap-2">
-                    {["Solution Architect", "Enterprise Architect", "Cloud Architect", "AI Solution Architect", "Digital Transformation Lead"].map((role) => (
-                      <Badge key={role} variant="outline" className="text-xs border-primary/30 text-muted-foreground hover:text-primary hover:border-primary/60 transition-colors">
-                        {role}
-                      </Badge>
-                    ))}
                   </div>
                 </div>
               </div>
 
               {/* Quick Actions */}
-              <div className="space-y-6">
+              <div className="space-y-5">
                 <h3 className="text-xl font-bold text-primary">Quick Actions</h3>
 
                 <div className="space-y-3">
-                  {/* Primary CTA */}
                   <Button
                     className="w-full bg-primary hover:bg-primary/90 neon-glow justify-start text-base py-5"
                     onClick={() => window.location.href = 'mailto:rajeshuriti@gmail.com'}
@@ -110,19 +150,12 @@ const ContactSection = () => {
                     </a>
                   </Button>
 
-                  {/* Resume Downloads */}
-                  <div className="pt-2 space-y-2">
+                  <div className="pt-1 space-y-2">
                     <p className="text-xs text-muted-foreground uppercase tracking-widest">Download Resume</p>
-                    <Button variant="outline" className="w-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-primary justify-start" size="lg" asChild>
-                      <a href="/files/Rajesh Uriti_Short_Resume.pdf" download>
+                    <Button variant="outline" className="w-full border-primary text-primary hover:bg-primary/10 justify-start" size="lg" asChild>
+                      <a href="/files/Rajesh_Uriti_Solution_Architect_Resume.pdf" download="Rajesh_Uriti_Solution_Architect_Resume.pdf">
                         <Download className="w-4 h-4 mr-3" />
-                        Short Resume (ATS-Optimised)
-                      </a>
-                    </Button>
-                    <Button variant="outline" className="w-full border-primary/40 text-foreground hover:bg-primary/10 hover:text-primary justify-start" size="lg" asChild>
-                      <a href="/files/Rajesh Uriti_Detailed_Resume.pdf" download>
-                        <Download className="w-4 h-4 mr-3" />
-                        Detailed Resume (Full Profile)
+                        Rajesh Uriti — Solution Architect Resume
                       </a>
                     </Button>
                   </div>
@@ -140,11 +173,11 @@ const ContactSection = () => {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 text-center space-y-2">
+        <div className="mt-14 text-center space-y-1.5">
           <p className="text-sm text-muted-foreground">
-            © 2025 Rajesh Uriti — Solution Architect | Cloud, AI & Digital Transformation
+            © {new Date().getFullYear()} Rajesh Uriti — Solution Architect | Cloud, AI & Digital Transformation
           </p>
-          <p className="text-xs text-muted-foreground/60">
+          <p className="text-xs text-muted-foreground/50">
             Built with React, TypeScript & Tailwind CSS · Deployed on Vercel
           </p>
         </div>
