@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, GitMerge, Brain, Database, Layers, Workflow } from "lucide-react";
+import { Cloud, GitMerge, Brain, Database, Layers, Workflow, Github, ExternalLink, BookOpen, Video, Code2, BarChart3, ShoppingCart, Zap, Calculator, GitBranch, Eye } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ProjectsSection = () => {
@@ -234,6 +234,162 @@ const ProjectsSection = () => {
               </div>
             </Card>
           ))}
+        </div>
+
+        {/* Personal Projects */}
+        <div className="mt-16">
+          <div className="text-center mb-10 space-y-3">
+            <Badge variant="outline" className="border-neon-cyan/40 text-neon-cyan px-4 py-1 text-sm">
+              Personal Projects & Open Source
+            </Badge>
+            <h3 className="text-2xl lg:text-3xl font-bold text-gradient">Side Projects</h3>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              Personal explorations in AI, developer tooling, and full-stack engineering
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {[
+              {
+                icon: Eye,
+                title: "KPO Smart Vision",
+                subtitle: "AI Vision & Document Intelligence",
+                description: "An AI-powered smart vision solution targeting KPO workflows — leveraging computer vision and document intelligence to automate data extraction, classification, and processing from unstructured sources.",
+                technologies: ["Python", "Computer Vision", "AI/ML", "Document Intelligence"],
+                githubUrl: "https://github.com/rajeshuriti/kpo-smart-vision",
+                gradient: "from-indigo-600/20 to-blue-400/20",
+                borderColor: "border-indigo-500/30"
+              },
+              {
+                icon: GitBranch,
+                title: "MindFlow AI",
+                subtitle: "AI Diagram Generator",
+                description: "Converts natural language descriptions into professional Mermaid diagrams using Google Gemini. Supports flowcharts, sequence diagrams, ERDs, class diagrams, state diagrams, and Gantt charts — no syntax knowledge required.",
+                technologies: ["Node.js", "Express.js", "Google Gemini API", "Mermaid.js", "JavaScript"],
+                githubUrl: "https://github.com/rajeshuriti/mindflow-ai",
+                gradient: "from-teal-600/20 to-cyan-400/20",
+                borderColor: "border-teal-500/30"
+              },
+              {
+                icon: BookOpen,
+                title: "Claude Terminology",
+                subtitle: "Certification Prep Platform",
+                description: "Interactive learning platform for the Anthropic Claude Solutions Architect certification. Features an 85+ concept glossary, visual relationship graphs, quizzes, practice exams, and hands-on CLI labs.",
+                technologies: ["React 19", "TypeScript", "Tailwind CSS", "Zustand", "Framer Motion", "Vite"],
+                githubUrl: "https://github.com/rajeshuriti/claude-terminology",
+                gradient: "from-blue-600/20 to-cyan-500/20",
+                borderColor: "border-blue-500/30"
+              },
+              {
+                icon: Video,
+                title: "NarrateCV",
+                subtitle: "Resume-to-Video Generator",
+                description: "Transforms a resume into a narrated video story with voice, visuals, and motion graphics. Upload your resume and get a dynamic multimedia presentation automatically generated.",
+                technologies: ["Next.js", "TypeScript", "Remotion", "Tailwind CSS"],
+                githubUrl: "https://github.com/rajeshuriti/NarrateCV",
+                gradient: "from-violet-600/20 to-purple-400/20",
+                borderColor: "border-violet-500/30"
+              },
+              {
+                icon: Code2,
+                title: "Claude + Remotion Sample",
+                subtitle: "AI-Generated Video Experiment",
+                description: "Proof-of-concept combining Anthropic Claude and Remotion to explore AI-driven programmatic video generation — using LLM output to drive animated React scenes.",
+                technologies: ["Claude SDK", "Remotion", "TypeScript", "React"],
+                githubUrl: "https://github.com/rajeshuriti/claude-remotion-sample",
+                gradient: "from-cyan-600/20 to-teal-400/20",
+                borderColor: "border-cyan-500/30"
+              },
+              {
+                icon: BarChart3,
+                title: "Visualize Algorithm",
+                subtitle: "Algorithm Visualizer",
+                description: "Interactive tool for visualising how sorting and search algorithms work step-by-step. A hands-on learning aid for understanding algorithmic complexity and execution flow.",
+                technologies: ["JavaScript", "TypeScript", "React", "CSS Animations"],
+                githubUrl: "https://github.com/rajeshuriti/visualize-algorithm",
+                gradient: "from-green-600/20 to-emerald-400/20",
+                borderColor: "border-green-500/30"
+              },
+              {
+                icon: ShoppingCart,
+                title: "Share Cart",
+                subtitle: "Collaborative Shopping List",
+                description: "Real-time shared shopping cart application that lets multiple users collaborate on a list simultaneously — exploring real-time sync, state management, and full-stack architecture.",
+                technologies: ["React", "TypeScript", "Node.js", "Real-time Sync"],
+                githubUrl: "https://github.com/rajeshuriti/share-cart",
+                gradient: "from-orange-500/20 to-amber-400/20",
+                borderColor: "border-orange-500/30"
+              },
+              {
+                icon: Workflow,
+                title: "Foodtopia",
+                subtitle: "Food Discovery Application",
+                description: "A full-stack food and recipe discovery app — browse, search, and explore dishes with a clean, engaging UI. Built to practice modern full-stack patterns and UI/UX design.",
+                technologies: ["React", "TypeScript", "Node.js", "REST APIs"],
+                githubUrl: "https://github.com/rajeshuriti/Foodtopia",
+                gradient: "from-rose-500/20 to-pink-400/20",
+                borderColor: "border-rose-500/30"
+              },
+              {
+                icon: Calculator,
+                title: "Unit Verse Calculator",
+                subtitle: "Unit Conversion Tool",
+                description: "A comprehensive unit conversion calculator covering length, weight, temperature, volume, and more — built with a clean, intuitive UI for fast everyday conversions.",
+                technologies: ["JavaScript", "TypeScript", "React", "CSS"],
+                githubUrl: "https://github.com/rajeshuriti/unit-verse-calculator",
+                gradient: "from-sky-500/20 to-blue-400/20",
+                borderColor: "border-sky-500/30"
+              },
+              {
+                icon: Zap,
+                title: "Motivate Chrome Extension",
+                subtitle: "Productivity Browser Extension",
+                description: "A Chrome extension that surfaces motivational quotes and nudges on every new tab, keeping you focused and inspired throughout the day. Lightweight, zero-dependency.",
+                technologies: ["JavaScript", "Chrome Extensions API", "HTML", "CSS"],
+                githubUrl: "https://github.com/rajeshuriti/motivate-chrome-extension",
+                gradient: "from-yellow-500/20 to-amber-400/20",
+                borderColor: "border-yellow-500/30"
+              },
+            ].map((project, index) => (
+              <Card
+                key={index}
+                className={`p-6 bg-gradient-to-br ${project.gradient} backdrop-blur-sm ${project.borderColor} border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group flex flex-col`}
+              >
+                <div className="flex items-start gap-3 mb-4">
+                  <div className="p-2.5 bg-primary/20 rounded-xl group-hover:bg-primary/30 transition-colors flex-shrink-0">
+                    <project.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h4 className="text-base font-bold leading-tight">{project.title}</h4>
+                    <p className="text-xs text-primary/80 font-medium mt-0.5">{project.subtitle}</p>
+                  </div>
+                </div>
+
+                <p className="text-sm text-muted-foreground leading-relaxed flex-1 mb-4">
+                  {project.description}
+                </p>
+
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {project.technologies.map((tech, tIndex) => (
+                    <Badge key={tIndex} variant="secondary" className="text-xs px-2 py-0.5">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 text-xs text-muted-foreground hover:text-primary transition-colors font-medium mt-auto group/link"
+                >
+                  <Github className="w-3.5 h-3.5" />
+                  View on GitHub
+                  <ExternalLink className="w-3 h-3 opacity-0 group-hover/link:opacity-100 transition-opacity" />
+                </a>
+              </Card>
+            ))}
+          </div>
         </div>
 
         {/* Overall Impact */}
