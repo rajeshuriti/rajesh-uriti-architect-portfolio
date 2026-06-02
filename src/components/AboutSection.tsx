@@ -1,40 +1,51 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Cloud, Users, Shield, Zap } from "lucide-react";
+import { Layers, Cloud, Brain, Users, GitMerge, Target, CheckCircle } from "lucide-react";
 
 const AboutSection = () => {
   const highlights = [
     {
-      icon: Code,
-      title: "Full Stack Development",
-      description: "Proficient in both front-end and back-end development, building robust end-to-end solutions"
+      icon: Layers,
+      title: "Enterprise Solution Architecture",
+      description: "Architected and delivered 12 enterprise-scale customer-facing applications across planning, risk, compliance, safety, and reporting domains supporting thousands of users."
     },
     {
-      icon: Database,
-      title: "Database Management",
-      description: "Extensive experience with SQL Server, PostgreSQL, and efficient ETL processes"
+      icon: GitMerge,
+      title: "Application Modernization",
+      description: "Led transformation of tightly coupled monolithic applications into a scalable ecosystem of 18 microservices, applying SOLID principles and enterprise design patterns."
     },
     {
       icon: Cloud,
-      title: "Cloud Architecture",
-      description: "Expert in AWS services including EC2, S3, FSx, and Lambda for scalable solutions"
+      title: "Cloud Architecture (AWS)",
+      description: "Designed and implemented AWS-based cloud solutions — EC2, S3, Lambda, ECS, ECR, FSx, IAM, DMS — delivering scalable, highly available, and cost-effective infrastructures."
+    },
+    {
+      icon: Brain,
+      title: "Generative AI & Enterprise AI",
+      description: "Architected and integrated Generative AI solutions using Anthropic Claude, OpenAI GPT, and Google Gemini with RAG, Prompt Engineering, and Semantic Search capabilities."
     },
     {
       icon: Users,
       title: "Technical Leadership",
-      description: "Led cross-functional teams, performed code reviews, and ensured architecture standards"
+      description: "Provided architecture governance and technical leadership to cross-functional teams of 38+ developers, QA engineers, and DevOps professionals across multiple delivery programmes."
     },
     {
-      icon: Shield,
-      title: "CI/CD & DevOps",
-      description: "Automated deployment using GitHub Actions and Docker containerization"
-    },
-    {
-      icon: Zap,
-      title: "Architecture Leadership",
-      description: "Led application architecture design and technology stack decisions"
+      icon: Target,
+      title: "Digital Transformation",
+      description: "Conducted systems analysis, technical feasibility assessments, architecture reviews, and stakeholder workshops to align technology investments with business objectives."
     }
+  ];
+
+  const pillars = [
+    "Architecture Governance",
+    "Systems Analysis",
+    "Technology Roadmaps",
+    "Stakeholder Alignment",
+    "Build vs. Buy Decisions",
+    "Technical Feasibility",
+    "Cross-Team Mentoring",
+    "Engineering Best Practices",
   ];
 
   return (
@@ -43,41 +54,68 @@ const AboutSection = () => {
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">About Me</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Transforming complex business requirements into scalable, efficient solutions
+            Translating complex business challenges into scalable, future-ready enterprise architectures
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Main Description */}
-          <div className="space-y-6">
+        <div className="grid lg:grid-cols-5 gap-12 items-start mb-16">
+          {/* Main Bio */}
+          <div className="lg:col-span-2 space-y-6">
             <Card className="p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500">
-              <div className="space-y-6 text-lg leading-relaxed">
+              <div className="space-y-5 text-base leading-relaxed">
                 <p>
-                  <span className="text-primary font-semibold">Experienced Application Architect</span> with 15+ years of expertise in architecting and developing end-to-end solutions across the full Software Development Life Cycle (SDLC).
+                  <span className="text-primary font-semibold">Solution Architect and Senior Software Engineer</span> with 16+ years of experience designing, modernizing, and delivering enterprise-scale customer-facing applications across the full SDLC.
                 </p>
-                
                 <p>
-                  As a <span className="text-primary font-semibold">versatile Full Stack Developer</span>, I'm proficient in both front-end and back-end development, with extensive experience in building robust, scalable solutions that drive business success.
+                  At <span className="text-primary font-semibold">Cognizant Technology Solutions</span>, I serve as Solution Architect and Technical Lead for 12 enterprise applications — transforming monolithic systems into a scalable ecosystem of 18 microservices and leading cloud adoption on AWS.
                 </p>
-                
                 <p>
-                  My <span className="text-primary font-semibold">Architecture Leadership</span> includes leading application architecture design, technology stack decisions, and system modularization to align with business goals and ensure long-term maintainability.
+                  Beyond architecture and engineering, I drive <span className="text-primary font-semibold">enterprise AI adoption</span> — evaluating Anthropic Claude, OpenAI GPT, and Google Gemini, delivering AI-powered automation and knowledge retrieval solutions that improve operational efficiency.
                 </p>
-                
-                <div className="pt-4">
+                <div className="pt-2 space-y-2">
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-muted-foreground">12 enterprise applications architected and delivered</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-muted-foreground">18 microservices — monolith-to-cloud transformation</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-muted-foreground">38+ engineers mentored and led across multiple teams</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <CheckCircle className="w-4 h-4 text-green-400 flex-shrink-0" />
+                    <span className="text-sm text-muted-foreground">Generative AI solutions deployed in production</span>
+                  </div>
+                </div>
+                <div className="pt-2">
                   <Badge className="bg-primary/20 text-primary border-primary/40 px-4 py-2 text-sm">
                     🇨🇦 Authorized to work in Canada without sponsorship
                   </Badge>
                 </div>
               </div>
             </Card>
+
+            {/* Architecture Pillars */}
+            <Card className="p-6 bg-gradient-to-br from-primary/5 to-neon-cyan/5 border-primary/20">
+              <h4 className="text-sm font-semibold text-primary uppercase tracking-widest mb-4">Architecture Practice Areas</h4>
+              <div className="flex flex-wrap gap-2">
+                {pillars.map((p) => (
+                  <Badge key={p} variant="outline" className="text-xs border-primary/30 text-muted-foreground hover:border-primary/60 hover:text-primary transition-colors">
+                    {p}
+                  </Badge>
+                ))}
+              </div>
+            </Card>
           </div>
 
-          {/* Key Strengths Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Capability Cards */}
+          <div className="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-4">
             {highlights.map((item, index) => (
-              <Card 
-                key={index} 
+              <Card
+                key={index}
                 className="p-6 bg-card/30 backdrop-blur-sm border-primary/10 hover:border-primary/30 transition-all duration-500 hover:shadow-lg hover:shadow-primary/20 group"
               >
                 <div className="space-y-3">
@@ -94,15 +132,6 @@ const AboutSection = () => {
               </Card>
             ))}
           </div>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-12 text-center">
-          <Card className="p-6 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block">
-            <p className="text-lg">
-              <span className="text-primary font-semibold">Cloud Expertise:</span> Proficient in utilizing AWS services like EC2, S3, FSx, and Lambda to design scalable, cost-effective cloud architectures that enhance performance and resource efficiency.
-            </p>
-          </Card>
         </div>
       </div>
     </section>

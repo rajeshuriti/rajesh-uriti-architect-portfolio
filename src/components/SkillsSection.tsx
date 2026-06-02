@@ -1,98 +1,198 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Cloud, Wrench, GitBranch, Zap, Brain } from "lucide-react";
+import { Code, Database, Cloud, Wrench, GitBranch, Zap, Brain, Layers } from "lucide-react";
 
 const SkillsSection = () => {
   const skillCategories = [
     {
-      icon: Code,
-      title: "Backend Programming",
-      skills: [".NET Framework", ".NET Core", "Python", "ML.NET", "Gen AI"],
-      gradient: "from-blue-500/20 to-cyan-500/20"
-    },
-    {
-      icon: Code,
-      title: "Frontend Programming",
-      skills: ["Angular", "React", "jQuery", "HTML5", "CSS3", "JavaScript", "TypeScript"],
-      gradient: "from-sky-500/20 to-indigo-500/20"
-    },
-    {
-      icon: Brain,
-      title: "AI & LLM",
-      skills: ["RAG", "LangChain", "LangGraph", "LLM", "Prompt Engineering", "Vector DB", "Embeddings", "Fine-tuning", "Agents", "OpenAI", "Anthropic"],
-      gradient: "from-violet-500/20 to-fuchsia-500/20"
-    },
-    {
-      icon: Database,
-      title: "Database & Storage",
-      skills: ["SQL Server", "PostgreSQL", "SSIS", "ETL Processes", "Database Design", "Query Optimization"],
-      gradient: "from-green-500/20 to-emerald-500/20"
+      icon: Layers,
+      title: "Architecture & Design",
+      description: "Core architecture practice",
+      skills: [
+        "Solution Architecture",
+        "Enterprise Architecture",
+        "Microservices Architecture",
+        "API Design & Strategy",
+        "System Design",
+        "Design Patterns",
+        "SOLID Principles",
+        "Domain-Driven Design",
+        "Technical Feasibility",
+        "Architecture Reviews",
+        "SDLC"
+      ],
+      gradient: "from-blue-600/20 to-cyan-500/20",
+      featured: true
     },
     {
       icon: Cloud,
       title: "Cloud & Infrastructure",
-      skills: ["AWS EC2", "AWS S3", "AWS Lambda", "AWS IAM", "AWS ECR", "AWS ECS", "AWS FSx", "Docker", "Microservices"],
-      gradient: "from-orange-500/20 to-red-500/20"
+      description: "AWS cloud architecture",
+      skills: [
+        "AWS EC2",
+        "AWS S3",
+        "AWS Lambda",
+        "AWS ECS",
+        "AWS ECR",
+        "AWS FSx",
+        "AWS IAM",
+        "AWS DMS",
+        "Docker",
+        "Microservices",
+        "Cloud Migration"
+      ],
+      gradient: "from-orange-500/20 to-amber-500/20",
+      featured: true
     },
     {
-      icon: Wrench,
-      title: "Tools & Development",
-      skills: ["Visual Studio 2022", "VS Code", "PyCharm", "Figma", "Postman", "Soap UI", "Locust", "Bruno", "SonarQube"],
-      gradient: "from-purple-500/20 to-pink-500/20"
+      icon: Brain,
+      title: "Generative AI & AI Engineering",
+      description: "Enterprise AI solutions",
+      skills: [
+        "Anthropic Claude SDK",
+        "OpenAI API (GPT)",
+        "Google Gemini",
+        "Retrieval Augmented Generation",
+        "Prompt Engineering",
+        "Semantic Search",
+        "Vector Embeddings",
+        "AI Agents",
+        "LLM Evaluation",
+        "AI Workflow Automation",
+        "Enterprise AI Adoption"
+      ],
+      gradient: "from-violet-600/20 to-fuchsia-500/20",
+      featured: true
+    },
+    {
+      icon: Code,
+      title: "Backend Engineering",
+      description: "Server-side platforms",
+      skills: [
+        "C#",
+        ".NET Core",
+        ".NET Framework",
+        "ASP.NET MVC",
+        "Python",
+        "FastAPI",
+        "REST APIs",
+        "ASP.NET Web APIs",
+        "Microservices"
+      ],
+      gradient: "from-blue-500/20 to-indigo-500/20"
+    },
+    {
+      icon: Code,
+      title: "Frontend Engineering",
+      description: "Client-side development",
+      skills: [
+        "Angular",
+        "TypeScript",
+        "JavaScript",
+        "React",
+        "HTML5",
+        "CSS3",
+        "jQuery",
+        "Bootstrap"
+      ],
+      gradient: "from-sky-500/20 to-cyan-400/20"
+    },
+    {
+      icon: Database,
+      title: "Data & Integration",
+      description: "Data platforms and pipelines",
+      skills: [
+        "SQL Server",
+        "PostgreSQL",
+        "SSIS",
+        "ETL Processes",
+        "Database Design",
+        "Query Optimization",
+        "MongoDB",
+        "NoSQL",
+        "Integration Patterns",
+        "Messaging Queues"
+      ],
+      gradient: "from-green-600/20 to-emerald-400/20"
     },
     {
       icon: GitBranch,
-      title: "Version Control & Deployment",
-      skills: ["GIT", "SVN", "TFS", "GitHub Actions", "CI/CD", "Automated Testing", "Code Quality"],
-      gradient: "from-indigo-500/20 to-blue-500/20"
+      title: "DevOps & CI/CD",
+      description: "Delivery and automation",
+      skills: [
+        "GitHub Actions",
+        "Docker",
+        "CI/CD Pipelines",
+        "Git",
+        "SVN",
+        "TFS",
+        "Automated Testing",
+        "Code Quality",
+        "SonarQube",
+        "Sonar Lint"
+      ],
+      gradient: "from-indigo-500/20 to-blue-400/20"
     },
     {
-      icon: Zap,
-      title: "Methodologies & Monitoring",
-      skills: ["Agile", "Waterfall", "Sitecore", "Maximo", "Confluence", "Hangfire", "Dynatrace", "Performance Testing"],
-      gradient: "from-yellow-500/20 to-orange-500/20"
+      icon: Wrench,
+      title: "Tools & Practices",
+      description: "Engineering toolchain",
+      skills: [
+        "Visual Studio 2022",
+        "VS Code",
+        "PyCharm",
+        "Postman",
+        "Bruno",
+        "SoapUI",
+        "Locust",
+        "Confluence",
+        "Dynatrace",
+        "Hangfire",
+        "Agile / Scrum"
+      ],
+      gradient: "from-purple-500/20 to-pink-500/20"
     }
+  ];
+
+  const featuredTech = [
+    ".NET Core", "Angular", "Python", "AWS", "Docker", "PostgreSQL", "Anthropic Claude", "OpenAI GPT"
   ];
 
   return (
     <section className="py-20 bg-gradient-to-b from-background to-card/20">
       <div className="container mx-auto px-6">
         <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">My Expertise</h2>
+          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Technical Skills</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            A comprehensive technology stack powering enterprise-level solutions
+            A broad technology foundation underpinned by deep architecture and engineering expertise
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {skillCategories.map((category, index) => (
-            <Card 
-              key={index} 
-              className={`p-6 bg-gradient-to-br ${category.gradient} backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group hover:scale-105`}
+        {/* Featured categories row (Architecture, Cloud, AI) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          {skillCategories.filter(c => c.featured).map((category, index) => (
+            <Card
+              key={index}
+              className={`p-6 bg-gradient-to-br ${category.gradient} backdrop-blur-sm border-primary/30 hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group hover:scale-105`}
             >
               <div className="space-y-4">
-                <div className="flex items-center gap-3 mb-4">
+                <div className="flex items-center gap-3 mb-2">
                   <div className="p-3 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
                     <category.icon className="w-6 h-6 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold">{category.title}</h3>
+                  <div>
+                    <h3 className="text-base font-bold">{category.title}</h3>
+                    <p className="text-xs text-muted-foreground">{category.description}</p>
+                  </div>
                 </div>
-                
                 <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <Badge 
+                    <Badge
                       key={skillIndex}
-                      variant="secondary" 
+                      variant="secondary"
                       className="skill-tag text-xs hover:scale-105 transition-transform"
                     >
-                      <a 
-                        href={`https://en.wikipedia.org/wiki/${skill.replace(/\s/g, '_').replace(/\./g, '')}`} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="hover:text-primary transition-colors"
-                      >
-                        {skill}
-                      </a>
+                      {skill}
                     </Badge>
                   ))}
                 </div>
@@ -101,23 +201,49 @@ const SkillsSection = () => {
           ))}
         </div>
 
-        {/* Featured Technologies */}
-        <div className="mt-16 text-center">
-          <h3 className="text-2xl font-bold mb-8 text-primary">Featured Technologies</h3>
-          <div className="flex flex-wrap justify-center gap-4">
-            {["React", "Python", ".NET Core", "AWS", "PostgreSQL", "Docker", "Angular"].map((tech, index) => (
-              <Badge 
+        {/* Supporting skill categories */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {skillCategories.filter(c => !c.featured).map((category, index) => (
+            <Card
+              key={index}
+              className={`p-5 bg-gradient-to-br ${category.gradient} backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-lg hover:shadow-primary/20 group hover:scale-105`}
+            >
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 mb-2">
+                  <div className="p-2 bg-primary/20 rounded-lg group-hover:bg-primary/30 transition-colors">
+                    <category.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold">{category.title}</h3>
+                    <p className="text-xs text-muted-foreground">{category.description}</p>
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {category.skills.map((skill, skillIndex) => (
+                    <Badge
+                      key={skillIndex}
+                      variant="secondary"
+                      className="skill-tag text-xs hover:scale-105 transition-transform"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </div>
+            </Card>
+          ))}
+        </div>
+
+        {/* Primary Technologies */}
+        <div className="mt-14 text-center">
+          <p className="text-xs text-muted-foreground uppercase tracking-widest mb-6">Primary Technologies</p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {featuredTech.map((tech, index) => (
+              <Badge
                 key={index}
-                className="px-6 py-3 text-lg bg-primary/20 text-primary border-primary/40 hover:bg-primary/30 transition-all duration-300 hover:scale-110 neon-glow"
+                className="px-5 py-2.5 text-sm bg-primary/20 text-primary border-primary/40 hover:bg-primary/30 transition-all duration-300 hover:scale-110 neon-glow"
               >
-                <a 
-                  href={`https://en.wikipedia.org/wiki/${tech.replace(/\s/g, '_').replace(/\./g, '')}`} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
-                >
-                  {tech}
-                </a>
+                {tech}
               </Badge>
             ))}
           </div>

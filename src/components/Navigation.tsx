@@ -28,10 +28,12 @@ const Navigation = () => {
 
   const navItems = [
     { id: "hero", label: "Home" },
-    { id: "about", label: "About Me" },
-    { id: "skills", label: "My Expertise" },
-    { id: "experience", label: "Professional Journey" },
-    { id: "projects", label: "Key Projects" },
+    { id: "about", label: "About" },
+    { id: "architecture", label: "Architecture" },
+    { id: "ai", label: "AI & Innovation" },
+    { id: "skills", label: "Skills" },
+    { id: "experience", label: "Experience" },
+    { id: "projects", label: "Projects" },
     { id: "contact", label: "Contact" }
   ];
 
@@ -49,7 +51,10 @@ const Navigation = () => {
             <div className="w-8 h-8 bg-gradient-to-br from-primary to-neon-cyan rounded-lg flex items-center justify-center">
               <span className="text-sm font-bold text-primary-foreground">RU</span>
             </div>
-            <span className="text-lg font-semibold text-primary">Rajesh Uriti</span>
+            <div>
+              <span className="text-base font-bold text-primary block leading-tight">Rajesh Uriti</span>
+              <span className="text-xs text-muted-foreground leading-tight">Solution Architect</span>
+            </div>
           </div>
 
           {/* Desktop Navigation */}

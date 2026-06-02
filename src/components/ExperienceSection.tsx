@@ -6,70 +6,76 @@ import { Calendar, MapPin, Building, Briefcase } from "lucide-react";
 const ExperienceSection = () => {
   const experiences = [
     {
-      company: "Cognizant",
-      period: "Jan 2019 - Present",
+      company: "Cognizant Technology Solutions",
+      role: "Full-Stack Application Architect",
+      period: "Jan 2019 – Present",
       location: "Mississauga, ON & West Palm Beach, FL",
       client: "NextEra Energy",
-      project: "Digital Worker",
+      isCurrent: true,
       achievements: [
-        "Led end-to-end application architecture design, including system modularization, technology stack selection, and integration strategies",
-        "Architected and developed a full-stack enterprise application using .NET Core and Angular with microservices architecture",
-        "Designed and implemented AWS infrastructure (EC2, Lambda, S3, DMS, FSx) and built CI/CD pipelines using GitHub Actions",
-        "Leveraged Python for automation and performance testing (Locust), and integrated Generative AI tools for enhanced functionality"
+        "Served as Solution Architect and Technical Lead for 12 enterprise-scale customer-facing applications supporting planning, execution, risk assessment, compliance, safety, and reporting processes for thousands of users across multiple business functions.",
+        "Directed application architecture, modernisation, and technology transformation initiatives — transforming tightly coupled monolithic applications into a scalable ecosystem of 18 microservices using C#, .NET Core, Angular, and REST APIs while applying SOLID principles and enterprise design patterns.",
+        "Optimised SQL Server and PostgreSQL platforms, ETL workflows, and data integration processes; architected AWS cloud solutions (EC2, S3, Lambda, ECS, ECR, FSx, IAM, DMS) and built CI/CD pipelines using GitHub Actions and Docker.",
+        "Drove enterprise AI adoption by evaluating and integrating Anthropic Claude, OpenAI GPT, and Google Gemini; developed AI-powered applications using Python, Anthropic SDK, RAG, semantic search, vector embeddings, and prompt engineering techniques.",
+        "Provided technical leadership, architecture governance, mentoring, and engineering best practices across cross-functional teams of 38+ developers, QA engineers, and DevOps professionals.",
+        "Conducted systems analysis, technical feasibility assessments, architecture reviews, and stakeholder workshops to align technology investments with business objectives and strategic roadmaps."
       ],
-      technologies: [".NET Core", "Angular", "PostgreSQL", "SQL Server", "SSIS", "GitHub Actions", "Docker", "AWS", "Python", "Gen AI"]
+      technologies: [".NET Core", "Angular", "PostgreSQL", "SQL Server", "SSIS", "GitHub Actions", "Docker", "AWS", "Python", "Anthropic Claude", "OpenAI GPT", "RAG"]
     },
     {
-      company: "Cognizant",
-      period: "Mar 2017 - Dec 2018",
+      company: "Cognizant Technology Solutions",
+      role: "Senior Software Engineer",
+      period: "Mar 2017 – Dec 2018",
       location: "Mississauga, ON",
       client: "NextEra Energy",
-      project: "Simplified Enrollment System",
+      isCurrent: false,
       achievements: [
-        "Led development of ASP.NET MVC application with Web APIs, streamlining the enrollment process for enhanced efficiency",
-        "Implemented robust data management solutions using .NET Framework and Angular for improved user experience",
-        "Optimized SQL Server procedures and gained valuable experience managing both cloud (AWS) and on-premises environments"
+        "Led development of ASP.NET MVC and Angular-based enrollment platforms for utility customers, designing Web APIs and scalable application architectures to support business growth and future enhancements.",
+        "Optimised SQL Server stored procedures, functions, and database performance for high-volume transactional systems.",
+        "Participated in requirements analysis, project planning, estimation, systems analysis, and technical solution design.",
+        "Worked across AWS and on-premises infrastructure environments supporting enterprise deployments."
       ],
       technologies: ["ASP.NET MVC", "Web APIs", ".NET Framework", "Angular", "SQL Server", "AWS"]
     },
     {
       company: "Tata Consultancy Services",
-      period: "Sep 2012 - Mar 2017",
+      role: "Application Developer",
+      period: "Sep 2012 – Mar 2017",
       location: "India",
       client: "Multiple Clients",
-      project: "Centralized ID Card System",
+      isCurrent: false,
       achievements: [
-        "Implemented seamless integration of ID Card System with multiple departmental applications for centralized card generation",
-        "Played a key role in project planning and developed responsive websites using .NET Framework, Angular, and jQuery",
-        "Designed user-friendly interfaces with Angular and Bootstrap, significantly enhancing user experience"
+        "Developed enterprise healthcare applications using .NET Framework, Angular, JavaScript, and SQL Server.",
+        "Participated in project planning, technical analysis, effort estimation, and enterprise application development.",
+        "Designed reusable application components and responsive user interfaces, serving 10,000+ users."
       ],
-      technologies: [".NET Framework", "Angular", "jQuery", "Bootstrap", "SQL Server"]
+      technologies: [".NET Framework", "Angular", "jQuery", "Bootstrap", "SQL Server", "Healthcare"]
     },
     {
       company: "ATOS Syntel",
-      period: "Feb 2010 - Aug 2012",
+      role: "Software Engineer",
+      period: "Feb 2010 – Aug 2012",
       location: "India",
       client: "Various Clients",
-      project: "Enterprise Applications",
+      isCurrent: false,
       achievements: [
-        "Engaged in comprehensive end-to-end development lifecycle, from requirements analysis to deployment",
-        "Responsible for database design and management, ensuring optimal performance and data integrity",
-        "Contributed to multiple enterprise-level projects, gaining expertise in scalable application development"
+        "Developed full-stack healthcare applications, database solutions, and Google API integrations while supporting production environments.",
+        "Contributed to end-to-end development lifecycle — requirements analysis through deployment — and database design for optimal performance."
       ],
-      technologies: [".NET Framework", "SQL Server", "Web Development"]
+      technologies: [".NET Framework", "SQL Server", "Web Development", "Google APIs"]
     },
     {
       company: "Cyient Limited",
-      period: "May 2009 - Jan 2010",
+      role: "Software Developer",
+      period: "May 2009 – Jan 2010",
       location: "India",
       client: "Engineering Clients",
-      project: "Technical Documentation",
+      isCurrent: false,
       achievements: [
-        "Gained foundational understanding of project architecture and requirements analysis",
-        "Documented code and processes, establishing best practices for technical documentation",
-        "Contributed to software development processes and quality assurance initiatives"
+        "Contributed to enterprise application development, maintenance, testing, troubleshooting, and technical documentation.",
+        "Gained foundational expertise in project architecture, requirements analysis, and software development processes."
       ],
-      technologies: ["Documentation", "Process Improvement", "Quality Assurance"]
+      technologies: ["Software Development", "Testing", "Technical Documentation"]
     }
   ];
 
@@ -79,53 +85,61 @@ const ExperienceSection = () => {
         <div className="text-center mb-16 space-y-4">
           <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Professional Journey</h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            15+ years of progressive growth and technical leadership across enterprise applications
+            16+ years of progressive growth — from software engineer to enterprise solution architect
           </p>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6">
           {experiences.map((exp, index) => (
-            <Card 
-              key={index} 
-              className="p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group"
+            <Card
+              key={index}
+              className={`p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group ${exp.isCurrent ? 'border-primary/35' : ''}`}
             >
               <div className="grid lg:grid-cols-4 gap-6">
-                {/* Company & Period Info */}
+                {/* Company & Role Info */}
                 <div className="lg:col-span-1 space-y-4">
-                  <div className="flex items-center gap-2">
-                    <Building className="w-5 h-5 text-primary" />
-                    <h3 className="text-xl font-bold text-primary">{exp.company}</h3>
+                  <div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <Building className="w-4 h-4 text-primary" />
+                      <h3 className="text-base font-bold text-primary leading-tight">{exp.company}</h3>
+                    </div>
+                    <p className="text-sm font-semibold text-foreground/80 ml-6">{exp.role}</p>
                   </div>
-                  
-                  <div className="space-y-2 text-sm">
+
+                  <div className="space-y-1.5 text-xs">
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <Calendar className="w-4 h-4" />
+                      <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
                       <span>{exp.period}</span>
                     </div>
                     <div className="flex items-center gap-2 text-muted-foreground">
-                      <MapPin className="w-4 h-4" />
+                      <MapPin className="w-3.5 h-3.5 flex-shrink-0" />
                       <span>{exp.location}</span>
                     </div>
                     {exp.client && (
                       <div className="flex items-center gap-2 text-muted-foreground">
-                        <Briefcase className="w-4 h-4" />
+                        <Briefcase className="w-3.5 h-3.5 flex-shrink-0" />
                         <span>Client: {exp.client}</span>
                       </div>
                     )}
                   </div>
 
-                  <Badge className="bg-primary/20 text-primary border-primary/40">
-                    {exp.project}
-                  </Badge>
+                  {exp.isCurrent && (
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <Badge className="bg-green-400/20 text-green-400 border-green-400/40 text-xs">
+                        Current Role
+                      </Badge>
+                    </div>
+                  )}
                 </div>
 
                 {/* Achievements */}
-                <div className="lg:col-span-2 space-y-4">
-                  <h4 className="text-lg font-semibold">Key Achievements</h4>
-                  <ul className="space-y-3">
+                <div className="lg:col-span-2 space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Key Contributions</h4>
+                  <ul className="space-y-2.5">
                     {exp.achievements.map((achievement, achIndex) => (
                       <li key={achIndex} className="flex items-start gap-3 text-sm leading-relaxed">
-                        <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                        <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
                         <span className="text-muted-foreground">{achievement}</span>
                       </li>
                     ))}
@@ -133,13 +147,13 @@ const ExperienceSection = () => {
                 </div>
 
                 {/* Technologies */}
-                <div className="lg:col-span-1 space-y-4">
-                  <h4 className="text-lg font-semibold">Technologies</h4>
-                  <div className="flex flex-wrap gap-2">
+                <div className="lg:col-span-1 space-y-3">
+                  <h4 className="text-sm font-semibold text-foreground/80 uppercase tracking-wide">Technologies</h4>
+                  <div className="flex flex-wrap gap-1.5">
                     {exp.technologies.map((tech, techIndex) => (
-                      <Badge 
+                      <Badge
                         key={techIndex}
-                        variant="outline" 
+                        variant="outline"
                         className="text-xs border-primary/30 text-foreground hover:border-primary/60 transition-colors"
                       >
                         {tech}
@@ -152,24 +166,23 @@ const ExperienceSection = () => {
           ))}
         </div>
 
-        {/* Career Summary */}
-        <div className="mt-16 text-center">
-          <Card className="p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-4xl">
+        {/* Career Stats */}
+        <div className="mt-14 text-center">
+          <Card className="p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-4xl w-full">
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-primary">Career Highlights</h3>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                <div>
-                  <div className="text-3xl font-bold text-gradient">15+</div>
-                  <div className="text-sm text-muted-foreground">Years Experience</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gradient">50+</div>
-                  <div className="text-sm text-muted-foreground">Projects Delivered</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-gradient">5</div>
-                  <div className="text-sm text-muted-foreground">Companies</div>
-                </div>
+              <h3 className="text-xl font-bold text-primary">Career at a Glance</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                {[
+                  { value: "16+", label: "Years Experience" },
+                  { value: "5", label: "Companies" },
+                  { value: "12", label: "Enterprise Apps" },
+                  { value: "38+", label: "Engineers Led" },
+                ].map((stat, index) => (
+                  <div key={index}>
+                    <div className="text-3xl font-bold text-gradient">{stat.value}</div>
+                    <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
+                  </div>
+                ))}
               </div>
             </div>
           </Card>
