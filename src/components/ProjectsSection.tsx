@@ -1,7 +1,7 @@
 
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Cloud, GitMerge, Brain, Database, Layers, Workflow, Github, ExternalLink, BookOpen, Video, Code2, BarChart3, ShoppingCart, Zap, Calculator, GitBranch, Eye } from "lucide-react";
+import { Cloud, GitMerge, Brain, Database, Layers, Workflow, Github, ExternalLink, BookOpen, Video, Code2, BarChart3, ShoppingCart, Zap, Calculator, GitBranch, Eye, PlaySquare } from "lucide-react";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const ProjectsSection = () => {
@@ -250,6 +250,16 @@ const ProjectsSection = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
             {[
+              {
+                icon: PlaySquare,
+                title: "Workflow Animation",
+                subtitle: "Technical Diagram to GIF Tool",
+                description: "Converts animated HTML workflow diagrams into polished GIFs optimised for LinkedIn. Uses Puppeteer + ffmpeg to capture CI/CD pipelines, cloud architectures, RAG pipelines, MLOps flows, and agent systems as shareable animations. Integrates Claude API for diagram generation.",
+                technologies: ["Node.js", "Puppeteer", "ffmpeg", "Claude API", "HTML", "SVG"],
+                githubUrl: "https://github.com/rajeshuriti/workflow-animation",
+                gradient: "from-fuchsia-600/20 to-pink-400/20",
+                borderColor: "border-fuchsia-500/30"
+              },
               {
                 icon: Eye,
                 title: "KPO Smart Vision",
