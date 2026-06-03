@@ -93,23 +93,23 @@ const ExperienceSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-12 sm:py-20 bg-background">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Professional Journey</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Professional Journey</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             16+ years of progressive growth — from software engineer to enterprise solution architect
           </p>
         </div>
 
-        <div className="space-y-5">
+        <div className="space-y-4 sm:space-y-5">
           {experiences.map((exp, index) => (
             <Card
               key={index}
-              className={`p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group ${exp.isCurrent ? "border-primary/35" : ""}`}
+              className={`p-4 sm:p-6 lg:p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group ${exp.isCurrent ? "border-primary/35" : ""}`}
             >
               <div className="grid lg:grid-cols-4 gap-6">
                 {/* Company & Role */}
@@ -189,10 +189,10 @@ const ExperienceSection = () => {
         </div>
 
         {/* Career Stats */}
-        <div className="mt-14 text-center">
-          <Card className="p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-4xl w-full">
-            <h3 className="text-xl font-bold text-primary mb-6">Career at a Glance</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="mt-10 sm:mt-14 text-center">
+          <Card className="p-5 sm:p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-4xl w-full">
+            <h3 className="text-xl font-bold text-primary mb-5 sm:mb-6">Career at a Glance</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
               {[
                 { value: "16+", label: "Years Experience" },
                 { value: "5", label: "Companies" },

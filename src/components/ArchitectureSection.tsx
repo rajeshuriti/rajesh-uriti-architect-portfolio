@@ -108,17 +108,17 @@ const ArchitectureSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background" id="architecture">
+    <section className="py-12 sm:py-20 bg-background" id="architecture">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
           <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
             Architecture Practice
           </Badge>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Architecture Expertise</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Architecture Expertise</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Six architecture domains spanning cloud, microservices, modernisation, and enterprise AI
           </p>
         </div>
@@ -161,10 +161,10 @@ const ArchitectureSection = () => {
         </div>
 
         {/* Architecture Impact Banner */}
-        <Card className="p-8 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/20">
-          <div className="text-center space-y-6">
-            <h3 className="text-2xl font-bold text-primary">Architecture Delivery at Scale</h3>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+        <Card className="p-5 sm:p-8 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/20">
+          <div className="text-center space-y-5 sm:space-y-6">
+            <h3 className="text-xl sm:text-2xl font-bold text-primary">Architecture Delivery at Scale</h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
               {[
                 { value: "12", label: "Enterprise Applications", sub: "Architected & delivered" },
                 { value: "18", label: "Microservices", sub: "Monolith transformation" },

@@ -147,28 +147,28 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-card/10 to-background">
+    <section className="py-12 sm:py-20 bg-gradient-to-b from-card/10 to-background">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
           <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
             Architecture Case Studies
           </Badge>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Key Projects & Deliveries</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Key Projects & Deliveries</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Architecture decisions, business outcomes, and technology choices across enterprise-scale programmes
           </p>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-5 sm:space-y-6">
           {projects.map((project, index) => (
             <Card
               key={index}
-              className={`p-7 bg-gradient-to-br ${project.gradient} backdrop-blur-sm ${project.borderColor} border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group`}
+              className={`p-4 sm:p-7 bg-gradient-to-br ${project.gradient} backdrop-blur-sm ${project.borderColor} border hover:border-primary/50 transition-all duration-500 hover:shadow-xl hover:shadow-primary/20 group`}
             >
-              <div className="grid lg:grid-cols-12 gap-6">
+              <div className="grid lg:grid-cols-12 gap-4 sm:gap-6">
                 {/* Project Identity */}
                 <div className="lg:col-span-3 space-y-4">
                   <div className="flex items-start gap-3">
@@ -237,13 +237,13 @@ const ProjectsSection = () => {
         </div>
 
         {/* Personal Projects */}
-        <div className="mt-16">
-          <div className="text-center mb-10 space-y-3">
+        <div className="mt-12 sm:mt-16">
+          <div className="text-center mb-8 sm:mb-10 space-y-3">
             <Badge variant="outline" className="border-neon-cyan/40 text-neon-cyan px-4 py-1 text-sm">
               Personal Projects & Open Source
             </Badge>
             <h3 className="text-2xl lg:text-3xl font-bold text-gradient">Side Projects</h3>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
               Personal explorations in AI, developer tooling, and full-stack engineering
             </p>
           </div>
@@ -403,11 +403,11 @@ const ProjectsSection = () => {
         </div>
 
         {/* Overall Impact */}
-        <div className="mt-14 text-center">
-          <Card className="p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-5xl w-full">
+        <div className="mt-10 sm:mt-14 text-center">
+          <Card className="p-5 sm:p-8 bg-gradient-to-r from-primary/10 to-neon-cyan/10 border-primary/20 inline-block max-w-5xl w-full">
             <div className="space-y-4">
-              <h3 className="text-2xl font-bold text-primary">Overall Programme Impact</h3>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              <h3 className="text-xl sm:text-2xl font-bold text-primary">Overall Programme Impact</h3>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 text-center">
                 {[
                   { value: "12", label: "Enterprise Applications", sub: "Architected & delivered" },
                   { value: "18", label: "Microservices", sub: "Monolith transformation" },

@@ -55,18 +55,18 @@ const GenAISection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-card/20 to-background" id="ai">
+    <section className="py-12 sm:py-20 bg-gradient-to-b from-card/20 to-background" id="ai">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
           <Badge variant="outline" className="border-primary/40 text-primary px-4 py-1 text-sm mb-4">
             <Cpu className="w-3.5 h-3.5 mr-1.5 inline" />
             Generative AI Practice
           </Badge>
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Generative AI & Enterprise AI</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Generative AI & Enterprise AI</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Architecting and delivering AI-powered solutions that enhance software delivery, accelerate knowledge discovery, and enable intelligent business automation
           </p>
         </div>
@@ -112,8 +112,8 @@ const GenAISection = () => {
         </div>
 
         {/* AI Use Cases & Stack Banner */}
-        <Card className="p-8 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/20">
-          <div className="grid md:grid-cols-2 gap-8 items-center">
+        <Card className="p-5 sm:p-8 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/20">
+          <div className="grid md:grid-cols-2 gap-5 sm:gap-8 items-center">
             <div className="space-y-4">
               <h3 className="text-2xl font-bold text-foreground">
                 Enterprise AI Use Cases Delivered

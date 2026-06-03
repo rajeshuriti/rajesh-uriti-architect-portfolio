@@ -162,14 +162,14 @@ const SkillsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-b from-background to-card/20">
+    <section className="py-12 sm:py-20 bg-gradient-to-b from-background to-card/20">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Technical Skills</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Technical Skills</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             A broad technology foundation underpinned by deep architecture and engineering expertise
           </p>
         </div>

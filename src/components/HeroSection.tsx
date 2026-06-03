@@ -15,9 +15,9 @@ const HeroSection = () => {
     <section className="min-h-screen relative overflow-hidden bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg pt-16">
       {/* Animated background elements */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 left-20 w-64 h-64 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 right-20 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
+        <div className="absolute top-20 left-10 lg:left-20 w-32 h-32 lg:w-64 lg:h-64 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 lg:right-20 w-48 h-48 lg:w-96 lg:h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[280px] h-[280px] lg:w-[600px] lg:h-[600px] bg-primary/5 rounded-full blur-3xl"></div>
       </div>
 
       {/* Subtle grid pattern */}
@@ -25,24 +25,24 @@ const HeroSection = () => {
         backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
       }}></div>
 
-      <div className="relative z-10 container mx-auto px-6 py-20 flex flex-col justify-center min-h-screen">
-        <div className="grid lg:grid-cols-2 gap-12 items-center animate-fade-in">
+      <div className="relative z-10 container mx-auto px-4 sm:px-6 py-12 sm:py-20 flex flex-col justify-center min-h-screen">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center animate-fade-in">
           {/* Left: Identity & CTAs */}
-          <div className="space-y-8">
+          <div className="space-y-6 sm:space-y-8">
             {/* Availability badge */}
-            <div className="flex items-center gap-2">
-              <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse"></div>
-              <Badge variant="outline" className="border-green-400/50 text-green-400 text-sm font-medium">
+            <div className="flex items-center gap-2 flex-wrap">
+              <div className="w-2.5 h-2.5 bg-green-400 rounded-full animate-pulse flex-shrink-0"></div>
+              <Badge variant="outline" className="border-green-400/50 text-green-400 text-xs sm:text-sm font-medium">
                 Open to Solution Architect & Enterprise Architect Roles
               </Badge>
             </div>
 
             {/* Name & Title */}
             <div className="space-y-3">
-              <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-gradient animate-slide-in-left leading-tight">
+              <h1 className="text-3xl sm:text-4xl lg:text-6xl xl:text-7xl font-bold text-gradient animate-slide-in-left leading-tight">
                 Rajesh Uriti
               </h1>
-              <h2 className="text-xl lg:text-2xl font-semibold text-foreground/90 leading-snug">
+              <h2 className="text-base sm:text-xl lg:text-2xl font-semibold text-foreground/90 leading-snug">
                 Solution Architect
                 <span className="text-primary mx-2">|</span>
                 <span className="text-primary/90">Cloud, AI & Digital Transformation</span>
@@ -50,7 +50,7 @@ const HeroSection = () => {
             </div>
 
             {/* Value proposition */}
-            <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
+            <p className="text-sm sm:text-base lg:text-lg text-muted-foreground leading-relaxed max-w-xl">
               <span className="text-primary font-semibold">16+ years</span> designing enterprise-scale solutions — from cloud-native microservices and AWS architectures to Generative AI integration. Delivered{" "}
               <span className="text-primary font-semibold">12 enterprise applications</span> supporting thousands of users across business-critical functions.
             </p>
@@ -108,10 +108,10 @@ const HeroSection = () => {
           </div>
 
           {/* Right: Photo + Stats */}
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-6 sm:gap-8">
             {/* Profile Photo */}
             <div className="relative">
-              <div className="w-72 h-72 lg:w-80 lg:h-80 rounded-2xl bg-gradient-to-br from-primary/30 to-neon-cyan/30 flex items-center justify-center animate-float p-1">
+              <div className="w-52 h-52 sm:w-64 sm:h-64 lg:w-80 lg:h-80 rounded-2xl bg-gradient-to-br from-primary/30 to-neon-cyan/30 flex items-center justify-center animate-float p-1">
                 <div className="w-full h-full rounded-xl overflow-hidden border border-primary/30">
                   <img
                     src={profileImage}
@@ -146,7 +146,7 @@ const HeroSection = () => {
         </div>
 
         {/* Bottom: Expertise Tags */}
-        <div className="mt-16 animate-fade-in">
+        <div className="mt-10 sm:mt-16 animate-fade-in">
           <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4 text-center">Core Expertise Areas</p>
           <div className="flex flex-wrap justify-center gap-2">
             {[

@@ -52,22 +52,22 @@ const AboutSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-12 sm:py-20 bg-background">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-16 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">About Me</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+        <div className="text-center mb-10 sm:mb-16 space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">About Me</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-3xl mx-auto">
             Translating complex business challenges into scalable, future-ready enterprise architectures
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 items-start mb-16">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 items-start mb-10 sm:mb-16">
           {/* Main Bio */}
           <div className="lg:col-span-2 space-y-6">
-            <Card className="p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500">
+            <Card className="p-4 sm:p-8 bg-card/50 backdrop-blur-sm border-primary/20 hover:border-primary/40 transition-all duration-500">
               <div className="space-y-5 text-base leading-relaxed">
                 <p>
                   <span className="text-primary font-semibold">Solution Architect and Senior Software Engineer</span> with 16+ years of experience designing, modernizing, and delivering enterprise-scale customer-facing applications across the full SDLC.

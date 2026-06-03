@@ -71,13 +71,13 @@ const CertificationsSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-background" id="credentials">
+    <section className="py-12 sm:py-20 bg-background" id="credentials">
       <div
         ref={ref}
-        className={`container mx-auto px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
         {/* Education + Certifications Row */}
-        <div className="grid lg:grid-cols-2 gap-10 mb-20">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-10 mb-12 sm:mb-20">
 
           {/* Education */}
           <div className="space-y-6">
@@ -162,9 +162,9 @@ const CertificationsSection = () => {
               <div className="p-2.5 bg-primary/20 rounded-xl">
                 <Lightbulb className="w-6 h-6 text-primary" />
               </div>
-              <h2 className="text-3xl lg:text-4xl font-bold text-gradient">Architecture Philosophy</h2>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gradient">Architecture Philosophy</h2>
             </div>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-sm sm:text-lg text-muted-foreground max-w-2xl mx-auto">
               Five principles that guide every architecture decision — built from 16 years of enterprise delivery
             </p>
           </div>

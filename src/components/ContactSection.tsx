@@ -31,27 +31,27 @@ const ContactSection = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg relative overflow-hidden">
+    <section className="py-12 sm:py-20 bg-gradient-to-br from-darker-bg via-dark-bg to-darker-bg relative overflow-hidden">
       {/* Background Effects */}
       <div className="absolute inset-0">
-        <div className="absolute top-20 right-20 w-64 h-64 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-20 left-20 w-96 h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-10 right-10 lg:top-20 lg:right-20 w-32 h-32 lg:w-64 lg:h-64 bg-neon-blue/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-10 left-10 lg:bottom-20 lg:left-20 w-48 h-48 lg:w-96 lg:h-96 bg-neon-cyan/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
       </div>
 
       <div
         ref={ref}
-        className={`container mx-auto px-6 relative z-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
+        className={`container mx-auto px-4 sm:px-6 relative z-10 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
       >
-        <div className="text-center mb-14 space-y-4">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gradient">Let's Connect</h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+        <div className="text-center mb-10 sm:mb-14 space-y-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gradient">Let's Connect</h2>
+          <p className="text-base sm:text-xl text-muted-foreground max-w-2xl mx-auto">
             Open to Solution Architect, Enterprise Architect, Cloud Architect, and AI Solution Architect opportunities across Canada.
           </p>
         </div>
 
         {/* What I'm Looking For */}
-        <div className="max-w-4xl mx-auto mb-10">
-          <Card className="p-7 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/25">
+        <div className="max-w-4xl mx-auto mb-8 sm:mb-10">
+          <Card className="p-4 sm:p-7 bg-gradient-to-r from-primary/10 via-card/60 to-neon-cyan/10 border-primary/25">
             <h3 className="text-lg font-bold text-primary mb-5 flex items-center gap-2">
               <Briefcase className="w-5 h-5" />
               What I'm Looking For
@@ -74,8 +74,8 @@ const ContactSection = () => {
 
         {/* Contact Card */}
         <div className="max-w-4xl mx-auto">
-          <Card className="p-8 bg-card/80 backdrop-blur-sm border-primary/20 animate-glow">
-            <div className="grid md:grid-cols-2 gap-8">
+          <Card className="p-4 sm:p-8 bg-card/80 backdrop-blur-sm border-primary/20 animate-glow">
+            <div className="grid md:grid-cols-2 gap-5 sm:gap-8">
               {/* Contact Information */}
               <div className="space-y-6">
                 <h3 className="text-xl font-bold text-primary">Get In Touch</h3>
@@ -173,7 +173,7 @@ const ContactSection = () => {
         </div>
 
         {/* Footer */}
-        <div className="mt-14 text-center space-y-1.5">
+        <div className="mt-10 sm:mt-14 text-center space-y-1.5">
           <p className="text-sm text-muted-foreground">
             © {new Date().getFullYear()} Rajesh Uriti — Solution Architect | Cloud, AI & Digital Transformation
           </p>
