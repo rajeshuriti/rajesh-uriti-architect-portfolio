@@ -84,8 +84,7 @@ export function Chapter8AISystem() {
     setActiveNode(Math.min(Math.max(nodeIndex, -1), flowNodes.length - 1))
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.08, 0.15, 0.2], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.08], [30, 0])
+  const titleOpacity = useTransform(scrollYProgress, [0.12, 0.20], [1, 0])
 
   return (
     <article ref={containerRef} className="relative bg-[#04030f]" style={{ height: '500vh' }}>
@@ -101,7 +100,7 @@ export function Chapter8AISystem() {
       <div className="sticky-stage">
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full">
           {/* Title */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="text-center mb-8">
+          <motion.div style={{ opacity: titleOpacity }} className="text-center mb-8">
             <p className="cinematic-label mb-3" style={{ color: 'rgba(167,139,250,0.8)' }}>
               Chapter VIII
             </p>

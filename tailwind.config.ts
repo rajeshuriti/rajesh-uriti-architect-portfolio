@@ -21,6 +21,7 @@ export default {
       fontFamily: {
         sans: ['var(--font-inter)', 'sans-serif'],
         display: ['var(--font-display)', 'sans-serif'],
+        hanken: ['var(--font-hanken)', 'Hanken Grotesk', 'sans-serif'],
         mono: ['JetBrains Mono', 'monospace'],
       },
       colors: {

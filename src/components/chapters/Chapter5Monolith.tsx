@@ -25,11 +25,11 @@ export function Chapter5Monolith() {
     setShowServices(v > 0.55)
   })
 
-  // Phase 1: Title
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.2, 0.28], [0, 1, 1, 0])
+  // Phase 1: Title — visible on entry, fades out when monolith appears
+  const titleOpacity = useTransform(scrollYProgress, [0.18, 0.26], [1, 0])
 
-  // Phase 2: Monolith block
-  const monolithOpacity = useTransform(scrollYProgress, [0.18, 0.35, 0.5, 0.62], [0, 1, 1, 0])
+  // Phase 2: Monolith block — visible on entry, fades/shrinks when services appear
+  const monolithOpacity = useTransform(scrollYProgress, [0, 0.50, 0.62], [1, 1, 0])
   const monolithScale = useTransform(scrollYProgress, [0.5, 0.62], [1, 0.4])
 
   // Crack 1 draws in

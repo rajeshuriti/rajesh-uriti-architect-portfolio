@@ -31,12 +31,9 @@ export function Chapter6Cloud() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.33], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.1], [30, 0])
-
-  const awsOpacity = useTransform(scrollYProgress, [0.22, 0.4, 0.62, 0.72], [0, 1, 1, 0])
-  const pipelineOpacity = useTransform(scrollYProgress, [0.65, 0.8, 0.92, 1], [0, 1, 1, 1])
-  const pipelineY = useTransform(scrollYProgress, [0.65, 0.8], [40, 0])
+  const titleOpacity    = useTransform(scrollYProgress, [0.22, 0.33], [1, 0])
+  const awsOpacity      = useTransform(scrollYProgress, [0, 0.60, 0.72], [1, 1, 0])
+  const pipelineOpacity = useTransform(scrollYProgress, [0.65, 0.80, 0.92, 1], [0, 1, 1, 1])
 
   return (
     <article ref={containerRef} className="chapter-section bg-[#060810]" style={{ height: '350vh' }}>
@@ -52,7 +49,7 @@ export function Chapter6Cloud() {
       <div className="sticky-stage">
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full">
           {/* Title */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="text-center mb-14">
+          <motion.div style={{ opacity: titleOpacity }} className="text-center mb-14">
             <p className="cinematic-label mb-4">Chapter VI</p>
             <h2 className="display-text text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
               The Cloud{' '}
@@ -87,7 +84,7 @@ export function Chapter6Cloud() {
 
           {/* CI/CD Pipeline */}
           <motion.div
-            style={{ opacity: pipelineOpacity, y: pipelineY }}
+            style={{ opacity: pipelineOpacity }}
             className="mt-12 sm:mt-16"
           >
             <p className="cinematic-label text-center mb-6">GitHub Actions CI/CD Pipeline</p>

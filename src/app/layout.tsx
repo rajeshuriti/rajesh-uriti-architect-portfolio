@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { Inter, Space_Grotesk } from 'next/font/google'
+import { Inter, Space_Grotesk, JetBrains_Mono, Hanken_Grotesk } from 'next/font/google'
 import './globals.css'
 import { SmoothScroll } from '@/components/SmoothScroll'
 
@@ -15,7 +15,22 @@ const spaceGrotesk = Space_Grotesk({
   display: 'swap',
 })
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  weight: ['400', '500'],
+  variable: '--font-mono',
+  display: 'swap',
+})
+
+const hankenGrotesk = Hanken_Grotesk({
+  subsets: ['latin'],
+  weight: ['300', '400', '500', '600', '700'],
+  variable: '--font-hanken',
+  display: 'swap',
+})
+
 export const metadata: Metadata = {
+  metadataBase: new URL('https://rajeshuriti.com'),
   title: 'Rajesh Uriti | Solution Architect & AI Transformation Leader',
   description:
     '16+ years designing enterprise-scale systems. Solution Architect specializing in cloud architecture (AWS), microservices transformation, and enterprise AI with Anthropic Claude, OpenAI GPT, and Google Gemini.',
@@ -75,8 +90,14 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable}`} suppressHydrationWarning>
-      <body>
+    <html lang="en" className={`${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${hankenGrotesk.variable}`} suppressHydrationWarning>
+      {/*
+       * suppressHydrationWarning on <body> suppresses Dark Reader's injected
+       * data-darkreader-* attributes and CSS custom properties on child elements.
+       * This does NOT hide real bugs — it only tolerates browser-extension DOM
+       * mutations that are outside our control.
+       */}
+      <body suppressHydrationWarning>
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

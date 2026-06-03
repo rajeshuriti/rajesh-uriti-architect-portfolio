@@ -48,13 +48,12 @@ export function Chapter4Architect() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.12, 0.3, 0.38], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.12], [30, 0])
-  const statsOpacity = useTransform(scrollYProgress, [0.25, 0.45, 0.75, 0.88], [0, 1, 1, 0])
-  const badgeOpacity = useTransform(scrollYProgress, [0.65, 0.8, 0.95, 1], [0, 1, 1, 1])
+  const titleOpacity = useTransform(scrollYProgress, [0.28, 0.38], [1, 0])
+  const statsOpacity = useTransform(scrollYProgress, [0.72, 0.88], [1, 0])
+  const badgeOpacity = useTransform(scrollYProgress, [0.62, 0.78, 1], [0, 1, 1])
 
   useMotionValueEvent(scrollYProgress, 'change', (v) => {
-    if (v > 0.35) setCountersActive(true)
+    if (v > 0.05) setCountersActive(true)
   })
 
   return (
@@ -71,7 +70,7 @@ export function Chapter4Architect() {
       <div className="sticky-stage">
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full text-center">
           {/* Chapter label + title */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="mb-16">
+          <motion.div style={{ opacity: titleOpacity }} className="mb-16">
             <p className="cinematic-label mb-4">Chapter IV · 2019 — Present</p>
             <h2 className="display-text text-5xl sm:text-6xl lg:text-7xl font-bold">
               <span className="text-white">The</span>{' '}

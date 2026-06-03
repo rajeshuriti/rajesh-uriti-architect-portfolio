@@ -37,15 +37,15 @@ export function Chapter2Enterprise() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.25, 0.35], [0, 1, 1, 0])
-  const card0Opacity = useTransform(scrollYProgress, [0.2, 0.35, 0.65, 0.75], [0, 1, 1, 0])
-  const card1Opacity = useTransform(scrollYProgress, [0.35, 0.5, 0.65, 0.75], [0, 1, 1, 0])
-  const card2Opacity = useTransform(scrollYProgress, [0.5, 0.65, 0.82, 0.92], [0, 1, 1, 0])
-  const card0Y = useTransform(scrollYProgress, [0.2, 0.35], [50, 0])
-  const card1Y = useTransform(scrollYProgress, [0.35, 0.5], [50, 0])
-  const card2Y = useTransform(scrollYProgress, [0.5, 0.65], [50, 0])
+  const titleOpacity = useTransform(scrollYProgress, [0.22, 0.35], [1, 0])
+  const card0Opacity = useTransform(scrollYProgress, [0, 0.55, 0.68], [1, 1, 0])
+  const card1Opacity = useTransform(scrollYProgress, [0.28, 0.42, 0.60, 0.72], [0, 1, 1, 0])
+  const card2Opacity = useTransform(scrollYProgress, [0.48, 0.60, 0.78, 0.88], [0, 1, 1, 0])
+  const card0Y = useTransform(scrollYProgress, [0, 0.08], [16, 0])
+  const card1Y = useTransform(scrollYProgress, [0.28, 0.42], [24, 0])
+  const card2Y = useTransform(scrollYProgress, [0.48, 0.60], [24, 0])
 
-  const closingOpacity = useTransform(scrollYProgress, [0.8, 0.92, 1], [0, 1, 1])
+  const closingOpacity = useTransform(scrollYProgress, [0.80, 0.92, 1], [0, 1, 1])
 
   return (
     <article ref={containerRef} className="chapter-section bg-[#050a14]" style={{ height: '350vh' }}>
@@ -60,14 +60,36 @@ export function Chapter2Enterprise() {
         />
 
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full">
-          <motion.div style={{ opacity: titleOpacity }} className="text-center mb-16">
-            <p className="cinematic-label mb-4">Chapter II · 2010 — 2017</p>
-            <h2 className="display-text text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
-              Understanding Enterprises
-            </h2>
-            <p className="text-white/40 mt-3 text-lg max-w-xl mx-auto">
-              Building software teaches implementation. Building enterprise systems teaches responsibility.
-            </p>
+          <motion.div style={{ opacity: titleOpacity }} className="mb-16">
+            <div className="flex flex-col lg:flex-row items-center lg:items-start gap-8 lg:gap-12">
+              {/* Text */}
+              <div className="flex-1 text-center lg:text-left">
+                <p className="cinematic-label mb-4">Chapter II · 2010 — 2017</p>
+                <h2 className="display-text text-4xl sm:text-5xl lg:text-6xl font-bold text-white">
+                  Understanding Enterprises
+                </h2>
+                <p className="text-white/40 mt-3 text-lg max-w-xl mx-auto lg:mx-0">
+                  Building software teaches implementation. Building enterprise systems teaches responsibility.
+                </p>
+              </div>
+
+              {/* Memory snapshot — enterprise era */}
+              <div className="relative flex-shrink-0 w-56 sm:w-64 lg:w-72">
+                <div className="relative h-44 sm:h-52 overflow-hidden rounded-xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- intentional: avoids next/image fill-mode left:0/"0px" SSR/CSR mismatch */}
+                  <img
+                    src="/Pictures/Second%20Menu.jpg"
+                    alt="Rajesh Uriti at an enterprise workstation, 2010"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#050a14] via-[#050a14]/20 to-transparent" />
+                </div>
+                <div className="absolute bottom-3 left-3">
+                  <p className="cinematic-label">Enterprise Systems · 2010</p>
+                </div>
+                <div className="absolute inset-0 border border-[#7C3AED]/25 rounded-xl pointer-events-none" />
+              </div>
+            </div>
           </motion.div>
 
           {/* Timeline */}

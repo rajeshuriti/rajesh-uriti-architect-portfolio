@@ -37,34 +37,33 @@ function NeuralCanvas({ active }: { active: boolean }) {
     const ctx = canvas.getContext('2d')
     if (!ctx) return
 
-    canvas.width = canvas.offsetWidth
-    canvas.height = canvas.offsetHeight
+    type Node = { x: number; y: number; r: number; phase: number }
+    let nodes: Node[] = []
+    let t = 0
+    let raf = 0
 
-    const nodes: { x: number; y: number; r: number; phase: number }[] = []
-    const cols = 6
-    const rows = 4
-    const w = canvas.width / (cols + 1)
-    const h = canvas.height / (rows + 1)
-
-    for (let row = 1; row <= rows; row++) {
-      for (let col = 1; col <= cols; col++) {
-        nodes.push({
-          x: col * w + (Math.random() - 0.5) * 20,
-          y: row * h + (Math.random() - 0.5) * 20,
-          r: Math.random() * 3 + 2,
-          phase: Math.random() * Math.PI * 2,
-        })
+    const initNodes = () => {
+      const cols = 6
+      const rows = 4
+      const w = canvas.width / (cols + 1)
+      const h = canvas.height / (rows + 1)
+      nodes = []
+      for (let row = 1; row <= rows; row++) {
+        for (let col = 1; col <= cols; col++) {
+          nodes.push({
+            x: col * w + (Math.random() - 0.5) * 20,
+            y: row * h + (Math.random() - 0.5) * 20,
+            r: Math.random() * 3 + 2,
+            phase: Math.random() * Math.PI * 2,
+          })
+        }
       }
     }
-
-    let t = 0
-    let raf: number
 
     const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height)
       t += 0.02
 
-      // Draw connections
       for (let i = 0; i < nodes.length; i++) {
         for (let j = i + 1; j < nodes.length; j++) {
           const dx = nodes[i].x - nodes[j].x
@@ -83,11 +82,9 @@ function NeuralCanvas({ active }: { active: boolean }) {
         }
       }
 
-      // Draw nodes
       for (const n of nodes) {
         const pulse = (Math.sin(t * 1.5 + n.phase) + 1) / 2
         const r = n.r + pulse * 1.5
-
         ctx.beginPath()
         ctx.arc(n.x, n.y, r, 0, Math.PI * 2)
         const grd = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, r * 2)
@@ -100,13 +97,31 @@ function NeuralCanvas({ active }: { active: boolean }) {
       raf = requestAnimationFrame(animate)
     }
 
-    animate()
-    return () => cancelAnimationFrame(raf)
+    // Shared start: resize canvas, re-init nodes, restart RAF loop
+    const start = () => {
+      cancelAnimationFrame(raf)
+      canvas.width = canvas.offsetWidth
+      canvas.height = canvas.offsetHeight
+      initNodes()
+      animate()
+    }
+
+    start()
+
+    // Re-init when the canvas element is resized (orientation change, browser resize)
+    const ro = new ResizeObserver(start)
+    ro.observe(canvas)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      ro.disconnect()
+    }
   }, [active])
 
   return (
     <canvas
       ref={canvasRef}
+      aria-hidden="true"
       className="absolute inset-0 w-full h-full pointer-events-none"
     />
   )
@@ -127,8 +142,7 @@ export function Chapter7AI() {
 
   const bgOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 1])
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.3, 0.38], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.1], [30, 0])
+  const titleOpacity = useTransform(scrollYProgress, [0.25, 0.38], [1, 0])
 
   const quoteOpacity = useTransform(scrollYProgress, [0.2, 0.35, 0.5, 0.58], [0, 1, 1, 0])
 
@@ -137,7 +151,7 @@ export function Chapter7AI() {
 
   return (
     <article ref={containerRef} className="relative" style={{ height: '400vh' }}>
-      {/* Background shifts to deep violet */}
+      {/* Background shifts to deep violet — spans full article height */}
       <motion.div
         className="absolute inset-0 pointer-events-none"
         style={{ opacity: bgOpacity }}
@@ -155,15 +169,15 @@ export function Chapter7AI() {
         />
       </motion.div>
 
-      {/* Neural canvas */}
-      <div className="absolute inset-0" style={{ opacity: 0.6 }}>
-        <NeuralCanvas active={neuralActive} />
-      </div>
-
       <div className="sticky-stage">
+        {/* Neural canvas inside sticky-stage: always viewport-sized and visible while Chapter 7 is active */}
+        <div className="absolute inset-0 pointer-events-none" style={{ opacity: 0.6 }}>
+          <NeuralCanvas active={neuralActive} />
+        </div>
+
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full text-center">
           {/* Title */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="mb-12">
+          <motion.div style={{ opacity: titleOpacity }} className="mb-12">
             <p className="cinematic-label mb-4" style={{ color: 'rgba(167,139,250,0.8)' }}>
               Chapter VII · The Inflection Point
             </p>
@@ -195,12 +209,9 @@ export function Chapter7AI() {
             style={{ opacity: cardsOpacity, y: cardsY }}
             className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 max-w-3xl mx-auto mt-4"
           >
-            {models.map((model, i) => (
-              <motion.div
+            {models.map((model) => (
+              <div
                 key={model.name}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15, duration: 0.6, ease: 'easeOut' }}
                 className={`rounded-2xl p-5 sm:p-6 text-left bg-gradient-to-br ${model.gradient} border`}
                 style={{ borderColor: `${model.color}25` }}
               >
@@ -223,7 +234,7 @@ export function Chapter7AI() {
                     </span>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>

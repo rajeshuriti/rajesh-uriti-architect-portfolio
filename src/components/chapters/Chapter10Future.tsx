@@ -11,23 +11,16 @@ export function Chapter10Future() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.12, 0.35, 0.45], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.12], [30, 0])
-  const quoteOpacity = useTransform(scrollYProgress, [0.3, 0.48, 0.65, 0.75], [0, 1, 1, 0])
-  const ctaOpacity = useTransform(scrollYProgress, [0.68, 0.82, 1], [0, 1, 1])
-  const ctaY = useTransform(scrollYProgress, [0.68, 0.82], [30, 0])
+  const titleOpacity = useTransform(scrollYProgress, [0.30, 0.45], [1, 0])
+  const quoteOpacity = useTransform(scrollYProgress, [0.28, 0.46, 0.65, 0.75], [0, 1, 1, 0])
+  const ctaOpacity   = useTransform(scrollYProgress, [0.65, 0.80, 1], [0, 1, 1])
 
   // Horizon glow
   const horizonOpacity = useTransform(scrollYProgress, [0.1, 0.5], [0, 1])
 
   return (
     <article ref={containerRef} className="relative bg-[#030712]" style={{ height: '280vh' }}>
-      {/* Particle canvas — sparse, violet */}
-      <div className="absolute inset-0">
-        <ParticleCanvas count={40} color="#7C3AED" connectionDistance={90} speed={0.2} />
-      </div>
-
-      {/* Horizon line glow */}
+      {/* Horizon line glow — spans full article height for ambient effect */}
       <motion.div
         style={{ opacity: horizonOpacity }}
         className="absolute inset-0 pointer-events-none"
@@ -59,9 +52,14 @@ export function Chapter10Future() {
       </motion.div>
 
       <div className="sticky-stage">
+        {/* Particle canvas — inside sticky-stage so it stays viewport-sized */}
+        <div className="absolute inset-0">
+          <ParticleCanvas count={40} color="#7C3AED" connectionDistance={90} speed={0.2} />
+        </div>
+
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full text-center">
           {/* Chapter label */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="mb-8">
+          <motion.div style={{ opacity: titleOpacity }} className="mb-8">
             <p className="cinematic-label mb-4" style={{ color: 'rgba(167,139,250,0.7)' }}>
               Chapter X · The Future
             </p>
@@ -82,7 +80,7 @@ export function Chapter10Future() {
           </motion.div>
 
           {/* CTA Section */}
-          <motion.div style={{ opacity: ctaOpacity, y: ctaY }} className="mt-16">
+          <motion.div style={{ opacity: ctaOpacity }} className="mt-16">
             {/* Name */}
             <div className="mb-10">
               <h3 className="display-text text-4xl sm:text-5xl font-bold gradient-heading">

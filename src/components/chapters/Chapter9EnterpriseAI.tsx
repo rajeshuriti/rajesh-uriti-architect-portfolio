@@ -61,11 +61,9 @@ export function Chapter9EnterpriseAI() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.1, 0.22, 0.30], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.1], [30, 0])
-
-  const rolesOpacity = useTransform(scrollYProgress, [0.22, 0.4, 0.75, 0.88], [0, 1, 1, 0])
-  const capabilitiesOpacity = useTransform(scrollYProgress, [0.8, 0.92, 1], [0, 1, 1])
+  const titleOpacity        = useTransform(scrollYProgress, [0.22, 0.30], [1, 0])
+  const rolesOpacity        = useTransform(scrollYProgress, [0, 0.72, 0.88], [1, 1, 0])
+  const capabilitiesOpacity = useTransform(scrollYProgress, [0.80, 0.92, 1], [0, 1, 1])
 
   return (
     <article ref={containerRef} className="relative bg-[#030712]" style={{ height: '320vh' }}>
@@ -81,7 +79,7 @@ export function Chapter9EnterpriseAI() {
       <div className="sticky-stage">
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full">
           {/* Title */}
-          <motion.div style={{ opacity: titleOpacity, y: titleY }} className="text-center mb-12">
+          <motion.div style={{ opacity: titleOpacity }} className="text-center mb-12">
             <p className="cinematic-label mb-4" style={{ color: 'rgba(167,139,250,0.7)' }}>
               Chapter IX
             </p>

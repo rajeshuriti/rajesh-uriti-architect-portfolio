@@ -33,14 +33,9 @@ export function Chapter1Foundation() {
     offset: ['start start', 'end end'],
   })
 
-  const titleOpacity = useTransform(scrollYProgress, [0, 0.12, 0.4, 0.5], [0, 1, 1, 0])
-  const titleY = useTransform(scrollYProgress, [0, 0.12], [40, 0])
-
-  const editorOpacity = useTransform(scrollYProgress, [0.1, 0.25, 0.7, 0.85], [0, 1, 1, 0])
-  const editorX = useTransform(scrollYProgress, [0.1, 0.25], [-60, 0])
-
-  const infoOpacity = useTransform(scrollYProgress, [0.15, 0.3, 0.7, 0.85], [0, 1, 1, 0])
-  const infoX = useTransform(scrollYProgress, [0.15, 0.3], [60, 0])
+  const titleOpacity = useTransform(scrollYProgress, [0.3, 0.45], [1, 0])
+  const editorOpacity = useTransform(scrollYProgress, [0.62, 0.82], [1, 0])
+  const infoOpacity  = useTransform(scrollYProgress, [0.62, 0.82], [1, 0])
 
   return (
     <article ref={containerRef} className="chapter-section" style={{ height: '280vh' }}>
@@ -60,7 +55,7 @@ export function Chapter1Foundation() {
         <div className="relative z-10 container mx-auto px-4 sm:px-8 w-full">
           {/* Chapter label */}
           <motion.div
-            style={{ opacity: titleOpacity, y: titleY }}
+            style={{ opacity: titleOpacity }}
             className="text-center mb-12 lg:mb-16"
           >
             <p className="cinematic-label mb-4">Chapter I</p>
@@ -72,7 +67,7 @@ export function Chapter1Foundation() {
 
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Code editor */}
-            <motion.div style={{ opacity: editorOpacity, x: editorX }}>
+            <motion.div style={{ opacity: editorOpacity }}>
               <div className="bg-[#0a0e1a] border border-[#00E5FF]/15 rounded-2xl overflow-hidden shadow-2xl">
                 {/* Editor header */}
                 <div className="flex items-center gap-2 px-4 py-3 border-b border-white/5 bg-black/30">
@@ -108,7 +103,7 @@ export function Chapter1Foundation() {
             </motion.div>
 
             {/* Story content */}
-            <motion.div style={{ opacity: infoOpacity, x: infoX }} className="space-y-8">
+            <motion.div style={{ opacity: infoOpacity }} className="space-y-8">
               <div>
                 <span className="text-7xl sm:text-8xl font-display font-bold gradient-heading opacity-20 leading-none block">
                   2009
@@ -128,6 +123,25 @@ export function Chapter1Foundation() {
                   Every transformation begins with understanding how things are built — brick by brick,
                   line by line.
                 </p>
+              </div>
+
+              {/* Memory snapshot — 2009 */}
+              <div className="relative overflow-hidden rounded-xl">
+                <div className="relative h-52 sm:h-60">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- intentional: avoids next/image fill-mode left:0/"0px" SSR/CSR mismatch */}
+                  <img
+                    src="/Pictures/First%20Menu.jpg"
+                    alt="Rajesh Uriti at his workstation, Hyderabad 2009"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-[#030712]/20 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/40 via-transparent to-transparent" />
+                </div>
+                <div className="absolute bottom-4 left-4">
+                  <p className="cinematic-label">Hyderabad, India · 2009</p>
+                  <p className="text-white/40 text-xs mt-1">The beginning of the journey</p>
+                </div>
+                <div className="absolute inset-0 border border-[#00E5FF]/15 rounded-xl pointer-events-none" />
               </div>
 
               <div className="flex flex-wrap gap-3">
