@@ -1,3 +1,13 @@
+export interface ChapterContribution {
+  dateRange: string
+  location: string
+  duration: string
+  client?: string
+  clientDesc?: string
+  points: string[]
+  technologies: string[]
+}
+
 export interface Chapter {
   id: string
   number: string
@@ -12,6 +22,7 @@ export interface Chapter {
   image: string | null
   transparent?: boolean
   accentColor: string
+  contribution?: ChapterContribution
 }
 
 export const chapters: Chapter[] = [
@@ -31,6 +42,18 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning to Build.png',
     transparent: true,
     accentColor: '#adc6ff',
+    contribution: {
+      dateRange: 'May 2009 – Jan 2010',
+      location: 'India',
+      duration: '9 months',
+      client: 'Engineering Clients',
+      clientDesc: 'Engineering and technology services',
+      points: [
+        'Contributed to enterprise application development, maintenance, testing, troubleshooting, and technical documentation.',
+        'Gained foundational expertise in project architecture, requirements analysis, and software development processes.',
+      ],
+      technologies: ['C#', '.NET', 'Visual Studio', 'Enterprise Applications'],
+    },
   },
   {
     id: 'learning-user-experience',
@@ -48,6 +71,18 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Leraning User Experience.png',
     transparent: true,
     accentColor: '#d0bcff',
+    contribution: {
+      dateRange: 'Feb 2010 – Aug 2012',
+      location: 'India',
+      duration: '2.5 years',
+      client: 'Various Clients',
+      clientDesc: 'Healthcare and enterprise technology clients',
+      points: [
+        'Developed full-stack healthcare applications, database solutions, and Google API integrations while supporting production environments.',
+        'Contributed to end-to-end development lifecycle — requirements analysis through deployment — and database design for optimal performance.',
+      ],
+      technologies: ['.NET Framework', 'SQL Server', 'Web Development', 'Google APIs'],
+    },
   },
   {
     id: 'learning-enterprise-systems',
@@ -65,6 +100,19 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning Enterprise Systems.png',
     transparent: true,
     accentColor: '#4edea3',
+    contribution: {
+      dateRange: 'Sep 2012 – Mar 2017',
+      location: 'India',
+      duration: '4.5 years',
+      client: 'Multiple Clients',
+      clientDesc: 'Enterprise healthcare and identity management clients',
+      points: [
+        'Developed enterprise healthcare applications using .NET Framework, Angular, JavaScript, and SQL Server.',
+        'Participated in project planning, technical analysis, effort estimation, and enterprise application development.',
+        'Designed reusable application components and responsive user interfaces, serving 10,000+ users.',
+      ],
+      technologies: ['.NET Framework', 'Angular', 'jQuery', 'Bootstrap', 'SQL Server'],
+    },
   },
   {
     id: 'thinking-in-systems',
@@ -82,6 +130,20 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Thinking in Systems.png',
     transparent: true,
     accentColor: '#adc6ff',
+    contribution: {
+      dateRange: 'Mar 2017 – Dec 2018',
+      location: 'Mississauga, ON',
+      duration: '2 years',
+      client: 'NextEra Energy',
+      clientDesc: "North America's largest clean energy company (S&P 500, Fortune 200)",
+      points: [
+        'Led development of ASP.NET MVC and Angular-based enrollment platforms for utility customers, designing Web APIs and scalable application architectures to support business growth and future enhancements.',
+        'Optimised SQL Server stored procedures, functions, and database performance for high-volume transactional systems.',
+        'Participated in requirements analysis, project planning, estimation, systems analysis, and technical solution design.',
+        'Worked across AWS and on-premises infrastructure environments supporting enterprise deployments.',
+      ],
+      technologies: ['ASP.NET MVC', 'Web APIs', '.NET Framework', 'Angular', 'SQL Server', 'AWS'],
+    },
   },
   {
     id: 'learning-leadership',
