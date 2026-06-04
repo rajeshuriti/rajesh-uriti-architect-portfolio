@@ -3,6 +3,8 @@ export interface Chapter {
   number: string
   title: string
   years: string
+  company: string
+  role: string
   description: string
   quote: string
   keyLesson: string
@@ -17,12 +19,14 @@ export const chapters: Chapter[] = [
     number: '01',
     title: 'Learning to Build',
     years: '2009',
+    company: 'Cyient Limited',
+    role: 'Software Developer',
     description:
-      'Every architect starts somewhere. My journey began with a simple goal: learn how software is built. At Cyient, I wrote my first professional lines of C# in Visual Studio, building enterprise applications for real users with real consequences. Quality was not optional.',
+      'Every architect starts somewhere. My journey began at Cyient Limited — contributing to enterprise application development, maintenance, testing, troubleshooting, and technical documentation. Writing the first professional lines of code taught me that software is only as good as the discipline behind it.',
     quote:
       '"Every architect starts somewhere. I started with a single line of code."',
-    keyLesson: 'Build things that matter to real people.',
-    skills: ['C#', '.NET', 'Visual Studio', 'Enterprise Applications'],
+    keyLesson: 'Discipline and documentation are the foundation of everything that follows.',
+    skills: ['C#', '.NET', 'Visual Studio', 'Enterprise Applications', 'Technical Documentation'],
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning to Build.png',
     accentColor: '#adc6ff',
   },
@@ -30,13 +34,15 @@ export const chapters: Chapter[] = [
     id: 'learning-user-experience',
     number: '02',
     title: 'Learning User Experience',
-    years: '2010 – 2014',
+    years: '2010 – 2012',
+    company: 'ATOS Syntel',
+    role: 'Software Engineer',
     description:
-      'As I gained experience, I realized software is not only about code. Every application ultimately serves a user. Working across healthcare and financial platforms, I became deeply curious about how people interact with technology — and how poor UX erodes even the best-built systems.',
+      'At ATOS Syntel, I built full-stack healthcare applications for clinical users — systems where a confusing interface is not just frustrating but dangerous. Integrating Google APIs and supporting live production environments taught me that every application ultimately serves a person, and how you design that interface determines whether they trust the system or fight it.',
     quote:
-      '"As I gained experience, I realized software is not only about code. Every application ultimately serves a user."',
+      '"Healthcare software taught me that UX is not a nice-to-have. When lives depend on clarity, design becomes responsibility."',
     keyLesson: 'Understanding users makes you a better developer.',
-    skills: ['HTML', 'CSS', 'JavaScript', 'Angular'],
+    skills: ['Full-Stack Development', 'Healthcare Applications', 'Database Solutions', 'Google APIs', 'Production Support'],
     image: '/Pictures/Stitch/stitch_the_curious_developer/Leraning User Experience.png',
     accentColor: '#d0bcff',
   },
@@ -44,27 +50,31 @@ export const chapters: Chapter[] = [
     id: 'learning-enterprise-systems',
     number: '03',
     title: 'Learning Enterprise Systems',
-    years: '2013 – 2017',
+    years: '2012 – 2017',
+    company: 'Tata Consultancy Services',
+    role: 'Application Developer',
     description:
-      'Enterprise software operates at a fundamentally different scale. I worked on mission-critical platforms serving thousands of clinical users — systems where downtime costs lives, not just revenue. Data integrity, compliance, and fault-tolerance became my foundations.',
+      'Five years at TCS building enterprise healthcare applications at scale. I worked with .NET Framework, Angular, JavaScript, and SQL Server — developing reusable components, responsive UIs, and participating in project planning, technical analysis, and effort estimation. Enterprise software operates at a different scale: complexity, compliance, and cross-team coordination become the real engineering challenges.',
     quote:
-      '"Mission-critical systems taught me that reliability is not a feature — it is the foundation everything else is built on."',
+      '"Enterprise software is not just bigger software. It is a different discipline — where reliability is the product, not a feature."',
     keyLesson: 'Reliability is not a feature — it is a foundation.',
-    skills: ['SQL Server', 'SSIS', 'ETL', 'Healthcare Systems', 'Data Modeling'],
-    image: null,
+    skills: ['.NET Framework', 'Angular', 'JavaScript', 'SQL Server', 'Healthcare Systems', 'Systems Analysis'],
+    image: '/Pictures/Stitch/stitch_the_curious_developer/Learning Enterprise Systems.png',
     accentColor: '#4edea3',
   },
   {
     id: 'thinking-in-systems',
     number: '04',
     title: 'Thinking in Systems',
-    years: '2015 – 2018',
+    years: '2017 – 2018',
+    company: 'Cognizant Technology Solutions',
+    role: 'Senior Software Engineer',
     description:
-      'I started seeing every problem as a system of interacting parts. I studied distributed architecture, domain-driven design, and how complex enterprise systems fail and recover under stress. Architecture became a way of thinking, not just a job title.',
+      'As Senior Software Engineer at Cognizant, I led development of ASP.NET MVC and Angular-based enrollment platforms for utility customers. I designed Web APIs and scalable application architectures, optimized SQL Server stored procedures for transactional systems, and worked across AWS and on-premises environments. This was where I stopped writing features and started designing systems.',
     quote:
       '"Architecture is not about drawing boxes. It is about understanding how things break — and designing so they break gracefully."',
     keyLesson: 'Understand the whole before optimizing the part.',
-    skills: ['System Design', 'Domain-Driven Design', 'Event-Driven Architecture', 'Distributed Systems'],
+    skills: ['ASP.NET MVC', 'Angular', 'Web APIs', 'SQL Server', 'AWS', 'Systems Analysis', 'Solution Design'],
     image: null,
     accentColor: '#adc6ff',
   },
@@ -72,13 +82,15 @@ export const chapters: Chapter[] = [
     id: 'learning-to-scale',
     number: '05',
     title: 'Learning to Scale',
-    years: '2017 – 2019',
+    years: '2019 – 2022',
+    company: 'Cognizant Technology Solutions',
+    role: 'Full-Stack Application Architect',
     description:
-      'The monolith was cracking under load. I led my first major microservices transformation — decomposing a legacy platform into independently deployable services. I learned how containerization, API gateways, and service meshes enable enterprise-scale delivery without sacrificing stability.',
+      'As Application Architect, I transformed tightly coupled monolithic applications into a scalable ecosystem of 18 microservices using C#, .NET Core, Angular, and REST APIs — applying SOLID principles and enterprise design patterns throughout. I architected CI/CD pipelines using GitHub Actions and Docker, and optimized SQL Server and PostgreSQL platforms alongside ETL workflows and data integration processes.',
     quote:
-      '"Scalability is an architectural decision made years before you need it."',
+      '"Breaking a monolith is not a technical problem. It is an organizational one. The microservices are the easy part."',
     keyLesson: 'Scalability is an architectural decision, not a deployment one.',
-    skills: ['Microservices', 'Docker', 'API Gateway', 'AWS', 'Service Mesh'],
+    skills: ['Microservices', '.NET Core', 'Docker', 'GitHub Actions', 'REST APIs', 'PostgreSQL', 'ETL', 'SOLID Principles'],
     image: null,
     accentColor: '#d0bcff',
   },
@@ -86,13 +98,15 @@ export const chapters: Chapter[] = [
     id: 'learning-leadership',
     number: '06',
     title: 'Learning Leadership',
-    years: '2018 – 2020',
+    years: '2019 – Present',
+    company: 'Cognizant Technology Solutions',
+    role: 'Full-Stack Application Architect',
     description:
-      'From individual contributor to technical leader. I began managing cross-functional engineering teams of 38+ engineers, conducting architecture reviews, driving roadmap decisions, and mentoring the next generation of developers. Leadership revealed that the best architecture is built by empowered, aligned teams.',
+      'Serving as Solution Architect and Technical Lead for 12 enterprise-scale customer-facing applications supporting planning, execution, risk assessment, compliance, safety, and reporting processes. I provided technical leadership, architecture governance, mentoring, and engineering best practices across cross-functional teams of 38+ developers, QA engineers, and DevOps professionals.',
     quote:
-      '"Your job as a leader is to make the team succeed — not to be the smartest person in the room."',
+      '"Your job as a technical leader is to make the team succeed — not to be the smartest person in every room."',
     keyLesson: 'Empowered teams build better systems than brilliant individuals.',
-    skills: ['Team Leadership', 'Architecture Reviews', 'Mentoring', 'Technology Roadmaps'],
+    skills: ['Solution Architecture', 'Architecture Governance', 'Technical Leadership', 'Mentoring', 'Stakeholder Workshops', 'Technology Roadmaps'],
     image: null,
     accentColor: '#4edea3',
   },
@@ -101,12 +115,14 @@ export const chapters: Chapter[] = [
     number: '07',
     title: 'Modern Architecture',
     years: '2019 – 2022',
+    company: 'Cognizant Technology Solutions',
+    role: 'Full-Stack Application Architect',
     description:
-      'Cloud-native became the new normal. I deepened my AWS expertise — designing multi-region architectures, implementing Infrastructure as Code with Terraform, and driving zero-downtime deployments for enterprise workloads serving millions of users across NextEra Energy.',
+      'I architected AWS-based cloud solutions across EC2, S3, Lambda, ECS, ECR, FSx, IAM, and DMS — delivering 12 enterprise applications that support thousands of users across business-critical functions. Conducted systems analysis, technical feasibility assessments, architecture reviews, and stakeholder workshops to align technology investments with business objectives and strategic roadmaps.',
     quote:
-      '"The cloud does not change the principles of good architecture. It just removes the excuses for not practicing them."',
+      '"The cloud does not change the principles of good architecture. It just removes the excuses for not applying them."',
     keyLesson: 'Good architecture principles are timeless — the tools just get better.',
-    skills: ['AWS', 'Terraform', 'EC2', 'ECS', 'Lambda', 'S3', 'CI/CD'],
+    skills: ['AWS EC2', 'S3', 'Lambda', 'ECS', 'ECR', 'FSx', 'IAM', 'DMS', 'CI/CD', 'Docker'],
     image: null,
     accentColor: '#adc6ff',
   },
@@ -115,12 +131,14 @@ export const chapters: Chapter[] = [
     number: '08',
     title: 'Learning AI',
     years: '2022 – 2024',
+    company: 'Cognizant Technology Solutions',
+    role: 'Full-Stack Application Architect',
     description:
-      'The AI inflection point arrived. I became deeply curious about large language models and what they meant for enterprise software. I built RAG pipelines, integrated Claude and GPT into production systems, evaluated LLMs for enterprise use cases, and developed AI governance frameworks.',
+      'I drove enterprise AI adoption through evaluation and integration of Anthropic Claude, OpenAI GPT, and Google Gemini. Using Python, the Anthropic SDK, and OpenAI APIs, I built AI-powered applications with Retrieval Augmented Generation (RAG), semantic search, vector embeddings, and prompt engineering techniques — delivering AI-assisted automation and knowledge retrieval solutions while assessing model performance, latency, security, scalability, and cost.',
     quote:
-      '"AI is not magic. It is a new kind of infrastructure — with new failure modes, new capabilities, and new responsibilities."',
-    keyLesson: 'AI is infrastructure. Treat it with the same rigor as any critical system.',
-    skills: ['Anthropic Claude', 'OpenAI GPT', 'RAG Pipelines', 'Prompt Engineering', 'Vector Search', 'LLM Evaluation'],
+      '"AI is not magic. It is infrastructure — with new failure modes, new capabilities, and new responsibilities that demand the same engineering rigour as any critical system."',
+    keyLesson: 'AI is infrastructure. Treat it with the same rigour as any critical system.',
+    skills: ['Anthropic Claude SDK', 'OpenAI API', 'Google Gemini', 'Python', 'FastAPI', 'RAG', 'Prompt Engineering', 'Vector Embeddings', 'Semantic Search'],
     image: null,
     accentColor: '#d0bcff',
   },
@@ -129,12 +147,14 @@ export const chapters: Chapter[] = [
     number: '09',
     title: 'Still Learning',
     years: '2024 – Present',
+    company: 'Cognizant Technology Solutions',
+    role: 'Solution Architect & GenAI Architect',
     description:
-      'The most important thing sixteen years has taught me is that the best engineers never stop being students. Today, as a Solution Architect and GenAI Architect in Canada, I continue to learn — new models, new patterns, new ways of thinking about enterprise transformation at the intersection of AI and human judgment.',
+      'The most important thing sixteen years has taught me is that the best engineers never stop being students. Today, as a Solution Architect and GenAI Architect in Mississauga, Canada — I continue to evaluate enterprise AI use cases, select appropriate LLM technologies, and design scalable, secure, and business-aligned AI solutions. The journey is still being written.',
     quote:
-      '"After sixteen years, curiosity is still my most important architectural skill."',
+      '"After sixteen years, curiosity remains my most important architectural skill."',
     keyLesson: 'Curiosity is the most important architectural skill.',
-    skills: ['GenAI Architecture', 'AI Transformation', 'Enterprise Strategy', 'AWS', 'Mississauga, Canada'],
+    skills: ['GenAI Architecture', 'AI Transformation', 'LLM Evaluation', 'Enterprise AI Governance', 'AI Agents', 'Workflow Automation'],
     image: null,
     accentColor: '#4edea3',
   },

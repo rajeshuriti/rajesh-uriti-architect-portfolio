@@ -82,7 +82,14 @@ export function StitchChapterSection({ chapter, index }: Props) {
         {chapter.title}
       </h2>
 
-      <p className="font-mono text-xs tracking-wide text-[#636775] mb-6 uppercase">
+      {/* Company + role */}
+      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-1">
+        <span className="text-[#c2c6d6] text-sm font-medium">{chapter.company}</span>
+        <span className="text-[#424754] text-xs">·</span>
+        <span className="text-[#636775] text-sm">{chapter.role}</span>
+      </div>
+
+      <p className="font-mono text-xs tracking-wide text-[#424754] mb-6 uppercase">
         {chapter.years}
       </p>
 

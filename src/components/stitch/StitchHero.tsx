@@ -107,7 +107,7 @@ export function StitchHero() {
                   }}
                 >
                   <p className="font-hanken font-semibold text-[#d8e3fb] text-sm">Rajesh Uriti</p>
-                  <p className="text-[#8c909f] text-xs mt-0.5">Solution Architect · GenAI Architect</p>
+                  <p className="text-[#8c909f] text-xs mt-0.5">Solution Architect | Cloud, AI &amp; Digital Transformation</p>
                   <p className="font-mono text-[#adc6ff] text-[10px] mt-1.5 tracking-wide uppercase">
                     🇨🇦 Mississauga, Ontario
                   </p>
