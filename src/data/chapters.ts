@@ -10,6 +10,7 @@ export interface Chapter {
   keyLesson: string
   skills: string[]
   image: string | null
+  transparent?: boolean
   accentColor: string
 }
 
@@ -28,6 +29,7 @@ export const chapters: Chapter[] = [
     keyLesson: 'Discipline and documentation are the foundation of everything that follows.',
     skills: ['C#', '.NET', 'Visual Studio', 'Enterprise Applications', 'Technical Documentation'],
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning to Build.png',
+    transparent: true,
     accentColor: '#adc6ff',
   },
   {
@@ -44,6 +46,7 @@ export const chapters: Chapter[] = [
     keyLesson: 'Understanding users makes you a better developer.',
     skills: ['Full-Stack Development', 'Healthcare Applications', 'Database Solutions', 'Google APIs', 'Production Support'],
     image: '/Pictures/Stitch/stitch_the_curious_developer/Leraning User Experience.png',
+    transparent: true,
     accentColor: '#d0bcff',
   },
   {
@@ -60,6 +63,7 @@ export const chapters: Chapter[] = [
     keyLesson: 'Reliability is not a feature — it is a foundation.',
     skills: ['.NET Framework', 'Angular', 'JavaScript', 'SQL Server', 'Healthcare Systems', 'Systems Analysis'],
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning Enterprise Systems.png',
+    transparent: true,
     accentColor: '#4edea3',
   },
   {
@@ -75,7 +79,8 @@ export const chapters: Chapter[] = [
       '"Breaking a monolith is not a technical problem. It is an organizational one. The microservices are the easy part."',
     keyLesson: 'Understand the whole before optimizing the part — then design it to scale gracefully.',
     skills: ['ASP.NET MVC', 'Angular', 'Web APIs', 'SQL Server', 'AWS', 'Systems Analysis', 'Solution Design', 'Microservices', '.NET Core', 'Docker', 'GitHub Actions', 'REST APIs', 'PostgreSQL', 'ETL', 'SOLID Principles'],
-    image: null,
+    image: '/Pictures/Stitch/stitch_the_curious_developer/Thinking in Systems.png',
+    transparent: true,
     accentColor: '#adc6ff',
   },
   {
@@ -91,7 +96,8 @@ export const chapters: Chapter[] = [
       '"Your job as a technical leader is to make the team succeed — not to be the smartest person in every room."',
     keyLesson: 'Empowered teams and timeless architecture principles are what scale systems — and people.',
     skills: ['Solution Architecture', 'Architecture Governance', 'Technical Leadership', 'Mentoring', 'Stakeholder Workshops', 'Technology Roadmaps', 'AWS EC2', 'S3', 'Lambda', 'ECS', 'ECR', 'FSx', 'IAM', 'DMS', 'CI/CD', 'Docker'],
-    image: null,
+    image: '/Pictures/Stitch/stitch_the_curious_developer/Leading & Architecting.png',
+    transparent: true,
     accentColor: '#4edea3',
   },
   {
@@ -107,7 +113,8 @@ export const chapters: Chapter[] = [
       '"AI is not magic. It is infrastructure — with new failure modes, new capabilities, and new responsibilities that demand the same engineering rigour as any critical system."',
     keyLesson: 'AI is infrastructure. Treat it with the same rigour as any critical system.',
     skills: ['Anthropic Claude SDK', 'OpenAI API', 'Google Gemini', 'Python', 'FastAPI', 'RAG', 'Prompt Engineering', 'Vector Embeddings', 'Semantic Search'],
-    image: null,
+    image: '/Pictures/Stitch/stitch_the_curious_developer/Learning AI.png',
+    transparent: true,
     accentColor: '#d0bcff',
   },
   {
@@ -118,12 +125,13 @@ export const chapters: Chapter[] = [
     company: 'Cognizant Technology Solutions',
     role: 'Solution Architect & GenAI Architect',
     description:
-      'The most important thing sixteen years has taught me is that the best engineers never stop being students. Today, as a Solution Architect and GenAI Architect in Mississauga, Canada — I continue to evaluate enterprise AI use cases, select appropriate LLM technologies, and design scalable, secure, and business-aligned AI solutions. The journey is still being written.',
+      'Sixteen years in technology have taught me that great architecture is not defined by technology alone. It\'s defined by the ability to balance innovation, scalability, security, cost, and business outcomes while adapting to constant change. From building applications and designing distributed systems to leading cloud modernization and enterprise AI initiatives, one principle has remained constant: the best solution is rarely the newest technology — it\'s the one that creates the greatest value for the business. That\'s why I continue to learn, explore, and challenge assumptions, helping organizations transform emerging technologies into secure, scalable, and meaningful outcomes.',
     quote:
       '"After sixteen years, curiosity remains my most important architectural skill."',
     keyLesson: 'Curiosity is the most important architectural skill.',
     skills: ['GenAI Architecture', 'AI Transformation', 'LLM Evaluation', 'Enterprise AI Governance', 'AI Agents', 'Workflow Automation'],
-    image: null,
+    image: '/Pictures/Stitch/stitch_the_curious_developer/Still Learning.png',
+    transparent: true,
     accentColor: '#4edea3',
   },
 ]

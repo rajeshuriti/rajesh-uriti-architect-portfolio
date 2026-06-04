@@ -30,15 +30,13 @@ export function StitchFooter() {
 
           {/* Avatar + identity */}
           <div className="flex flex-col items-center gap-3 mb-10">
-            <div
-              className="w-14 h-14 rounded-full flex items-center justify-center font-hanken font-bold text-xl"
-              style={{
-                background: 'linear-gradient(135deg, #adc6ff 0%, #d0bcff 100%)',
-                color: '#002e6a',
-              }}
-            >
-              RU
-            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/Pictures/Stitch/stitch_the_curious_developer/Profile.jpg"
+              alt="Rajesh Uriti"
+              className="w-14 h-14 rounded-full object-cover object-top"
+              style={{ border: '2px solid rgba(173,198,255,0.25)' }}
+            />
             <div>
               <p className="font-hanken font-semibold text-[#d8e3fb]">Rajesh Uriti</p>
               <p className="text-[#636775] text-sm mt-0.5">
