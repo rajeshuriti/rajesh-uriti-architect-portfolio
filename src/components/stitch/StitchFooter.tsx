@@ -112,9 +112,6 @@ export function StitchFooter() {
             </a>
           </div>
 
-          <p className="text-[#424754] text-xs font-mono">
-            Built with Next.js 15 · React 19 · Framer Motion · Hanken Grotesk
-          </p>
         </motion.div>
       </div>
     </footer>

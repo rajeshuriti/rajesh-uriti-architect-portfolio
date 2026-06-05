@@ -21,12 +21,10 @@ export function StitchNav() {
       }`}
     >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 h-16 flex items-center justify-between">
-        {/* Brand */}
-        <span className="font-hanken font-semibold text-[#d8e3fb] tracking-tight text-[15px]">
-          Rajesh Uriti
-        </span>
+        {/* Left spacer (desktop) */}
+        <div className="hidden md:flex flex-1" />
 
-        {/* Desktop nav */}
+        {/* Desktop nav — centred */}
         <nav className="hidden md:flex items-center gap-7">
           <a
             href="#journey"
@@ -48,32 +46,30 @@ export function StitchNav() {
           </a>
         </nav>
 
-        {/* Desktop CTA */}
-        <a
-          href="mailto:rajeshuriti@gmail.com"
-          className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-110 active:scale-95"
-          style={{
-            background: '#adc6ff',
-            color: '#002e6a',
-          }}
-        >
-          Let&apos;s Connect
-        </a>
+        {/* Right side — CTA + mobile toggle */}
+        <div className="flex items-center justify-end md:flex-1">
+          <a
+            href="mailto:rajeshuriti@gmail.com"
+            className="hidden md:inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 hover:brightness-110 active:scale-95"
+            style={{ background: '#adc6ff', color: '#002e6a' }}
+          >
+            Let&apos;s Connect
+          </a>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2 text-[#8c909f] hover:text-[#d8e3fb] transition-colors"
-          onClick={() => setMenuOpen(!menuOpen)}
-          aria-label="Toggle menu"
-        >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-            {menuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
-        </button>
+          <button
+            className="md:hidden p-2 text-[#8c909f] hover:text-[#d8e3fb] transition-colors"
+            onClick={() => setMenuOpen(!menuOpen)}
+            aria-label="Toggle menu"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+              {menuOpen ? (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+              ) : (
+                <path strokeLinecap="round" strokeLinejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+              )}
+            </svg>
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}
