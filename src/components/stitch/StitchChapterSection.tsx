@@ -159,9 +159,9 @@ export function StitchChapterSection({ chapter, index }: Props) {
   const textX  = imageRight ? -20 : 20
   const imageX = imageRight ?  20 : -20
 
-  // Desktop grid placement
-  const textCol  = imageRight ? 'lg:col-start-1' : 'lg:col-start-2'
-  const imageCol = imageRight ? 'lg:col-start-2' : 'lg:col-start-1'
+  // Desktop grid placement — 3-col grid: [1fr 80px 1fr], spine always col-start-2
+  const textCol  = imageRight ? 'lg:col-start-1' : 'lg:col-start-3'
+  const imageCol = imageRight ? 'lg:col-start-3' : 'lg:col-start-1'
 
   // Reusable enter-animation props
   const textEnter = {
@@ -176,12 +176,12 @@ export function StitchChapterSection({ chapter, index }: Props) {
   return (
     <section
       ref={ref}
-      id={index === 0 ? 'journey' : undefined}
+      id={chapter.id}
       className="py-16 sm:py-20 lg:py-24"
       style={{ background: index % 3 === 1 ? '#0b1120' : '#040e1f' }}
     >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-x-16 lg:gap-y-2">
+        <div className="grid lg:grid-cols-[1fr_80px_1fr] gap-6 lg:gap-x-6 lg:gap-y-2">
 
           {/*
             Each panel = outer motion.div (parallax y only) + inner motion.div (enter anim).
@@ -232,7 +232,58 @@ export function StitchChapterSection({ chapter, index }: Props) {
             </motion.div>
           </motion.div>
 
-          {/* ── 2. Image ── */}
+          {/* ── 2. Center spine (desktop only) ── */}
+          <div className="hidden lg:flex lg:col-start-2 lg:row-start-1 lg:row-span-2 flex-col items-center">
+            {/* Top connector line */}
+            <div
+              className="w-px flex-1"
+              style={{
+                minHeight: '40px',
+                background: `linear-gradient(to bottom, transparent, ${chapter.accentColor}35)`,
+              }}
+            />
+
+            {/* Dot + chapter label */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.4 }}
+              animate={isInView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
+              className="flex flex-col items-center gap-2 shrink-0 my-3"
+            >
+              <div
+                className="w-4 h-4 rounded-full"
+                style={{
+                  background: chapter.accentColor,
+                  boxShadow: isInView
+                    ? `0 0 0 5px ${chapter.accentColor}18, 0 0 22px ${chapter.accentColor}50`
+                    : 'none',
+                  transition: 'box-shadow 0.6s ease',
+                }}
+              />
+              {/* Start year — the meaningful timeline marker */}
+              <span
+                className="font-hanken font-bold text-center tabular-nums"
+                style={{ color: chapter.accentColor, fontSize: '12px', letterSpacing: '-0.02em' }}
+              >
+                {chapter.years.split(' ')[0]}
+              </span>
+            </motion.div>
+
+            {/* Bottom connector line — draws down when in view */}
+            <motion.div
+              className="w-px flex-1"
+              initial={{ scaleY: 0 }}
+              animate={isInView ? { scaleY: 1 } : {}}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.3 }}
+              style={{
+                minHeight: '40px',
+                background: `linear-gradient(to bottom, ${chapter.accentColor}35, transparent)`,
+                transformOrigin: 'top',
+              }}
+            />
+          </div>
+
+          {/* ── 3. Image ── */}
           <motion.div style={{ y: imageParallaxY }} className={`${imageCol} lg:row-start-1 lg:row-span-2 lg:self-center`}>
             <motion.div
               {...imageEnter}
@@ -273,7 +324,7 @@ export function StitchChapterSection({ chapter, index }: Props) {
             </motion.div>
           </motion.div>
 
-          {/* ── 3. Content ── */}
+          {/* ── 4. Content ── */}
           <motion.div style={{ y: textParallaxY }} className={`${textCol} lg:row-start-2 lg:self-start`}>
             <motion.div
               {...textEnter}

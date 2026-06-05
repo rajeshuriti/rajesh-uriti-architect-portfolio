@@ -11,9 +11,11 @@ export default function Home() {
       <StitchNav />
       <StitchHero />
 
-      {chapters.map((chapter, i) => (
-        <StitchChapterSection key={chapter.id} chapter={chapter} index={i} />
-      ))}
+      <div id="journey">
+        {chapters.map((chapter, i) => (
+          <StitchChapterSection key={chapter.id} chapter={chapter} index={i} />
+        ))}
+      </div>
 
       <StitchProjects />
 

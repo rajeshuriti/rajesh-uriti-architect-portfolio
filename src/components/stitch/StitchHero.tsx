@@ -1,8 +1,9 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { SkillsModal } from './SkillsModal'
+import { CareerGlanceModal } from './CareerGlanceModal'
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -20,12 +21,47 @@ const fadeUp = {
 
 export function StitchHero() {
   const ref = useRef<HTMLElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
   const [showSkills, setShowSkills] = useState(false)
+  const [showCareerGlance, setShowCareerGlance] = useState(false)
 
   // Parallax as hero scrolls out of view — image lags behind scroll (feels deeper)
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] })
   const imageParallaxY = useTransform(scrollYProgress, [0, 1], [0, 70])
   const textParallaxY  = useTransform(scrollYProgress, [0, 1], [0, 35])
+
+  // 5-second video split into 3 scroll segments:
+  //   scroll 0–40%  → frames 1–2 (0s–2s)  — hero entering / visible
+  //   scroll 40–80% → frames 3–4 (2s–4s)  — hero centered
+  //   scroll 80–100%→ frame  5   (4s–5s)  — hero scrolling away
+  const videoTime = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0, 2, 4, 5])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.load()
+
+    const seek = (t: number) => {
+      if (!video.duration || isNaN(video.duration)) return
+      video.currentTime = Math.min(t, video.duration)
+    }
+
+    // play→pause primes the buffer so seeks work in all browsers
+    const onCanPlay = () => {
+      video.play()
+        .then(() => { video.pause(); seek(videoTime.get()) })
+        .catch(() => seek(videoTime.get()))
+    }
+    video.addEventListener('canplay', onCanPlay, { once: true })
+
+    const unsubscribe = videoTime.on('change', seek)
+
+    return () => {
+      video.removeEventListener('canplay', onCanPlay)
+      unsubscribe()
+    }
+  }, [videoTime])
 
   return (
     <section ref={ref} className="relative min-h-screen bg-[#040e1f] flex items-center pt-16">
@@ -50,6 +86,7 @@ export function StitchHero() {
               <div>
                 <p className="font-hanken font-semibold text-[#d8e3fb] text-base leading-tight">Rajesh Uriti</p>
                 <p className="font-mono text-xs text-[#adc6ff] tracking-[0.12em] mt-0.5">Solution Architect</p>
+                <p className="font-mono text-xs text-[#adc6ff]/60 tracking-[0.12em] mt-0.5">Cloud, AI &amp; Digital Transformation</p>
               </div>
             </motion.div>
 
@@ -151,6 +188,20 @@ export function StitchHero() {
                 </svg>
                 View Skills
               </button>
+              <button
+                onClick={() => setShowCareerGlance(true)}
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10 active:scale-95"
+                style={{
+                  background: 'transparent',
+                  border: '1px solid rgba(78,222,163,0.25)',
+                  color: '#4edea3',
+                }}
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Career at a Glance
+              </button>
             </motion.div>
 
           </motion.div>
@@ -171,30 +222,15 @@ export function StitchHero() {
                 boxShadow: '0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.04)',
               }}
             >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/Pictures/Stitch/stitch_the_curious_developer/Explore The Journey.png"
-                alt="Rajesh Uriti — The Curious Developer"
+              <video
+                ref={videoRef}
+                src="/Pictures/Stitch/stitch_the_curious_developer/Explore The Journey_video.mp4"
+                muted
+                playsInline
+                preload="auto"
                 className="absolute inset-0 w-full h-full object-cover object-top"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#040e1f]/80 via-transparent to-transparent" />
-
-              <div className="absolute bottom-6 left-6 right-6">
-                <div
-                  className="rounded-xl p-4"
-                  style={{
-                    background: 'rgba(21, 32, 49, 0.85)',
-                    backdropFilter: 'blur(20px)',
-                    border: '1px solid rgba(255,255,255,0.08)',
-                  }}
-                >
-                  <p className="font-hanken font-semibold text-[#d8e3fb] text-sm">Rajesh Uriti</p>
-                  <p className="text-[#8c909f] text-xs mt-0.5">Solution Architect | Cloud, AI &amp; Digital Transformation</p>
-                  <p className="font-mono text-[#adc6ff] text-[10px] mt-1.5 tracking-wide uppercase">
-                    🇨🇦 Mississauga, Ontario
-                  </p>
-                </div>
-              </div>
             </div>
 
             <div
@@ -230,6 +266,7 @@ export function StitchHero() {
       </div>
 
       <SkillsModal open={showSkills} onClose={() => setShowSkills(false)} />
+      <CareerGlanceModal open={showCareerGlance} onClose={() => setShowCareerGlance(false)} />
     </section>
   )
 }
