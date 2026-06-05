@@ -236,6 +236,9 @@ export function StitchChapterSection({ chapter, index }: Props) {
   const textCol  = imageRight ? 'lg:col-start-1' : 'lg:col-start-3'
   const imageCol = imageRight ? 'lg:col-start-3' : 'lg:col-start-1'
 
+  // Parse 'YYYY – YYYY' or 'YYYY – Present' into start/end
+  const [startYear, endYear] = chapter.years.split(' – ')
+
   // Reusable enter-animation props
   const textEnter = {
     initial: { opacity: 0, x: textX, y: 16 },
@@ -316,39 +319,56 @@ export function StitchChapterSection({ chapter, index }: Props) {
               }}
             />
 
-            {/* Dot + chapter label */}
+            {/* Start year — slides down from above */}
+            <motion.span
+              initial={{ opacity: 0, y: -14 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: -14 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 26, delay: 0.12 }}
+              className="font-mono text-center shrink-0 tabular-nums"
+              style={{
+                fontSize: '10px',
+                color: `${chapter.accentColor}cc`,
+                letterSpacing: '0.06em',
+                marginBottom: '6px',
+              }}
+            >
+              {startYear}
+            </motion.span>
+
+            {/* Dot — pops in */}
             <motion.div
               initial={{ opacity: 0, scale: 0.4 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ type: 'spring', stiffness: 380, damping: 22, delay: 0.15 }}
-              className="flex flex-col items-center gap-2 shrink-0 my-3"
-            >
-              <div
-                className="w-4 h-4 rounded-full"
-                style={{
-                  background: chapter.accentColor,
-                  boxShadow: isInView
-                    ? `0 0 0 5px ${chapter.accentColor}18, 0 0 22px ${chapter.accentColor}50`
-                    : 'none',
-                  transition: 'box-shadow 0.6s ease',
-                }}
-              />
-              {/* Role tier badge */}
-              <span
-                className="font-mono font-bold text-center tracking-wide"
+              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.4 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 22, delay: 0.22 }}
+              className="shrink-0 rounded-full"
+              style={{
+                width: 16,
+                height: 16,
+                background: chapter.accentColor,
+                boxShadow: isInView
+                  ? `0 0 0 5px ${chapter.accentColor}18, 0 0 22px ${chapter.accentColor}50`
+                  : 'none',
+                transition: 'box-shadow 0.6s ease',
+              }}
+            />
+
+            {/* End year — slides up from below */}
+            {endYear && (
+              <motion.span
+                initial={{ opacity: 0, y: 14 }}
+                animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 14 }}
+                transition={{ type: 'spring', stiffness: 300, damping: 26, delay: 0.32 }}
+                className="font-mono text-center shrink-0 tabular-nums"
                 style={{
                   fontSize: '10px',
-                  color: chapter.accentColor,
-                  background: `${chapter.accentColor}15`,
-                  border: `1px solid ${chapter.accentColor}35`,
-                  borderRadius: '4px',
-                  padding: '2px 5px',
+                  color: `${chapter.accentColor}70`,
                   letterSpacing: '0.06em',
+                  marginTop: '6px',
                 }}
               >
-                {chapter.tier}
-              </span>
-            </motion.div>
+                {endYear}
+              </motion.span>
+            )}
 
             {/* Bottom connector line — draws down when in view */}
             <motion.div

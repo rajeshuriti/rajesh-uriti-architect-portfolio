@@ -32,7 +32,7 @@ export const chapters: Chapter[] = [
     id: 'learning-to-build',
     number: '01',
     title: 'Learning to Build',
-    years: '2009',
+    years: '2009 – 2010',
     company: 'Cyient Limited',
     role: 'Software Developer',
     description:
