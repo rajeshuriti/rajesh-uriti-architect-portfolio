@@ -15,9 +15,9 @@ export function StitchFooter() {
     >
       <div className="max-w-[1200px] mx-auto px-6 sm:px-8 text-center">
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 24 }}
-          transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+          initial={{ opacity: 0, y: 28 }}
+          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 }}
+          transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="font-hanken font-light text-[#8c909f] leading-relaxed max-w-2xl mx-auto mb-4"
              style={{ fontSize: 'clamp(1.1rem, 2.5vw, 1.5rem)' }}>

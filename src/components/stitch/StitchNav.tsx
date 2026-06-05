@@ -35,6 +35,12 @@ export function StitchNav() {
             The Journey
           </a>
           <a
+            href="#projects"
+            className="text-sm text-[#8c909f] hover:text-[#d8e3fb] transition-colors duration-200"
+          >
+            Projects
+          </a>
+          <a
             href="#contact"
             className="text-sm text-[#8c909f] hover:text-[#d8e3fb] transition-colors duration-200"
           >
@@ -79,6 +85,13 @@ export function StitchNav() {
             onClick={() => setMenuOpen(false)}
           >
             The Journey
+          </a>
+          <a
+            href="#projects"
+            className="block text-sm text-[#c2c6d6] hover:text-[#adc6ff] py-2 transition-colors"
+            onClick={() => setMenuOpen(false)}
+          >
+            Projects
           </a>
           <a
             href="#contact"

@@ -1,6 +1,7 @@
 import { StitchNav } from '@/components/stitch/StitchNav'
 import { StitchHero } from '@/components/stitch/StitchHero'
 import { StitchChapterSection } from '@/components/stitch/StitchChapterSection'
+import { StitchProjects } from '@/components/stitch/StitchProjects'
 import { StitchFooter } from '@/components/stitch/StitchFooter'
 import { chapters } from '@/data/chapters'
 
@@ -13,6 +14,8 @@ export default function Home() {
       {chapters.map((chapter, i) => (
         <StitchChapterSection key={chapter.id} chapter={chapter} index={i} />
       ))}
+
+      <StitchProjects />
 
       <StitchFooter />
     </main>

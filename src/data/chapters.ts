@@ -161,6 +161,21 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Leading & Architecting.png',
     transparent: true,
     accentColor: '#4edea3',
+    contribution: {
+      dateRange: 'Jan 2019 – Dec 2022',
+      location: 'Mississauga, ON',
+      duration: '3 years',
+      client: 'NextEra Energy',
+      clientDesc: "North America's largest clean energy company (S&P 500, Fortune 200)",
+      points: [
+        'Served as Solution Architect and Technical Lead for 12 enterprise-scale customer-facing applications supporting planning, execution, risk assessment, compliance, safety, and reporting processes for thousands of users across multiple business functions.',
+        'Directed application architecture, modernization, and technology transformation initiatives using C#, .NET Core, Angular, REST APIs, and Microservices Architecture, transforming tightly coupled applications into a scalable ecosystem of 18 microservices while applying SOLID principles and enterprise design patterns.',
+        'Conducted systems analysis, technical feasibility assessments, architecture reviews, and stakeholder workshops to align technology investments with business objectives and strategic roadmaps.',
+        'Optimized SQL Server and PostgreSQL platforms, ETL workflows, and data integration processes while architecting AWS-based cloud solutions and CI/CD pipelines using GitHub Actions and Docker to improve scalability, reliability, and deployment efficiency.',
+        'Provided technical leadership, architecture governance, mentoring, and engineering best practices across cross-functional teams of 38+ developers, QA engineers, and DevOps professionals.',
+      ],
+      technologies: ['C#', '.NET Core', 'Angular', 'REST APIs', 'Microservices', 'SQL Server', 'PostgreSQL', 'AWS', 'GitHub Actions', 'Docker', 'ETL'],
+    },
   },
   {
     id: 'learning-ai',
@@ -178,6 +193,21 @@ export const chapters: Chapter[] = [
     image: '/Pictures/Stitch/stitch_the_curious_developer/Learning AI.png',
     transparent: true,
     accentColor: '#d0bcff',
+    contribution: {
+      dateRange: 'Jan 2022 – Dec 2024',
+      location: 'Mississauga, ON',
+      duration: '2 years',
+      client: 'Cognizant Technology Solutions',
+      clientDesc: 'Enterprise AI adoption and applied AI engineering initiatives',
+      points: [
+        'Drove enterprise AI adoption through strategic evaluation and integration of Anthropic Claude, OpenAI GPT, and Google Gemini — assessing model capabilities, performance benchmarks, latency profiles, security posture, and total cost of ownership to identify the right LLM for each enterprise use case.',
+        'Built AI-powered applications using Python, Anthropic SDK, and OpenAI APIs, implementing Retrieval Augmented Generation (RAG) pipelines, semantic search, vector embeddings, and advanced prompt engineering techniques to deliver accurate, context-aware knowledge retrieval and document intelligence solutions.',
+        'Delivered AI-assisted automation solutions across enterprise workflows, reducing manual processing effort and accelerating knowledge discovery through intelligent document retrieval, summarisation, classification, and structured data extraction.',
+        'Architected scalable AI application backends using FastAPI and Python, designing modular prompt pipelines, embedding workflows, and vector store integrations that enabled cross-functional teams to extend AI capabilities without rebuilding core infrastructure.',
+        'Established responsible AI adoption practices by defining evaluation frameworks covering model performance, hallucination risk, scalability, and cost governance — ensuring AI solutions met enterprise security and compliance standards prior to production deployment.',
+      ],
+      technologies: ['Python', 'Anthropic Claude SDK', 'OpenAI API', 'Google Gemini', 'FastAPI', 'RAG', 'Vector Embeddings', 'Semantic Search', 'Prompt Engineering'],
+    },
   },
   {
     id: 'still-learning',
