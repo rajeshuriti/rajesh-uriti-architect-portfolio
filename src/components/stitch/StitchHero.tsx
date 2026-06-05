@@ -1,7 +1,7 @@
 'use client'
 
 import { useRef, useState, useEffect } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'framer-motion'
 import { SkillsModal } from './SkillsModal'
 import { CareerGlanceModal } from './CareerGlanceModal'
 
@@ -13,10 +13,40 @@ const staggerContainer = {
   visible: { transition: { staggerChildren: 0.09, delayChildren: 0.05 } },
 }
 
-// Each text line fades up individually
+// Each text line fades up individually — spring for natural deceleration
 const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.65, ease: EASE } },
+  hidden: { opacity: 0, y: 28 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: 'spring', stiffness: 300, damping: 28 },
+  },
+}
+
+function MagneticButton({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const x = useMotionValue(0)
+  const y = useMotionValue(0)
+  const sx = useSpring(x, { stiffness: 350, damping: 30 })
+  const sy = useSpring(y, { stiffness: 350, damping: 30 })
+
+  function onMouseMove(e: React.MouseEvent) {
+    const rect = ref.current?.getBoundingClientRect()
+    if (!rect) return
+    x.set((e.clientX - (rect.left + rect.width / 2)) * 0.35)
+    y.set((e.clientY - (rect.top + rect.height / 2)) * 0.35)
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      style={{ x: sx, y: sy, display: 'inline-flex' }}
+      onMouseMove={onMouseMove}
+      onMouseLeave={() => { x.set(0); y.set(0) }}
+    >
+      {children}
+    </motion.div>
+  )
 }
 
 export function StitchHero() {
@@ -78,7 +108,7 @@ export function StitchHero() {
             <motion.div variants={fadeUp} className="flex items-center gap-3 mb-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/Pictures/Stitch/stitch_the_curious_developer/Profile.jpg"
+                src="/Assets/Images/Profile.jpg"
                 alt="Rajesh Uriti"
                 className="w-12 h-12 rounded-full object-cover object-top shrink-0"
                 style={{ border: '2px solid rgba(173,198,255,0.25)' }}
@@ -166,42 +196,48 @@ export function StitchHero() {
             </motion.div>
 
             <motion.div variants={fadeUp} className="flex flex-wrap gap-3">
-              <a
-                href="/Rajesh Uriti_Detailed_Resume.pdf"
-                download="Rajesh_Uriti_Resume.pdf"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:brightness-110 active:scale-95"
-                style={{ background: '#adc6ff', color: '#002e6a' }}
-              >
-                Download Resume
-              </a>
-              <button
-                onClick={() => setShowSkills(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10 active:scale-95"
-                style={{
-                  background: 'transparent',
-                  border: '1px solid rgba(173,198,255,0.25)',
-                  color: '#adc6ff',
-                }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18" />
-                </svg>
-                View Skills
-              </button>
-              <button
-                onClick={() => setShowCareerGlance(true)}
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10 active:scale-95"
-                style={{
-                  background: 'transparent',
-                  border: '1px solid rgba(78,222,163,0.25)',
-                  color: '#4edea3',
-                }}
-              >
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-                Career at a Glance
-              </button>
+              <MagneticButton>
+                <a
+                  href="/Rajesh Uriti_Detailed_Resume.pdf"
+                  download="Rajesh_Uriti_Resume.pdf"
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:brightness-110 active:scale-95"
+                  style={{ background: '#adc6ff', color: '#002e6a' }}
+                >
+                  Download Resume
+                </a>
+              </MagneticButton>
+              <MagneticButton>
+                <button
+                  onClick={() => setShowSkills(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10 active:scale-95"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(173,198,255,0.25)',
+                    color: '#adc6ff',
+                  }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18" />
+                  </svg>
+                  View Skills
+                </button>
+              </MagneticButton>
+              <MagneticButton>
+                <button
+                  onClick={() => setShowCareerGlance(true)}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-200 hover:bg-white/10 active:scale-95"
+                  style={{
+                    background: 'transparent',
+                    border: '1px solid rgba(78,222,163,0.25)',
+                    color: '#4edea3',
+                  }}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M16 8v8m-4-5v5m-4-2v2m-2 4h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                  </svg>
+                  Career at a Glance
+                </button>
+              </MagneticButton>
             </motion.div>
 
           </motion.div>
@@ -224,7 +260,7 @@ export function StitchHero() {
             >
               <video
                 ref={videoRef}
-                src="/Pictures/Stitch/stitch_the_curious_developer/Explore The Journey_video.mp4"
+                src="/Assets/Videos/Explore The Journey.mp4"
                 muted
                 playsInline
                 preload="auto"

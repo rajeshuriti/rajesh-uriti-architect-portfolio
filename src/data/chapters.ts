@@ -19,7 +19,9 @@ export interface Chapter {
   quote: string
   keyLesson: string
   skills: string[]
+  tier: string
   image: string | null
+  video?: string
   transparent?: boolean
   accentColor: string
   contribution?: ChapterContribution
@@ -39,7 +41,9 @@ export const chapters: Chapter[] = [
       '"Every architect starts somewhere. I started with a single line of code."',
     keyLesson: 'Discipline and documentation are the foundation of everything that follows.',
     skills: ['C#', '.NET', 'Visual Studio', 'Enterprise Applications', 'Technical Documentation'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Learning to Build.png',
+    tier: 'DEV',
+    image: '/Assets/Images/Learning to Build.png',
+    video: '/Assets/Videos/Learning to Build.mp4',
     transparent: true,
     accentColor: '#adc6ff',
     contribution: {
@@ -68,7 +72,8 @@ export const chapters: Chapter[] = [
       '"Healthcare software taught me that UX is not a nice-to-have. When lives depend on clarity, design becomes responsibility."',
     keyLesson: 'Understanding users makes you a better developer.',
     skills: ['Full-Stack Development', 'Healthcare Applications', 'Database Solutions', 'Google APIs', 'Production Support'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Leraning User Experience.png',
+    tier: 'SE',
+    image: '/Assets/Images/Leraning User Experience.png',
     transparent: true,
     accentColor: '#d0bcff',
     contribution: {
@@ -97,7 +102,8 @@ export const chapters: Chapter[] = [
       '"Enterprise software is not just bigger software. It is a different discipline — where reliability is the product, not a feature."',
     keyLesson: 'Reliability is not a feature — it is a foundation.',
     skills: ['.NET Framework', 'Angular', 'JavaScript', 'SQL Server', 'Healthcare Systems', 'Systems Analysis'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Learning Enterprise Systems.png',
+    tier: 'SDE',
+    image: '/Assets/Images/Learning Enterprise Systems.png',
     transparent: true,
     accentColor: '#4edea3',
     contribution: {
@@ -127,7 +133,8 @@ export const chapters: Chapter[] = [
       '"Breaking a monolith is not a technical problem. It is an organizational one. The microservices are the easy part."',
     keyLesson: 'Understand the whole before optimizing the part — then design it to scale gracefully.',
     skills: ['ASP.NET MVC', 'Angular', 'Web APIs', 'SQL Server', 'AWS', 'Systems Analysis', 'Solution Design', 'Microservices', '.NET Core', 'Docker', 'GitHub Actions', 'REST APIs', 'PostgreSQL', 'ETL', 'SOLID Principles'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Thinking in Systems.png',
+    tier: 'ARCH',
+    image: '/Assets/Images/Thinking in Systems.png',
     transparent: true,
     accentColor: '#adc6ff',
     contribution: {
@@ -158,7 +165,8 @@ export const chapters: Chapter[] = [
       '"Your job as a technical leader is to make the team succeed — not to be the smartest person in every room."',
     keyLesson: 'Empowered teams and timeless architecture principles are what scale systems — and people.',
     skills: ['Solution Architecture', 'Architecture Governance', 'Technical Leadership', 'Mentoring', 'Stakeholder Workshops', 'Technology Roadmaps', 'AWS EC2', 'S3', 'Lambda', 'ECS', 'ECR', 'FSx', 'IAM', 'DMS', 'CI/CD', 'Docker'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Leading & Architecting.png',
+    tier: 'LEAD',
+    image: '/Assets/Images/Leading & Architecting.png',
     transparent: true,
     accentColor: '#4edea3',
     contribution: {
@@ -190,7 +198,8 @@ export const chapters: Chapter[] = [
       '"AI is not magic. It is infrastructure — with new failure modes, new capabilities, and new responsibilities that demand the same engineering rigour as any critical system."',
     keyLesson: 'AI is infrastructure. Treat it with the same rigour as any critical system.',
     skills: ['Anthropic Claude SDK', 'OpenAI API', 'Google Gemini', 'Python', 'FastAPI', 'RAG', 'Prompt Engineering', 'Vector Embeddings', 'Semantic Search'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Learning AI.png',
+    tier: 'AI',
+    image: '/Assets/Images/Learning AI.png',
     transparent: true,
     accentColor: '#d0bcff',
     contribution: {
@@ -222,7 +231,8 @@ export const chapters: Chapter[] = [
       '"After sixteen years, curiosity remains my most important architectural skill."',
     keyLesson: 'Curiosity is the most important architectural skill.',
     skills: ['GenAI Architecture', 'AI Transformation', 'LLM Evaluation', 'Enterprise AI Governance', 'AI Agents', 'Workflow Automation'],
-    image: '/Pictures/Stitch/stitch_the_curious_developer/Still Learning.png',
+    tier: 'SA',
+    image: '/Assets/Images/Still Learning.png',
     transparent: true,
     accentColor: '#4edea3',
   },

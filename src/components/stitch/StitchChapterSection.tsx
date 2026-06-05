@@ -4,6 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import {
   motion, useInView, useScroll, useTransform,
   useMotionValue, useSpring, AnimatePresence,
+  type MotionValue,
 } from 'framer-motion'
 import type { Chapter } from '@/data/chapters'
 
@@ -13,6 +14,18 @@ interface Props {
 }
 
 const EASE = [0.22, 1, 0.36, 1] as const
+
+const skillsWrap = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.045, delayChildren: 0.08 } },
+}
+const skillChip = {
+  hidden: { opacity: 0, scale: 0.72, y: 8 },
+  visible: {
+    opacity: 1, scale: 1, y: 0,
+    transition: { type: 'spring', stiffness: 380, damping: 22 },
+  },
+}
 
 function ChapterPlaceholder({ chapter }: { chapter: Chapter }) {
   return (
@@ -45,6 +58,66 @@ function ChapterPlaceholder({ chapter }: { chapter: Chapter }) {
       >
         {chapter.number}
       </span>
+    </div>
+  )
+}
+
+function ChapterVideo({
+  chapter,
+  scrollYProgress,
+}: {
+  chapter: Chapter
+  scrollYProgress: MotionValue<number>
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  // 5-second video: entering → 0–2s, centered → 2–4s, leaving → 4–5s
+  const videoTime = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0, 2, 4, 5])
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.load()
+
+    const seek = (t: number) => {
+      if (!video.duration || isNaN(video.duration)) return
+      video.currentTime = Math.min(t, video.duration)
+    }
+
+    const onCanPlay = () => {
+      video.play()
+        .then(() => { video.pause(); seek(videoTime.get()) })
+        .catch(() => seek(videoTime.get()))
+    }
+    video.addEventListener('canplay', onCanPlay, { once: true })
+
+    const unsubscribe = videoTime.on('change', seek)
+
+    return () => {
+      video.removeEventListener('canplay', onCanPlay)
+      unsubscribe()
+    }
+  }, [videoTime])
+
+  return (
+    <div
+      className="relative rounded-2xl overflow-hidden"
+      style={{
+        border: `1px solid ${chapter.accentColor}18`,
+        boxShadow: `0 24px 60px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.03)`,
+        aspectRatio: '4/3',
+      }}
+    >
+      <video
+        ref={videoRef}
+        src={chapter.video}
+        muted
+        playsInline
+        preload="auto"
+        className="absolute inset-0 w-full h-full object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-[#040e1f]/60 via-transparent to-transparent" />
     </div>
   )
 }
@@ -192,7 +265,7 @@ export function StitchChapterSection({ chapter, index }: Props) {
           <motion.div style={{ y: textParallaxY }} className={`${textCol} lg:row-start-1 lg:self-end`}>
             <motion.div
               {...textEnter}
-              transition={{ duration: 0.65, ease: EASE }}
+              transition={{ type: 'spring', stiffness: 280, damping: 26 }}
               className="flex flex-col lg:pb-4"
             >
               <span
@@ -247,7 +320,7 @@ export function StitchChapterSection({ chapter, index }: Props) {
             <motion.div
               initial={{ opacity: 0, scale: 0.4 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.45, ease: EASE, delay: 0.15 }}
+              transition={{ type: 'spring', stiffness: 380, damping: 22, delay: 0.15 }}
               className="flex flex-col items-center gap-2 shrink-0 my-3"
             >
               <div
@@ -260,12 +333,20 @@ export function StitchChapterSection({ chapter, index }: Props) {
                   transition: 'box-shadow 0.6s ease',
                 }}
               />
-              {/* Start year — the meaningful timeline marker */}
+              {/* Role tier badge */}
               <span
-                className="font-hanken font-bold text-center tabular-nums"
-                style={{ color: chapter.accentColor, fontSize: '12px', letterSpacing: '-0.02em' }}
+                className="font-mono font-bold text-center tracking-wide"
+                style={{
+                  fontSize: '10px',
+                  color: chapter.accentColor,
+                  background: `${chapter.accentColor}15`,
+                  border: `1px solid ${chapter.accentColor}35`,
+                  borderRadius: '4px',
+                  padding: '2px 5px',
+                  letterSpacing: '0.06em',
+                }}
               >
-                {chapter.years.split(' ')[0]}
+                {chapter.tier}
               </span>
             </motion.div>
 
@@ -287,10 +368,12 @@ export function StitchChapterSection({ chapter, index }: Props) {
           <motion.div style={{ y: imageParallaxY }} className={`${imageCol} lg:row-start-1 lg:row-span-2 lg:self-center`}>
             <motion.div
               {...imageEnter}
-              transition={{ duration: 0.8, ease: EASE, delay: 0.1 }}
+              transition={{ type: 'spring', stiffness: 260, damping: 24, delay: 0.08 }}
               className="relative"
             >
-              {chapter.transparent && chapter.image ? (
+              {chapter.video ? (
+                <ChapterVideo chapter={chapter} scrollYProgress={scrollYProgress} />
+              ) : chapter.transparent && chapter.image ? (
                 <PopupImagePanel chapter={chapter} />
               ) : chapter.image ? (
                 <>
@@ -328,7 +411,7 @@ export function StitchChapterSection({ chapter, index }: Props) {
           <motion.div style={{ y: textParallaxY }} className={`${textCol} lg:row-start-2 lg:self-start`}>
             <motion.div
               {...textEnter}
-              transition={{ duration: 0.65, ease: EASE, delay: 0.18 }}
+              transition={{ type: 'spring', stiffness: 280, damping: 26, delay: 0.18 }}
               className="flex flex-col lg:pt-4"
             >
               <p className="text-[#8c909f] text-base leading-relaxed mb-6 max-w-prose">
@@ -353,11 +436,21 @@ export function StitchChapterSection({ chapter, index }: Props) {
                 </p>
               </div>
 
-              <div className="flex flex-wrap gap-2">
+              <motion.div
+                className="flex flex-wrap gap-2"
+                variants={skillsWrap}
+                initial="hidden"
+                animate={isInView ? 'visible' : 'hidden'}
+              >
                 {chapter.skills.map((skill) => (
-                  <span
+                  <motion.span
                     key={skill}
-                    className="px-3 py-1 rounded-full text-xs font-mono transition-colors"
+                    variants={skillChip}
+                    whileHover={{
+                      scale: 1.1,
+                      transition: { type: 'spring', stiffness: 400, damping: 18 },
+                    }}
+                    className="px-3 py-1 rounded-full text-xs font-mono cursor-default"
                     style={{
                       background: `${chapter.accentColor}10`,
                       border: `1px solid ${chapter.accentColor}25`,
@@ -365,9 +458,9 @@ export function StitchChapterSection({ chapter, index }: Props) {
                     }}
                   >
                     {skill}
-                  </span>
+                  </motion.span>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
           </motion.div>
 
@@ -387,10 +480,9 @@ export function StitchChapterSection({ chapter, index }: Props) {
             onClick={() => setShowContributions(false)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.94, y: 16 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.94, y: 16 }}
-              transition={{ duration: 0.25, ease: [0.25, 0.46, 0.45, 0.94] }}
+              initial={{ opacity: 0, scale: 0.90, y: 28 }}
+              animate={{ opacity: 1, scale: 1, y: 0, transition: { type: 'spring', stiffness: 380, damping: 30 } }}
+              exit={{ opacity: 0, scale: 0.96, y: 10, transition: { duration: 0.18, ease: [0.4, 0, 1, 1] } }}
               onClick={(e) => e.stopPropagation()}
               className="relative rounded-2xl p-6 max-w-lg w-full max-h-[82vh] overflow-y-auto"
               style={{
