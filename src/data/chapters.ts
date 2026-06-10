@@ -74,6 +74,7 @@ export const chapters: Chapter[] = [
     skills: ['Full-Stack Development', 'Healthcare Applications', 'Database Solutions', 'Google APIs', 'Production Support'],
     tier: 'SE',
     image: '/Assets/Images/Leraning User Experience.png',
+    video: '/Assets/Videos/Leraning User Experience.mp4',
     transparent: true,
     accentColor: '#d0bcff',
     contribution: {
@@ -104,6 +105,7 @@ export const chapters: Chapter[] = [
     skills: ['.NET Framework', 'Angular', 'JavaScript', 'SQL Server', 'Healthcare Systems', 'Systems Analysis'],
     tier: 'SDE',
     image: '/Assets/Images/Learning Enterprise Systems.png',
+    video: '/Assets/Videos/Learning Enterprise Systems.mp4',
     transparent: true,
     accentColor: '#4edea3',
     contribution: {
@@ -135,6 +137,7 @@ export const chapters: Chapter[] = [
     skills: ['ASP.NET MVC', 'Angular', 'Web APIs', 'SQL Server', 'AWS', 'Systems Analysis', 'Solution Design', 'Microservices', '.NET Core', 'Docker', 'GitHub Actions', 'REST APIs', 'PostgreSQL', 'ETL', 'SOLID Principles'],
     tier: 'ARCH',
     image: '/Assets/Images/Thinking in Systems.png',
+    video: '/Assets/Videos/Thinking in Systems.mp4',
     transparent: true,
     accentColor: '#adc6ff',
     contribution: {

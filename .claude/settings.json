@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git checkout *)",
+      "Bash(mkdir -p /tmp/thumbs)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Leraning User Experience.mp4\" -frames:v 1 /tmp/thumbs/v1.png -loglevel error)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Leraning User Experience1.mp4\" -frames:v 1 /tmp/thumbs/v2.png -loglevel error)",
+      "Read(//tmp/thumbs/**)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Leraning User Experience.mp4\" -frames:v 1 __thumbs/v1.png -loglevel error)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Leraning User Experience1.mp4\" -frames:v 1 __thumbs/v2.png -loglevel error)",
+      "Bash(node __check_ch2.mjs)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Learning Enterprise Systems.mp4\" -frames:v 1 __thumbs/v1.png -loglevel error)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/Learning Enterprise Systems11.mp4\" -frames:v 1 __thumbs/v2.png -loglevel error)",
+      "Bash(ffmpeg -y -ss 2.5 -i \"public/Assets/Videos/enterprise-shot-shot_01.mp4\" -frames:v 1 __thumbs/v3.png -loglevel error)"
+    ]
+  }
+}

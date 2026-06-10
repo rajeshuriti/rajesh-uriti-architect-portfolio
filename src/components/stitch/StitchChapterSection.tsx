@@ -4,7 +4,6 @@ import { useRef, useState, useEffect } from 'react'
 import {
   motion, useInView, useScroll, useTransform,
   useMotionValue, useSpring, AnimatePresence,
-  type MotionValue,
 } from 'framer-motion'
 import type { Chapter } from '@/data/chapters'
 
@@ -62,14 +61,13 @@ function ChapterPlaceholder({ chapter }: { chapter: Chapter }) {
   )
 }
 
-function ChapterVideo({
-  chapter,
-  scrollYProgress,
-}: {
-  chapter: Chapter
-  scrollYProgress: MotionValue<number>
-}) {
+function ChapterVideo({ chapter }: { chapter: Chapter }) {
   const videoRef = useRef<HTMLVideoElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  // Track this video's own viewport entry/exit — not the whole (taller) chapter section —
+  // so playback progress 0 lines up with the moment the video actually becomes visible.
+  const { scrollYProgress } = useScroll({ target: containerRef, offset: ['start end', 'end start'] })
 
   // 5-second video: entering → 0–2s, centered → 2–4s, leaving → 4–5s
   const videoTime = useTransform(scrollYProgress, [0, 0.4, 0.8, 1], [0, 2, 4, 5])
@@ -102,6 +100,7 @@ function ChapterVideo({
 
   return (
     <div
+      ref={containerRef}
       className="relative rounded-2xl overflow-hidden"
       style={{
         border: `1px solid ${chapter.accentColor}18`,
@@ -392,7 +391,7 @@ export function StitchChapterSection({ chapter, index }: Props) {
               className="relative"
             >
               {chapter.video ? (
-                <ChapterVideo chapter={chapter} scrollYProgress={scrollYProgress} />
+                <ChapterVideo chapter={chapter} />
               ) : chapter.transparent && chapter.image ? (
                 <PopupImagePanel chapter={chapter} />
               ) : chapter.image ? (
